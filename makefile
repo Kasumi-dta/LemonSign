@@ -54,3 +54,4 @@ $(SCHEMES): deps
 	
 	mkdir -p packages
 	zip -r9 "packages/$@.ipa" Payload
+	cp "packages/$@.ipa" "packages/LemonSign.ipa" || true

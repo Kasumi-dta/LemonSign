@@ -9,6 +9,8 @@ jobs:
   build:
     name: Build Beta
     runs-on: macos-26
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout Code
@@ -44,13 +46,14 @@ jobs:
 
           gh release delete beta --cleanup-tag -y || true
           
-          gh release create beta "packages/Ksign.ipa" \
-            --title "Latest Beta Build" \
+          gh release create beta packages/*.ipa \
+            --title "LemonSign Beta Build" \
             --notes "$(cat release_notes.md)" \
             --prerelease \
             --target ${{ github.sha }}
 
       - name: Notify Discord
+        if: ${{ env.DISCORD_WEBHOOK != '' }}
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         run: |
@@ -58,7 +61,7 @@ jobs:
           
           REPO="${{ github.repository }}"
           TAG="beta"
-          FILENAME="Ksign.ipa"
+          FILENAME="LemonSign.ipa"
           
           DOWNLOAD_URL="https://github.com/$REPO/releases/download/$TAG/$FILENAME"
           RELEASE_URL="https://github.com/$REPO/releases/tag/$TAG"
@@ -74,4 +77,4 @@ jobs:
           curl -v \
             -H "Content-Type: application/json" \
             -d @discord_payload.json \
-            "$DISCORD_WEBHOOK"
+            "$DISCORD_WEBHOOK" || true

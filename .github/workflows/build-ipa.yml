@@ -34,7 +34,7 @@ jobs:
       - name: Upload IPA
         uses: actions/upload-artifact@v4
         with:
-          name: Ksign-IPA
-          path: packages/Ksign.ipa
+          name: LemonSign-IPA
+          path: packages/*.ipa
           if-no-files-found: error
           retention-days: 14
