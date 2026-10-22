@@ -174,9 +174,9 @@ final class UpdateManager: NSObject {
 		let isNewer = _isRemoteNewer(remoteTag: tag, remoteVersion: tag)
 
 		if isNewer {
-			let updateTitle = String.localized("New Update Available: %@", name)
+			let updateTitle = String.localized("New Update Available: %@", arguments: name)
 			let cleanBody = body.isEmpty ? "A new version of LemonSign is available with improvements and performance optimizations." : body
-			let message = String.localized("A new version of LemonSign is available:\n\n%@\n\nWould you like to download and update now?", cleanBody)
+			let message = String.localized("A new version of LemonSign is available:\n\n%@\n\nWould you like to download and update now?", arguments: cleanBody)
 
 			let downloadAction = UIAlertAction(title: .localized("Update Now (Download)"), style: .default) { _ in
 				if let dlUrl = URL(string: downloadURL) {
@@ -202,7 +202,7 @@ final class UpdateManager: NSObject {
 		} else if isManualCheck {
 			UIAlertController.showAlertWithOk(
 				title: .localized("You're Up to Date"),
-				message: String.localized("LemonSign %@ is currently the newest version.", currentVersion)
+				message: String.localized("LemonSign %@ is currently the newest version.", arguments: currentVersion)
 			)
 		}
 	}

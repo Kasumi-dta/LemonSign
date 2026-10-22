@@ -257,7 +257,7 @@ extension BulkSigningView {
 
 		UIAlertController.showAlert(
 			title: .localized("⚡ LemonTurbo Engine"),
-			message: String.localized("LemonSign will utilize maximum device hardware resources (%d CPU cores) to accelerate signing, parallel hashing, and packaging.", cpuCount),
+			message: String.localized("LemonSign will utilize maximum device hardware resources (%d CPU cores) to accelerate signing, parallel hashing, and packaging.", arguments: cpuCount),
 			actions: [proceed, cancel]
 		)
 	}
