@@ -13,8 +13,6 @@ import NimbleJSON
 struct AboutNyaView: View {
 	private let _dataService = NBFetchService()
 	
-	@State private var shouldShowPatchNotes = false
-	
 	// MARK: Body
 	var body: some View {
 		NBList(.localized("About")) {
@@ -34,15 +32,6 @@ struct AboutNyaView: View {
                     }
                     .font(.footnote)
                     .foregroundStyle(.secondary)
-                    
-                    Button {
-                        _showPatchNotes()
-                    } label: {
-                        Text("Show patch notes").bg()
-                    }
-                    .font(.footnote)
-                    .padding(.top, 4)
-                    .tint(.accent)
 
                     Button {
                         UpdateManager.shared.checkForUpdates(isManualCheck: true)
@@ -50,7 +39,7 @@ struct AboutNyaView: View {
                         Text("Check for Updates").bg()
                     }
                     .font(.footnote)
-                    .padding(.top, 2)
+                    .padding(.top, 4)
                     .tint(.accent)
                 }
             }
@@ -81,15 +70,6 @@ struct AboutNyaView: View {
                 Text(Bundle.main.bundleIdentifier ?? "")
             }
 		}
-	}
-	
-	private func _showPatchNotes() {
-		UIAlertController.showAlertWithOk(
-			title: .localized("From Kasumi, Version \(Bundle.main.version) (Beta 3)"),
-			message: .localized("Bản cập nhật LemonSign Beta 3 (v1.6.3.2):\n\n- 🛡️ Bảo lưu toàn vẹn 100% chứng chỉ đã nhập (.p12 / .mobileprovision) và cấu hình khi cập nhật.\n- ⚡ LemonTurbo Engine tự động: Ký siêu tốc tức thì, loại bỏ hoàn toàn các popup xác nhận phiền phức.\n- 📬 Hòm thư thông báo trên Trang chủ & Thư viện: Kiểm tra Có gì mới và cập nhật một chạm.\n- 🔄 Hoàn thiện hệ thống cập nhật tự động (In-App Updater): Hỗ trợ tự cài đè qua OTA nội bộ.\n- 🌐 Hỗ trợ đa ngôn ngữ hoàn chỉnh (Tiếng Việt & English).\n- 🚀 Tăng tốc độ truyền tải Payload và cài đặt OTA cực nhanh."),
-			isCancel: true,
-			thankYou: true
-		)
 	}
 }
 

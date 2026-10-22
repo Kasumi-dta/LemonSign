@@ -161,20 +161,12 @@ struct LibraryView: View {
 						.disabled(_selectedApps.isEmpty)
 					}
 				} else {
-					ToolbarItemGroup(placement: .topBarTrailing) {
-						Button {
-							UpdateManager.shared.checkForUpdates(isManualCheck: true)
-						} label: {
-							Image(systemName: "envelope.fill")
-								.foregroundStyle(Color.accentColor)
-						}
-						.accessibilityLabel("Hòm thư thông báo")
-
-						Menu {
-							_importActions()
-						} label: {
-							NBButton("", systemImage: "plus", style: .icon)
-						}
+					NBToolbarMenu(
+						systemImage: "plus",
+						style: .icon,
+						placement: .topBarTrailing
+					) {
+						_importActions()
 					}
 				}
 			}

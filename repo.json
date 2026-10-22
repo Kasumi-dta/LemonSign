@@ -19,19 +19,19 @@
             "versions": [
                 {
                     "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/beta3/LemonSign.ipa",
-                    "size": 14000000,
-                    "version": "1.6.3.2",
-                    "buildVersion": "5",
-                    "date": "2026-10-22T22:15:00+07:00",
-                    "localizedDescription": "Bản phát hành LemonSign Beta 3 (v1.6.3.2):\n- 🛡️ Bảo lưu 100% chứng chỉ đã nhập (.p12 / .mobileprovision) và cấu hình khi cập nhật.\n- ⚡ Tối ưu LemonTurbo Engine tự động: Ký siêu tốc tức thì, loại bỏ hoàn toàn các popup xác nhận phiền phức.\n- 📬 Hòm thư thông báo trên Trang chủ & Thư viện: Kiểm tra Có gì mới và thông báo bản cập nhật một chạm.\n- 🔄 Hoàn thiện hệ thống cập nhật tự động (In-App Updater): Tự cài đè qua OTA nội bộ mà không bị chặn.\n- 🌐 Hỗ trợ đa ngôn ngữ hoàn chỉnh (Tiếng Việt & English).\n- 🚀 Tăng tốc độ truyền tải Payload và cài đặt OTA cực nhanh.",
+                    "size": 14900000,
+                    "version": "1.6.3.3",
+                    "buildVersion": "6",
+                    "date": "2026-10-22T23:35:00+07:00",
+                    "localizedDescription": "Bản phát hành LemonSign Beta 3 (v1.6.3.3):\n- 🛡️ Bảo lưu 100% chứng chỉ đã nhập (.p12 / .mobileprovision) và cấu hình khi cập nhật.\n- ⚡ Tối ưu LemonTurbo Engine tự động: Ký siêu tốc tức thì, không popup phiền phức.\n- 🔄 Cập nhật tự động trực tiếp trên thiết bị (In-App OTA).\n- 🌐 Hỗ trợ đa ngôn ngữ hoàn chỉnh (Tiếng Việt & English).\n- 🚀 Tăng tốc độ truyền tải Payload và cài đặt OTA cực nhanh.",
                     "minOSVersion": "16.0"
                 }
             ],
             "appPermissions": {},
-            "version": "1.6.3.2",
-            "buildVersion": "5",
-            "versionDate": "2026-10-22T22:15:00+07:00",
-            "size": 14000000,
+            "version": "1.6.3.3",
+            "buildVersion": "6",
+            "versionDate": "2026-10-22T23:35:00+07:00",
+            "size": 14900000,
             "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/beta3/LemonSign.ipa"
         }
     ]

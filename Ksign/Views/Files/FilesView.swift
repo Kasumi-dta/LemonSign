@@ -95,13 +95,6 @@ struct FilesView: View {
                 }
                 .toolbar {
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
-                        Button {
-                            UpdateManager.shared.checkForUpdates(isManualCheck: true)
-                        } label: {
-                            Image(systemName: "envelope.fill")
-                                .foregroundStyle(Color.accentColor)
-                        }
-                        .accessibilityLabel("Hòm thư thông báo")
                         addButton
                         editButton
                     }

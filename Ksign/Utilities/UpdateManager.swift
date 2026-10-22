@@ -12,8 +12,8 @@ final class UpdateManager: NSObject {
 	static let shared = UpdateManager()
 
 	// Current app constants for this build
-	static let currentAppVersion = "1.6.3.2"
-	static let currentAppBuild = 5
+	static let currentAppVersion = "1.6.3.3"
+	static let currentAppBuild = 6
 	static let currentAppTag = "beta3"
 
 	private let _repoJsonUrl = "https://raw.githubusercontent.com/Kasumi-dta/LemonSign/refs/heads/main/repo.json"
@@ -234,8 +234,8 @@ final class UpdateManager: NSObject {
 				actions: [downloadAction, githubAction, cancelAction]
 			)
 		} else if isManualCheck {
-			let title = String.localized("LemonSign Mailbox: You're Up to Date")
-			let message = String.localized("You're using the latest version of LemonSign (v%@).\n\n✨ What's New:\n- 🛡️ 100% Certificate Preservation: Keeps all existing .p12 certificates and configurations.\n- ⚡ Automatic LemonTurbo Engine: High-speed multi-threaded signing (popups removed).\n- 📬 Mailbox notification on Home screen for quick update checks.\n- 🚀 Accelerated payload streaming & instant OTA install.\n- 🌐 Complete multi-language support.\n- 🍋 Exclusive Lemon Yellow branding.\n\nEverything is up to date!", arguments: currentVersion)
+			let title = String.localized("LemonSign: You're Up to Date")
+			let message = String.localized("You're using the latest version of LemonSign (v%@). Everything is up to date!", arguments: currentVersion)
 			UIAlertController.showAlertWithOk(
 				title: title,
 				message: message
