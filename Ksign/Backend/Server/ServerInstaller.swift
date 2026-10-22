@@ -112,4 +112,18 @@ class ServerInstaller: Identifiable, ObservableObject {
 	static func setIPFix(_ enabled: Bool) {
 		UserDefaults.standard.set(enabled, forKey: "Feather.ipFix")
 	}
+	
+	static let serverPackUrl = "https://backloop.dev/pack.json"
+	
+	@discardableResult
+	static func switchServerMethod() -> Int {
+		let current = getServerMethod()
+		let next = (current == 0 ? 1 : 0)
+		setServerMethod(next)
+		return next
+	}
+	
+	static func serverMethodDisplayName(_ method: Int) -> String {
+		method == 1 ? "Bán cục bộ (Semi Local)" : "Cục bộ hoàn toàn (Fully Local)"
+	}
 }
