@@ -89,36 +89,53 @@
         }
       }
     },
-    "New Update Available: %@" : {
+    "Update Available" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "New Update Available: %@"
+            "value" : "Update Available"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bản cập nhật mới: %@"
+            "value" : "Cập nhật LemonSign"
           }
         }
       }
     },
-    "A new version of LemonSign is available:\n\n%@\n\nWould you like to download and update now?" : {
+    "A new version of LemonSign is available (v%@). Would you like to update?" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "A new version of LemonSign is available:\n\n%@\n\nWould you like to download and update now?"
+            "value" : "A new version of LemonSign is available (v%@). Would you like to update?"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Đã có phiên bản LemonSign mới với các cải tiến:\n\n%@\n\nBạn có muốn tải về và cập nhật ngay không?"
+            "value" : "Đã có phiên bản mới (v%@). Bạn có muốn tải về để cập nhật không?"
+          }
+        }
+      }
+    },
+    "This is the latest version." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This is the latest version."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Phiên bản này là mới nhất."
           }
         }
       }

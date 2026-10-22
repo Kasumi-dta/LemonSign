@@ -131,6 +131,7 @@ struct SigningView: View {
 			if
 				_optionsManager.options.ppqProtection,
 				let identifier = app.identifier,
+				identifier != Bundle.main.bundleIdentifier,
 				let cert = _selectedCert(),
 				cert.ppQCheck
 			{

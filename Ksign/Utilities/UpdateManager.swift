@@ -207,35 +207,29 @@ final class UpdateManager: NSObject {
 		let isNewer = _isRemoteNewer(remoteVersion: version, remoteBuild: build, remoteTag: tag)
 
 		if isNewer {
-			let updateTitle = String.localized("New Update Available: %@", arguments: name)
-			let cleanBody = body.isEmpty ? "A new version of LemonSign is available with improvements and performance optimizations." : body
-			let certNotice = "\n\n🛡️ " + .localized("Certificate Preservation: 100% of your imported certificates (.p12 / .mobileprovision), passwords, and app configurations will be preserved safely.")
-			let message = String.localized("A new version of LemonSign is available:\n\n%@%@\n\nWould you like to download and update now?", arguments: cleanBody, certNotice)
+			let updateTitle = String.localized("Update Available")
+			let message = String.localized("A new version of LemonSign is available (v%@). Would you like to update?", arguments: version)
 
-			let downloadAction = UIAlertAction(title: .localized("Update Now (Download)"), style: .default) { _ in
+			let downloadAction = UIAlertAction(title: String.localized("Update Now (Download)"), style: .default) { _ in
 				if let dlUrl = URL(string: downloadURL) {
 					_ = DownloadManager.shared.startDownload(from: dlUrl, id: "LemonSign_Update_\(UUID().uuidString)")
 					UIAlertController.showAlertWithOk(
-						title: .localized("Downloading Update"),
-						message: .localized("LemonSign is downloading the update. You can monitor progress in the Downloads tab to sign and install over.")
+						title: String.localized("Downloading Update"),
+						message: String.localized("LemonSign is downloading the update. You can monitor progress in the Downloads tab to sign and install over.")
 					)
 				}
 			}
 
-			let githubAction = UIAlertAction(title: .localized("View on GitHub"), style: .default) { _ in
-				UIApplication.open("https://github.com/Kasumi-dta/LemonSign/releases")
-			}
-
-			let cancelAction = UIAlertAction(title: .localized("Later"), style: .cancel, handler: nil)
+			let cancelAction = UIAlertAction(title: String.localized("Later"), style: .cancel, handler: nil)
 
 			UIAlertController.showAlert(
 				title: updateTitle,
 				message: message,
-				actions: [downloadAction, githubAction, cancelAction]
+				actions: [downloadAction, cancelAction]
 			)
 		} else if isManualCheck {
-			let title = String.localized("LemonSign: You're Up to Date")
-			let message = String.localized("You're using the latest version of LemonSign (v%@). Everything is up to date!", arguments: currentVersion)
+			let title = String.localized("Check for Updates")
+			let message = String.localized("This is the latest version.")
 			UIAlertController.showAlertWithOk(
 				title: title,
 				message: message
