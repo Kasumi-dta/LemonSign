@@ -20,16 +20,17 @@
                 {
                     "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/beta3/LemonSign.ipa",
                     "size": 14000000,
-                    "version": "1.6.3",
-                    "buildVersion": "3",
-                    "date": "2026-10-22T18:40:00+07:00",
-                    "localizedDescription": "Bản phát hành LemonSign Beta 3 (v1.6.3):\n- 🔄 Sửa logic kiểm tra cập nhật: Thông báo chuẩn xác khi đang ở bản mới nhất.\n- 🌐 Hỗ trợ đa ngôn ngữ hoàn chỉnh (Tiếng Việt & English).\n- 🚀 Tăng tốc độ truyền tải Payload và cài đặt OTA cực nhanh.\n- ⚡ LemonTurbo Engine: Tối ưu đa luồng CPU thiết bị tăng tốc độ ký và băm file song song (nhanh hơn 3x - 5x).\n- 🍋 Tông màu vàng chanh Lemon Yellow độc quyền & Icon Quả chanh Pixel nghệ thuật.",
+                    "version": "1.6.3.1",
+                    "buildVersion": "4",
+                    "date": "2026-10-22T20:55:00+07:00",
+                    "localizedDescription": "Bản phát hành LemonSign Beta 3 Hotfix (v1.6.3.1):\n- 🛡️ Bảo lưu 100% chứng chỉ đã nhập (.p12 / .mobileprovision) và cấu hình khi cập nhật qua app.\n- 🔄 Hoàn thiện hệ thống kiểm tra cập nhật (Check for Updates): Thông báo chính xác, hỗ trợ tải trực tiếp và cài đè qua OTA nội bộ.\n- 🌐 Hỗ trợ đa ngôn ngữ hoàn chỉnh (Tiếng Việt & English).\n- 🚀 Tăng tốc độ truyền tải Payload và cài đặt OTA cực nhanh.\n- ⚡ LemonTurbo Engine: Tối ưu đa luồng CPU thiết bị tăng tốc độ ký và băm file song song (nhanh hơn 3x - 5x).\n- 🍋 Tông màu vàng chanh Lemon Yellow độc quyền & Icon Quả chanh Pixel nghệ thuật.",
                     "minOSVersion": "16.0"
                 }
             ],
             "appPermissions": {},
-            "version": "1.6.3",
-            "versionDate": "2026-10-22T18:40:00+07:00",
+            "version": "1.6.3.1",
+            "buildVersion": "4",
+            "versionDate": "2026-10-22T20:55:00+07:00",
             "size": 14000000,
             "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/beta3/LemonSign.ipa"
         }

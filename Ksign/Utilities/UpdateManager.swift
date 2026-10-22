@@ -12,12 +12,12 @@ final class UpdateManager: NSObject {
 	static let shared = UpdateManager()
 
 	// Current app constants for this build
-	static let currentAppVersion = "1.6.3"
-	static let currentAppBuild = 3
+	static let currentAppVersion = "1.6.3.1"
+	static let currentAppBuild = 4
 	static let currentAppTag = "beta3"
 
-	private let _releasesApiUrl = "https://api.github.com/repos/Kasumi-dta/LemonSign/releases/latest"
 	private let _repoJsonUrl = "https://raw.githubusercontent.com/Kasumi-dta/LemonSign/refs/heads/main/repo.json"
+	private let _releasesApiUrl = "https://api.github.com/repos/Kasumi-dta/LemonSign/releases?per_page=5"
 	private var _isChecking = false
 
 	private override init() {
@@ -35,6 +35,52 @@ final class UpdateManager: NSObject {
 		guard !_isChecking else { return }
 		_isChecking = true
 
+		// Check repo.json first with cache buster
+		let timestamp = Int(Date().timeIntervalSince1970)
+		guard let url = URL(string: "\(_repoJsonUrl)?t=\(timestamp)") else {
+			_isChecking = false
+			return
+		}
+
+		var request = URLRequest(url: url)
+		request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+		request.timeoutInterval = 10
+
+		let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+			if let data = data,
+			   let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+			   let apps = json["apps"] as? [[String: Any]],
+			   let lemonApp = apps.first(where: {
+				   ($0["bundleIdentifier"] as? String)?.contains("lemonsign") == true ||
+				   ($0["name"] as? String)?.contains("LemonSign") == true
+			   }) {
+				let remoteVersion = lemonApp["version"] as? String ?? "1.6.3.1"
+				let remoteBuildStr = (lemonApp["buildVersion"] as? String) ?? "\(lemonApp["buildVersion"] as? Int ?? 4)"
+				let remoteBuild = Int(remoteBuildStr) ?? 4
+				let downloadURL = lemonApp["downloadURL"] as? String ?? "https://github.com/Kasumi-dta/LemonSign/releases/download/beta3/LemonSign.ipa"
+				let desc = lemonApp["localizedDescription"] as? String ?? ""
+
+				DispatchQueue.main.async {
+					self?._isChecking = false
+					self?._processRelease(
+						version: remoteVersion,
+						build: remoteBuild,
+						tag: "beta3",
+						name: "LemonSign v\(remoteVersion)",
+						body: desc,
+						downloadURL: downloadURL,
+						isManualCheck: isManualCheck
+					)
+				}
+			} else {
+				// Fallback to GitHub releases API
+				self?._checkGitHubReleasesFallback(isManualCheck: isManualCheck)
+			}
+		}
+		task.resume()
+	}
+
+	private func _checkGitHubReleasesFallback(isManualCheck: Bool) {
 		guard let url = URL(string: _releasesApiUrl) else {
 			_isChecking = false
 			return
@@ -49,15 +95,28 @@ final class UpdateManager: NSObject {
 			defer { self?._isChecking = false }
 
 			if let data = data,
-			   let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-			   let tagName = json["tag_name"] as? String {
-				
-				let releaseName = json["name"] as? String ?? tagName
-				let body = json["body"] as? String ?? ""
-				
-				// Find IPA download URL from assets
+			   let releases = try? JSONSerialization.jsonObject(with: data) as? [[String: Any]],
+			   let firstRelease = releases.first,
+			   let tagName = firstRelease["tag_name"] as? String {
+
+				let releaseName = firstRelease["name"] as? String ?? tagName
+				let body = firstRelease["body"] as? String ?? ""
+
+				// Extract semantic version if embedded in release name (e.g. "LemonSign Beta 3 (v1.6.3.1)")
+				var parsedVersion = ""
+				if let regex = try? NSRegularExpression(pattern: #"v?([0-9]+\.[0-9]+(?:\.[0-9]+)*)"#) {
+					let searchString = "\(releaseName) \(tagName)"
+					let nsString = searchString as NSString
+					if let match = regex.firstMatch(in: searchString, range: NSRange(location: 0, length: nsString.length)) {
+						parsedVersion = nsString.substring(with: match.range(at: 1))
+					}
+				}
+				if parsedVersion.isEmpty {
+					parsedVersion = tagName
+				}
+
 				var downloadURLString = "https://github.com/Kasumi-dta/LemonSign/releases/download/\(tagName)/LemonSign.ipa"
-				if let assets = json["assets"] as? [[String: Any]] {
+				if let assets = firstRelease["assets"] as? [[String: Any]] {
 					for asset in assets {
 						if let name = asset["name"] as? String, name.hasSuffix(".ipa"),
 						   let browserURL = asset["browser_download_url"] as? String {
@@ -69,6 +128,8 @@ final class UpdateManager: NSObject {
 
 				DispatchQueue.main.async {
 					self?._processRelease(
+						version: parsedVersion,
+						build: 0,
 						tag: tagName,
 						name: releaseName,
 						body: body,
@@ -76,77 +137,31 @@ final class UpdateManager: NSObject {
 						isManualCheck: isManualCheck
 					)
 				}
-			} else {
-				// Fallback to repo.json check
-				self?._checkRepoJsonFallback(isManualCheck: isManualCheck)
+			} else if isManualCheck {
+				DispatchQueue.main.async {
+					UIAlertController.showAlertWithOk(
+						title: .localized("Check for Updates"),
+						message: .localized("Unable to check for updates. Please try again later.")
+					)
+				}
 			}
 		}
 		task.resume()
 	}
 
-	private func _checkRepoJsonFallback(isManualCheck: Bool) {
-		guard let url = URL(string: _repoJsonUrl) else { return }
-
-		URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
-			guard let data = data,
-				  let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-				  let apps = json["apps"] as? [[String: Any]],
-				  let lemonApp = apps.first(where: { ($0["bundleIdentifier"] as? String)?.contains("lemonsign") == true || ($0["name"] as? String)?.contains("LemonSign") == true })
-			else {
-				if isManualCheck {
-					DispatchQueue.main.async {
-						UIAlertController.showAlertWithOk(
-							title: .localized("Check for Updates"),
-							message: .localized("Unable to check for updates. Please try again later.")
-						)
-					}
-				}
-				return
-			}
-
-			let version = lemonApp["version"] as? String ?? "1.6.3"
-			let downloadURL = lemonApp["downloadURL"] as? String ?? "https://github.com/Kasumi-dta/LemonSign/releases/download/beta3/LemonSign.ipa"
-			let desc = lemonApp["localizedDescription"] as? String ?? ""
-
-			DispatchQueue.main.async {
-				self?._processRelease(
-					tag: version,
-					name: "LemonSign v\(version)",
-					body: desc,
-					downloadURL: downloadURL,
-					isManualCheck: isManualCheck
-				)
-			}
-		}.resume()
-	}
-
-	private func _isRemoteNewer(remoteTag: String, remoteVersion: String) -> Bool {
+	private func _isRemoteNewer(remoteVersion: String, remoteBuild: Int, remoteTag: String) -> Bool {
 		let currentVersionStr = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? Self.currentAppVersion
-		let currentTagStr = Self.currentAppTag
+		let currentBuildStr = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "\(Self.currentAppBuild)"
+		let currentBuild = Int(currentBuildStr) ?? Self.currentAppBuild
 
-		// 1. Check if both are beta tags (e.g. beta2, beta3, beta10)
-		let remoteLower = remoteTag.lowercased()
-		let currentLower = currentTagStr.lowercased()
-		if remoteLower.contains("beta") && currentLower.contains("beta") {
-			let remoteBetaNum = Int(remoteLower.replacingOccurrences(of: "beta", with: "")) ?? 1
-			let currentBetaNum = Int(currentLower.replacingOccurrences(of: "beta", with: "")) ?? 1
-			if remoteBetaNum > currentBetaNum {
-				return true
-			} else if remoteBetaNum < currentBetaNum {
-				return false
-			}
-		}
-
-		// 2. Semantic version comparison (e.g. 1.6.3 vs 1.6.2)
+		// 1. Semantic version comparison (e.g. 1.6.3.1 vs 1.6.3)
 		let cleanRemote = remoteVersion
-			.lowercased()
-			.replacingOccurrences(of: "beta", with: "")
-			.replacingOccurrences(of: "v", with: "")
+			.replacingOccurrences(of: "v", with: "", options: .caseInsensitive)
+			.replacingOccurrences(of: "beta", with: "", options: .caseInsensitive)
 			.trimmingCharacters(in: .whitespacesAndNewlines)
 		let cleanCurrent = currentVersionStr
-			.lowercased()
-			.replacingOccurrences(of: "beta", with: "")
-			.replacingOccurrences(of: "v", with: "")
+			.replacingOccurrences(of: "v", with: "", options: .caseInsensitive)
+			.replacingOccurrences(of: "beta", with: "", options: .caseInsensitive)
 			.trimmingCharacters(in: .whitespacesAndNewlines)
 
 		let remoteParts = cleanRemote.split(separator: ".").compactMap { Int($0) }
@@ -160,10 +175,28 @@ final class UpdateManager: NSObject {
 			if r < c { return false }
 		}
 
+		// 2. Build number check (if semantic versions are equal)
+		if remoteBuild > 0 && currentBuild > 0 {
+			if remoteBuild > currentBuild { return true }
+			if remoteBuild < currentBuild { return false }
+		}
+
+		// 3. Beta tag check (e.g. beta3 vs beta2)
+		let remoteLower = remoteTag.lowercased()
+		let currentLower = Self.currentAppTag.lowercased()
+		if remoteLower.contains("beta") && currentLower.contains("beta") {
+			let remoteBetaNum = Int(remoteLower.replacingOccurrences(of: "beta", with: "").trimmingCharacters(in: .letters)) ?? 0
+			let currentBetaNum = Int(currentLower.replacingOccurrences(of: "beta", with: "").trimmingCharacters(in: .letters)) ?? 0
+			if remoteBetaNum > currentBetaNum { return true }
+			if remoteBetaNum < currentBetaNum { return false }
+		}
+
 		return false
 	}
 
 	private func _processRelease(
+		version: String,
+		build: Int,
 		tag: String,
 		name: String,
 		body: String,
@@ -171,7 +204,7 @@ final class UpdateManager: NSObject {
 		isManualCheck: Bool
 	) {
 		let currentVersion = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? Self.currentAppVersion
-		let isNewer = _isRemoteNewer(remoteTag: tag, remoteVersion: tag)
+		let isNewer = _isRemoteNewer(remoteVersion: version, remoteBuild: build, remoteTag: tag)
 
 		if isNewer {
 			let updateTitle = String.localized("New Update Available: %@", arguments: name)

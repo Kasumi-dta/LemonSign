@@ -44,10 +44,11 @@ jobs:
           
           cat release_notes.md
 
+          APP_VER=$(jq -r '.apps[0].version' repo.json 2>/dev/null || echo "1.6.3.1")
           gh release delete beta3 --cleanup-tag -y || true
           
           gh release create beta3 packages/*.ipa \
-            --title "LemonSign Beta 3" \
+            --title "LemonSign Beta 3 (v$APP_VER)" \
             --notes "$(cat release_notes.md)" \
             --prerelease \
             --target ${{ github.sha }}
