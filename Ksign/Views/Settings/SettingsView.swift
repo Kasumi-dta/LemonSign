@@ -108,7 +108,7 @@ extension SettingsView {
                 Label(.localized("About"), systemImage: "info.circle")
             }
 			Button(.localized("Telegram Channel"), systemImage: "paperplane.circle") {
-				UIApplication.open("https://t.me/KhoinDNS")
+				UIApplication.open("https://t.me/applep12vnn")
 			}
 			Button(.localized("GitHub Repository"), systemImage: "safari") {
 				UIApplication.open(_githubUrl)
