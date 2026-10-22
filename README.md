@@ -36,9 +36,12 @@ Another reason is this app was built to make sideloading simpler and more access
 
 ## Features
 - 🍋 **Lemon Yellow Theme**: Clean, modern interface designed with custom pixel art lemon branding.
+- ⚡ **LemonTurbo Multi-Core Engine**: Parallel multi-threaded hashing and codesigning utilizing 100% of the device's CPU cores for 3x - 5x faster signing.
+- 🔄 **In-App Auto-Updater**: Directly checks for remote releases on GitHub and downloads/updates with 1-click.
 - ✍️ **On-Device Signing**: Fast C++ `zsign` engine compiled directly into Swift for lightning-fast IPA signing.
+- 🛡️ **Live Jailbreak Detection**: Real-time status indicator recognizing Stock iOS vs Rootless/Rootful jailbreak.
 - 💉 **Tweak & Dylib Injection**: Inject modifications, frameworks, and tweaks into your IPAs seamlessly.
-- 📲 **Direct Local Server Install**: Built-in HTTPS server for one-click OTA installations directly on iOS.
+- 📲 **Smart Localhost OTA Server**: Built-in server with automatic fallback and SSL certificate renewal prompt.
 - 📦 **Multi-Repo Sources**: Browse and download IPAs directly from AltStore and ESign repository sources.
 - 🛠️ **Built-in File & Plist Editor**: Inspect app bundles, modify `Info.plist`, view hex, and unpack IPAs.
 - 🔌 **IDevice Tunnel Support**: Local device tunnel pairing for trusted installation flows.
@@ -49,7 +52,7 @@ You can create an Issue at [Issues](https://github.com/Kasumi-dta/LemonSign/issu
 You can also join our Telegram channel at [applep12vnn](https://t.me/applep12vnn) for updates, certificates, and community discussion.
 
 ## Download
-Go to [Releases](https://github.com/Kasumi-dta/LemonSign/releases) and download the newest `.ipa` release.
+Go to **[Release Beta 2](https://github.com/Kasumi-dta/LemonSign/releases/tag/beta2)** and download `LemonSign.ipa`.
 
 ## Special thanks
 - Feather by [claration](https://github.com/claration/Feather)
