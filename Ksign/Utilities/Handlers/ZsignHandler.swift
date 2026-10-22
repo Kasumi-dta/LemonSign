@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import ZsignSwift
+import Zsign
 import UIKit
 
 final class ZsignHandler {

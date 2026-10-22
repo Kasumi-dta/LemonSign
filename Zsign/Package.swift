@@ -19,11 +19,11 @@ let package = Package(
 		),
 		.library(
 			name: "Zsign",
-			targets: ["Zsign"]
+			targets: ["Zsign", "ZsignSwift"]
 		),
 		.library(
 			name: "ZsignSwift",
-			targets: ["Zsign"]
+			targets: ["Zsign", "ZsignSwift"]
 		),
 	],
 	dependencies: [
@@ -76,6 +76,16 @@ let package = Package(
 			path: "swift",
 			sources: [
 				"zsign.swift"
+			]
+		),
+		.target(
+			name: "ZsignSwift",
+			dependencies: [
+				"Zsign"
+			],
+			path: "swift-shim",
+			sources: [
+				"ZsignSwift.swift"
 			]
 		)
 	]
