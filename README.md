@@ -1,40 +1,57 @@
+<p align="center">
+  <img src="assets/logo.png" height="200" alt="LemonSign Logo">
+</p>
 
-<img src="https://github.com/user-attachments/assets/986892f9-c32f-448d-a24e-ba8659203fbf" height="200">
+<h1 align="center">LemonSign</h1>
 
-# Ksign 
-[![GitHub Release](https://img.shields.io/github/v/release/nyasami/ksign?style=for-the-badge&color=3c94fc)](https://github.com/nyasami/ksign/releases/latest) 
-[![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/nyasami/ksign/total?style=for-the-badge&color=6bc563)](https://github.com/nyasami/ksign/releases)
+<p align="center">
+  <a href="https://github.com/Kasumi-dta/LemonSign/releases/latest">
+    <img src="https://img.shields.io/github/v/release/Kasumi-dta/LemonSign?style=for-the-badge&color=FFD60A&labelColor=23272d" alt="GitHub Release">
+  </a>
+  <a href="https://github.com/Kasumi-dta/LemonSign/releases">
+    <img src="https://img.shields.io/github/downloads/Kasumi-dta/LemonSign/total?style=for-the-badge&color=FFD60A&labelColor=23272d" alt="GitHub Downloads">
+  </a>
+  <a href="https://github.com/Kasumi-dta/LemonSign/blob/main/LICENSE">
+    <img src="https://img.shields.io/badge/License-GPL%20v3.0-FFD60A?style=for-the-badge&labelColor=23272d" alt="License">
+  </a>
+</p>
+
+<p align="center">
+  An elegant, on-device iOS app signer and sideloading utility customized with the <b>3105 aesthetic</b> and signature <b>Lemon Yellow</b> theme.
+</p>
+
+---
 
 Yet another codesigning app, have you ever wondered what if Feather and Esign had a child?
 
 ## Why?
 Since Esign is end of service so people been moving to other signing apps, but Esign was a really big part of the community, so with the help of Feather as the base app, I tried to recreate Esign as close as possible so you guys can easier to get familiar and less app switching for smooth sideloading.
 
-Another reason is this app was built specifically for Khoindvn to share his certificates, allowing more people to access to sideloading without even have to buy a certificate!
+LemonSign builds upon this foundation with a fresh **3105-inspired interface**, a signature lemon yellow identity, and complete offline signing capabilities.
 
-## Help
-You can create your Issue at [Issue](https://github.com/Kasumi-dta), this will also be the place for you to request a new feature so feel free to make one!
+Another reason is this app was built to make sideloading simpler and more accessible, allowing everyone to easily sign, inject dylibs/tweaks, and manage certificates directly on iOS devices without needing a computer!
+
+## Features
+- 🍋 **Lemon Yellow 3105 Aesthetic**: Clean, modern interface designed with custom pixel art lemon branding.
+- ✍️ **On-Device Signing**: Fast C++ `zsign` engine compiled directly into Swift for lightning-fast IPA signing.
+- 💉 **Tweak & Dylib Injection**: Inject modifications, frameworks, and tweaks into your IPAs seamlessly.
+- 📲 **Direct Local Server Install**: Built-in HTTPS server for one-click OTA installations directly on iOS.
+- 📦 **Multi-Repo Sources**: Browse and download IPAs directly from AltStore and ESign repository sources.
+- 🛠️ **Built-in File & Plist Editor**: Inspect app bundles, modify `Info.plist`, view hex, and unpack IPAs.
+- 🔌 **IDevice Tunnel Support**: Local device tunnel pairing for trusted installation flows.
+
+## Help & Issues
+You can create an Issue at [Issues](https://github.com/Kasumi-dta/LemonSign/issues). This is also the place for you to report bugs or request new features, so feel free to open one!
 
 ## Download
-Go to [GitHub](https://github.com/Kasumi-dta) to download the newest ipa.
-
-## Star History
-
-<a href="https://www.star-history.com/?repos=nyasami%2Fksign&type=date&legend=top-left">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=nyasami/ksign&type=date&theme=dark&legend=top-left&sealed_token=qF8r8F35jlacPKoDFdro6gYpDDUbVGloo-UPsBBqrAufefIWUZ7MY_TmH4j_UB2ailJBO_OYzkYV-jye9GlGJR-PfMID-XHRW52SHl--bD976zJlaiDwOA" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=nyasami/ksign&type=date&legend=top-left&sealed_token=qF8r8F35jlacPKoDFdro6gYpDDUbVGloo-UPsBBqrAufefIWUZ7MY_TmH4j_UB2ailJBO_OYzkYV-jye9GlGJR-PfMID-XHRW52SHl--bD976zJlaiDwOA" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=nyasami/ksign&type=date&legend=top-left&sealed_token=qF8r8F35jlacPKoDFdro6gYpDDUbVGloo-UPsBBqrAufefIWUZ7MY_TmH4j_UB2ailJBO_OYzkYV-jye9GlGJR-PfMID-XHRW52SHl--bD976zJlaiDwOA" />
- </picture>
-</a>
+Go to [Releases](https://github.com/Kasumi-dta/LemonSign/releases) and download the newest `.ipa` release.
 
 ## Special thanks
-- Feather by [claration](https://github.com/claration/Feather)  
-
-- Product manager Khoindvn
-
+- Feather by [claration](https://github.com/claration/Feather)
+- Ksign by [nyasami](https://github.com/nyasami)
+- Khoindvn for certificate sharing and community support
+- [Kasumi-dta](https://github.com/Kasumi-dta) for LemonSign customization & maintenance
 - And you! for using the app ❤️
 
 ## Disclaimer
-
-This project is maintained here, on GitHub. Releases are distributed here, on GitHub. We do not currently have a project website outside of this repository. Please make sure to avoid any sites that host our software as they are often malicious and are there to mislead to user.
+This project is maintained here, on GitHub. Releases are distributed here, on GitHub. We do not currently have a project website outside of this repository. Please make sure to avoid any sites that host our software as they are often malicious and are there to mislead the user.
