@@ -93,7 +93,7 @@ final class ArchiveHandler: NSObject {
 	
 	static func getCompressionLevel() -> Int {
 		if UserDefaults.standard.object(forKey: "Feather.compressionLevel") == nil {
-			return 1 // BestSpeed: Instant fast packaging for installation
+			return 0 // NoCompression: Pure store, instant archive (<1s) & instant install decompression!
 		}
 		return UserDefaults.standard.integer(forKey: "Feather.compressionLevel")
 	}

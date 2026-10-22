@@ -4,6 +4,278 @@
     "" : {
       "shouldTranslate" : false
     },
+    "⚡ LemonTurbo Engine" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⚡ LemonTurbo Engine"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⚡ LemonTurbo Engine"
+          }
+        }
+      }
+    },
+    "LemonSign will utilize maximum device hardware resources (%d CPU cores) to accelerate signing, parallel hashing, and packaging." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LemonSign will utilize maximum device hardware resources (%d CPU cores) to accelerate signing, parallel hashing, and packaging."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LemonSign sẽ huy động tối đa tài nguyên thiết bị (%d nhân CPU) để tăng tốc độ ký, băm file song song và đóng gói cài đặt ứng dụng siêu tốc."
+          }
+        }
+      }
+    },
+    "Turbo Signing (Start)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turbo Signing (Start)"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ký siêu tốc (Bắt đầu)"
+          }
+        }
+      }
+    },
+    "Check for Updates" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check for Updates"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kiểm tra bản cập nhật"
+          }
+        }
+      }
+    },
+    "New Update Available: %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Update Available: %@"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bản cập nhật mới: %@"
+          }
+        }
+      }
+    },
+    "A new version of LemonSign is available:\n\n%@\n\nWould you like to download and update now?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A new version of LemonSign is available:\n\n%@\n\nWould you like to download and update now?"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Đã có phiên bản LemonSign mới với các cải tiến:\n\n%@\n\nBạn có muốn tải về và cập nhật ngay không?"
+          }
+        }
+      }
+    },
+    "Update Now (Download)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update Now (Download)"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cập nhật ngay (Tải về)"
+          }
+        }
+      }
+    },
+    "View on GitHub" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View on GitHub"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Xem trên GitHub"
+          }
+        }
+      }
+    },
+    "Later" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Later"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Để sau"
+          }
+        }
+      }
+    },
+    "Downloading Update" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Downloading Update"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Đang tải bản cập nhật"
+          }
+        }
+      }
+    },
+    "LemonSign is downloading the update. You can monitor progress in the Downloads tab to sign and install over." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LemonSign is downloading the update. You can monitor progress in the Downloads tab to sign and install over."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LemonSign đang tải bản cập nhật về máy. Bạn có thể theo dõi tiến trình trong mục Tải về để ký và cài đặt đè."
+          }
+        }
+      }
+    },
+    "You're Up to Date" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You're Up to Date"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bạn đang ở bản mới nhất"
+          }
+        }
+      }
+    },
+    "LemonSign %@ is currently the newest version." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LemonSign %@ is currently the newest version."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LemonSign %@ hiện là phiên bản mới nhất."
+          }
+        }
+      }
+    },
+    "Unable to check for updates. Please try again later." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to check for updates. Please try again later."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Không thể kết nối đến máy chủ cập nhật. Vui lòng thử lại sau."
+          }
+        }
+      }
+    },
+    "⚡ Accelerating signing with multi-core device resources..." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⚡ Accelerating signing with multi-core device resources..."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⚡ Đang sử dụng tài nguyên đa nhân thiết bị để tăng tốc độ ký..."
+          }
+        }
+      }
+    },
+    "⚡ Accelerating bulk signing with multi-core device resources..." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⚡ Accelerating bulk signing with multi-core device resources..."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⚡ Đang sử dụng tài nguyên đa nhân thiết bị để tăng tốc độ ký hàng loạt..."
+          }
+        }
+      }
+    },
     "%lld Apps" : {
       "comment" : "Repository app count",
       "extractionState" : "manual",

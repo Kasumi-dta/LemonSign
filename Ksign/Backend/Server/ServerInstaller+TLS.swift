@@ -24,7 +24,7 @@ extension ServerInstaller {
 	
 	static func setupApp(port: Int) throws -> Application {
 		let app = Application(env)
-		app.threadPool = .init(numberOfThreads: 1)
+		app.threadPool = .init(numberOfThreads: min(4, max(2, ProcessInfo.processInfo.activeProcessorCount)))
 		
 		if ServerInstaller.getServerMethod() != 1 {
 			if let tls = try Self.tls() {

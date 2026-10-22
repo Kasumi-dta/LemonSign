@@ -298,14 +298,14 @@ extension SigningView {
 		}
 
 		let cpuCount = ProcessInfo.processInfo.activeProcessorCount
-		let proceed = UIAlertAction(title: .localized("Ký siêu tốc (Bắt đầu)"), style: .default) { [self] _ in
+		let proceed = UIAlertAction(title: .localized("Turbo Signing (Start)"), style: .default) { [self] _ in
 			_proceedWithSigning()
 		}
 		let cancel = UIAlertAction(title: .localized("Cancel"), style: .cancel, handler: nil)
 
 		UIAlertController.showAlert(
-			title: "⚡ LemonTurbo Engine",
-			message: "LemonSign sẽ huy động tối đa tài nguyên thiết bị (\(cpuCount) nhân CPU) để tăng tốc độ ký, băm file song song và đóng gói cài đặt ứng dụng siêu tốc.",
+			title: .localized("⚡ LemonTurbo Engine"),
+			message: String.localized("LemonSign will utilize maximum device hardware resources (%d CPU cores) to accelerate signing, parallel hashing, and packaging.", cpuCount),
 			actions: [proceed, cancel]
 		)
 	}
@@ -321,7 +321,7 @@ extension SigningView {
 		NotificationCenter.default.post(
 			name: NSNotification.Name("lemonsign.turboActive"),
 			object: nil,
-			userInfo: ["message": "⚡ Đang sử dụng tài nguyên đa nhân thiết bị để tăng tốc độ ký..."]
+			userInfo: ["message": String.localized("⚡ Accelerating signing with multi-core device resources...")]
 		)
 		FR.signPackageFile(
 			app,

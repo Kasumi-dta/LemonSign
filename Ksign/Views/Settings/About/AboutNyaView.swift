@@ -94,8 +94,8 @@ struct AboutNyaView: View {
 	
 	private func _showPatchNotes() {
 		UIAlertController.showAlertWithOk(
-			title: .localized("From Kasumi, Version \(Bundle.main.version) (Beta 2)"),
-			message: .localized("Bản cập nhật LemonSign Beta 2 mang đến:\n\n- ⚡ LemonTurbo Engine: Tận dụng tối đa đa nhân CPU thiết bị để tăng tốc độ ký và băm file song song (nhanh hơn 3x - 5x).\n- 🚀 Tối ưu luồng giải nén & đóng gói IPA siêu tốc (High-Priority CPU + Fast compression).\n- 🔔 Bổ sung Popup thông báo huy động tài nguyên phần cứng thiết bị khi ký.\n- 🔄 In-App Auto-Updater: Tự động kiểm tra và cập nhật ứng dụng từ xa trực tuyến qua GitHub Release.\n- 🌐 Máy chủ OTA thông minh: Tự động chuyển đổi máy chủ và nhắc cập nhật chứng chỉ SSL khi lỗi payload.\n- 🍋 Giao diện vàng chanh Lemon Yellow đặc trưng & Icon Pixel Lemon nghệ thuật."),
+			title: .localized("From Kasumi, Version \(Bundle.main.version) (Beta 3)"),
+			message: .localized("Bản cập nhật LemonSign Beta 3 mang đến:\n\n- 🔄 Fix logic kiểm tra cập nhật: Thông báo chuẩn xác khi đang ở bản mới nhất.\n- 🌐 Hỗ trợ đa ngôn ngữ toàn diện (Tiếng Việt & English).\n- 🚀 Tăng tốc độ truyền tải Payload và cài đặt OTA cực nhanh.\n- ⚡ LemonTurbo Engine: Tối ưu đa nhân CPU thiết bị tăng tốc độ ký và băm file song song (nhanh hơn 3x - 5x).\n- 🍋 Giao diện vàng chanh Lemon Yellow đặc trưng & Icon Pixel Lemon nghệ thuật."),
 			isCancel: true,
 			thankYou: true
 		)

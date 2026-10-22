@@ -11,6 +11,11 @@ import Foundation
 final class UpdateManager: NSObject {
 	static let shared = UpdateManager()
 
+	// Current app constants for this build
+	static let currentAppVersion = "1.6.3"
+	static let currentAppBuild = 3
+	static let currentAppTag = "beta3"
+
 	private let _releasesApiUrl = "https://api.github.com/repos/Kasumi-dta/LemonSign/releases/latest"
 	private let _repoJsonUrl = "https://raw.githubusercontent.com/Kasumi-dta/LemonSign/refs/heads/main/repo.json"
 	private var _isChecking = false
@@ -92,15 +97,15 @@ final class UpdateManager: NSObject {
 					DispatchQueue.main.async {
 						UIAlertController.showAlertWithOk(
 							title: .localized("Check for Updates"),
-							message: .localized("Không thể kết nối đến máy chủ cập nhật. Vui lòng thử lại sau.")
+							message: .localized("Unable to check for updates. Please try again later.")
 						)
 					}
 				}
 				return
 			}
 
-			let version = lemonApp["version"] as? String ?? "1.6.2"
-			let downloadURL = lemonApp["downloadURL"] as? String ?? "https://github.com/Kasumi-dta/LemonSign/releases/download/beta2/LemonSign.ipa"
+			let version = lemonApp["version"] as? String ?? "1.6.3"
+			let downloadURL = lemonApp["downloadURL"] as? String ?? "https://github.com/Kasumi-dta/LemonSign/releases/download/beta3/LemonSign.ipa"
 			let desc = lemonApp["localizedDescription"] as? String ?? ""
 
 			DispatchQueue.main.async {
@@ -115,6 +120,49 @@ final class UpdateManager: NSObject {
 		}.resume()
 	}
 
+	private func _isRemoteNewer(remoteTag: String, remoteVersion: String) -> Bool {
+		let currentVersionStr = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? Self.currentAppVersion
+		let currentTagStr = Self.currentAppTag
+
+		// 1. Check if both are beta tags (e.g. beta2, beta3, beta10)
+		let remoteLower = remoteTag.lowercased()
+		let currentLower = currentTagStr.lowercased()
+		if remoteLower.contains("beta") && currentLower.contains("beta") {
+			let remoteBetaNum = Int(remoteLower.replacingOccurrences(of: "beta", with: "")) ?? 1
+			let currentBetaNum = Int(currentLower.replacingOccurrences(of: "beta", with: "")) ?? 1
+			if remoteBetaNum > currentBetaNum {
+				return true
+			} else if remoteBetaNum < currentBetaNum {
+				return false
+			}
+		}
+
+		// 2. Semantic version comparison (e.g. 1.6.3 vs 1.6.2)
+		let cleanRemote = remoteVersion
+			.lowercased()
+			.replacingOccurrences(of: "beta", with: "")
+			.replacingOccurrences(of: "v", with: "")
+			.trimmingCharacters(in: .whitespacesAndNewlines)
+		let cleanCurrent = currentVersionStr
+			.lowercased()
+			.replacingOccurrences(of: "beta", with: "")
+			.replacingOccurrences(of: "v", with: "")
+			.trimmingCharacters(in: .whitespacesAndNewlines)
+
+		let remoteParts = cleanRemote.split(separator: ".").compactMap { Int($0) }
+		let currentParts = cleanCurrent.split(separator: ".").compactMap { Int($0) }
+
+		let count = max(remoteParts.count, currentParts.count)
+		for i in 0..<count {
+			let r = i < remoteParts.count ? remoteParts[i] : 0
+			let c = i < currentParts.count ? currentParts[i] : 0
+			if r > c { return true }
+			if r < c { return false }
+		}
+
+		return false
+	}
+
 	private func _processRelease(
 		tag: String,
 		name: String,
@@ -122,43 +170,29 @@ final class UpdateManager: NSObject {
 		downloadURL: String,
 		isManualCheck: Bool
 	) {
-		let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.6.1"
-		let currentTag = UserDefaults.standard.string(forKey: "lemonsign.appTag") ?? "beta"
-
-		let isNewer: Bool
-		let cleanTag = tag.trimmingCharacters(in: CharacterSet(charactersIn: "vV"))
-		let cleanCurrent = currentVersion.trimmingCharacters(in: CharacterSet(charactersIn: "vV"))
-
-		if cleanTag.compare(cleanCurrent, options: .numeric) == .orderedDescending {
-			isNewer = true
-		} else if tag.lowercased() == "beta2" && currentTag.lowercased() != "beta2" {
-			isNewer = true
-		} else if isManualCheck && tag != currentTag {
-			isNewer = true
-		} else {
-			isNewer = false
-		}
+		let currentVersion = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? Self.currentAppVersion
+		let isNewer = _isRemoteNewer(remoteTag: tag, remoteVersion: tag)
 
 		if isNewer {
-			let updateTitle = "🎉 Bản cập nhật mới: \(name)"
-			let cleanBody = body.isEmpty ? "Đã có bản cập nhật LemonSign mới nhất với các cải tiến và sửa lỗi." : body
-			let message = "\(cleanBody)\n\nBạn có muốn tải về và cập nhật ngay không?"
+			let updateTitle = String.localized("New Update Available: %@", name)
+			let cleanBody = body.isEmpty ? "A new version of LemonSign is available with improvements and performance optimizations." : body
+			let message = String.localized("A new version of LemonSign is available:\n\n%@\n\nWould you like to download and update now?", cleanBody)
 
-			let downloadAction = UIAlertAction(title: "Cập nhật ngay (Tải về)", style: .default) { _ in
+			let downloadAction = UIAlertAction(title: .localized("Update Now (Download)"), style: .default) { _ in
 				if let dlUrl = URL(string: downloadURL) {
 					_ = DownloadManager.shared.startDownload(from: dlUrl, id: "LemonSign_Update_\(UUID().uuidString)")
 					UIAlertController.showAlertWithOk(
-						title: "Đang tải bản cập nhật",
-						message: "LemonSign đang tải bản cập nhật về máy. Bạn có thể theo dõi tiến trình tải trong thanh thông báo hoặc mục Tải về để ký và cài đặt đè."
+						title: .localized("Downloading Update"),
+						message: .localized("LemonSign is downloading the update. You can monitor progress in the Downloads tab to sign and install over.")
 					)
 				}
 			}
 
-			let githubAction = UIAlertAction(title: "Xem trên GitHub", style: .default) { _ in
+			let githubAction = UIAlertAction(title: .localized("View on GitHub"), style: .default) { _ in
 				UIApplication.open("https://github.com/Kasumi-dta/LemonSign/releases")
 			}
 
-			let cancelAction = UIAlertAction(title: "Để sau", style: .cancel, handler: nil)
+			let cancelAction = UIAlertAction(title: .localized("Later"), style: .cancel, handler: nil)
 
 			UIAlertController.showAlert(
 				title: updateTitle,
@@ -167,8 +201,8 @@ final class UpdateManager: NSObject {
 			)
 		} else if isManualCheck {
 			UIAlertController.showAlertWithOk(
-				title: "LemonSign đã là bản mới nhất",
-				message: "Bạn đang sử dụng phiên bản \(currentVersion) mới nhất với công nghệ tối ưu LemonTurbo."
+				title: .localized("You're Up to Date"),
+				message: String.localized("LemonSign %@ is currently the newest version.", currentVersion)
 			)
 		}
 	}
