@@ -2,7 +2,7 @@
 //  JailbreakDetector.swift
 //  LemonSign
 //
-//  Created for LemonSign 3105 on 22.10.2026.
+//  Created for LemonSign on 22.10.2026.
 //
 
 import Foundation

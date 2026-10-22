@@ -3,7 +3,7 @@
 //  LemonSign
 //
 //  Created by samara on 30.04.2025.
-//  Customized for LemonSign 3105 on 22.10.2026.
+//  Customized for LemonSign on 22.10.2026.
 //
 
 import SwiftUI
