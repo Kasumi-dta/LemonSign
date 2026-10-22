@@ -161,13 +161,22 @@ struct LibraryView: View {
 						.disabled(_selectedApps.isEmpty)
 					}
 				} else {
-					NBToolbarMenu(
-						systemImage: "plus",
-						style: .icon,
-						placement: .topBarTrailing
-					) {
-                        _importActions()
-                    }
+					ToolbarItemGroup(placement: .topBarTrailing) {
+						Button {
+							UpdateManager.shared.checkForUpdates(isManualCheck: true)
+						} label: {
+							Image(systemName: "envelope.fill")
+								.foregroundStyle(Color.accentColor)
+						}
+						.accessibilityLabel("Hòm thư thông báo")
+
+						NBToolbarMenu(
+							systemImage: "plus",
+							style: .icon
+						) {
+							_importActions()
+						}
+					}
 				}
 			}
             .environment(\.editMode, $_isEditMode)

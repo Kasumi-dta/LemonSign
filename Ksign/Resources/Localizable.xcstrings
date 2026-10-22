@@ -208,6 +208,40 @@
         }
       }
     },
+    "LemonSign Mailbox: You're Up to Date" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LemonSign Mailbox: You're Up to Date"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hòm thư LemonSign: Bạn đang ở bản mới nhất"
+          }
+        }
+      }
+    },
+    "Certificate Preservation: 100% of your imported certificates (.p12 / .mobileprovision), passwords, and app configurations will be preserved safely." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Certificate Preservation: 100% of your imported certificates (.p12 / .mobileprovision), passwords, and app configurations will be preserved safely."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bảo lưu chứng chỉ: Quá trình cập nhật sẽ BẢO LƯU 100% toàn bộ chứng chỉ (.p12 / .mobileprovision), mật khẩu và cấu hình cũ của bạn an toàn."
+          }
+        }
+      }
+    },
     "You're Up to Date" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -221,6 +255,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bạn đang ở bản mới nhất"
+          }
+        }
+      }
+    },
+    "You're using the latest version of LemonSign (v%@).\n\n✨ What's New:\n- 🛡️ 100% Certificate Preservation: Keeps all existing .p12 certificates and configurations.\n- ⚡ Automatic LemonTurbo Engine: High-speed multi-threaded signing (popups removed).\n- 📬 Mailbox notification on Home screen for quick update checks.\n- 🚀 Accelerated payload streaming & instant OTA install.\n- 🌐 Complete multi-language support.\n- 🍋 Exclusive Lemon Yellow branding.\n\nEverything is up to date!" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You're using the latest version of LemonSign (v%@).\n\n✨ What's New:\n- 🛡️ 100% Certificate Preservation: Keeps all existing .p12 certificates and configurations.\n- ⚡ Automatic LemonTurbo Engine: High-speed multi-threaded signing (popups removed).\n- 📬 Mailbox notification on Home screen for quick update checks.\n- 🚀 Accelerated payload streaming & instant OTA install.\n- 🌐 Complete multi-language support.\n- 🍋 Exclusive Lemon Yellow branding.\n\nEverything is up to date!"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bạn đang sử dụng phiên bản LemonSign mới nhất (v%@).\n\n✨ Có gì mới:\n- 🛡️ Bảo lưu toàn vẹn 100% chứng chỉ (.p12, .mobileprovision) và cấu hình cũ khi cập nhật.\n- ⚡ LemonTurbo Engine tự động: Ký siêu tốc đa luồng (đã loại bỏ popup phiền phức).\n- 📬 Hòm thư thông báo trên Trang chủ & Thư viện: Kiểm tra bản cập nhật và có gì mới tiện lợi.\n- 🚀 Tăng tốc độ stream Payload và cài đặt OTA cực nhanh.\n- 🌐 Hỗ trợ song ngữ Tiếng Việt & English hoàn chỉnh.\n- 🍋 Giao diện vàng chanh Lemon Yellow độc quyền.\n\nTất cả đã ở trạng thái mới nhất!"
           }
         }
       }

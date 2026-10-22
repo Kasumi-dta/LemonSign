@@ -12,8 +12,8 @@ final class UpdateManager: NSObject {
 	static let shared = UpdateManager()
 
 	// Current app constants for this build
-	static let currentAppVersion = "1.6.3.1"
-	static let currentAppBuild = 4
+	static let currentAppVersion = "1.6.3.2"
+	static let currentAppBuild = 5
 	static let currentAppTag = "beta3"
 
 	private let _repoJsonUrl = "https://raw.githubusercontent.com/Kasumi-dta/LemonSign/refs/heads/main/repo.json"
@@ -209,7 +209,8 @@ final class UpdateManager: NSObject {
 		if isNewer {
 			let updateTitle = String.localized("New Update Available: %@", arguments: name)
 			let cleanBody = body.isEmpty ? "A new version of LemonSign is available with improvements and performance optimizations." : body
-			let message = String.localized("A new version of LemonSign is available:\n\n%@\n\nWould you like to download and update now?", arguments: cleanBody)
+			let certNotice = "\n\n🛡️ " + .localized("Certificate Preservation: 100% of your imported certificates (.p12 / .mobileprovision), passwords, and app configurations will be preserved safely.")
+			let message = String.localized("A new version of LemonSign is available:\n\n%@%@\n\nWould you like to download and update now?", arguments: cleanBody, certNotice)
 
 			let downloadAction = UIAlertAction(title: .localized("Update Now (Download)"), style: .default) { _ in
 				if let dlUrl = URL(string: downloadURL) {
@@ -233,9 +234,11 @@ final class UpdateManager: NSObject {
 				actions: [downloadAction, githubAction, cancelAction]
 			)
 		} else if isManualCheck {
+			let title = .localized("LemonSign Mailbox: You're Up to Date")
+			let message = String.localized("You're using the latest version of LemonSign (v%@).\n\n✨ What's New:\n- 🛡️ 100% Certificate Preservation: Keeps all existing .p12 certificates and configurations.\n- ⚡ Automatic LemonTurbo Engine: High-speed multi-threaded signing (popups removed).\n- 📬 Mailbox notification on Home screen for quick update checks.\n- 🚀 Accelerated payload streaming & instant OTA install.\n- 🌐 Complete multi-language support.\n- 🍋 Exclusive Lemon Yellow branding.\n\nEverything is up to date!", arguments: currentVersion)
 			UIAlertController.showAlertWithOk(
-				title: .localized("You're Up to Date"),
-				message: String.localized("LemonSign %@ is currently the newest version.", arguments: currentVersion)
+				title: title,
+				message: message
 			)
 		}
 	}

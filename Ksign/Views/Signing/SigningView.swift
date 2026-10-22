@@ -297,17 +297,7 @@ extension SigningView {
 			return
 		}
 
-		let cpuCount = ProcessInfo.processInfo.activeProcessorCount
-		let proceed = UIAlertAction(title: .localized("Turbo Signing (Start)"), style: .default) { [self] _ in
-			_proceedWithSigning()
-		}
-		let cancel = UIAlertAction(title: .localized("Cancel"), style: .cancel, handler: nil)
-
-		UIAlertController.showAlert(
-			title: .localized("⚡ LemonTurbo Engine"),
-			message: String.localized("LemonSign will utilize maximum device hardware resources (%d CPU cores) to accelerate signing, parallel hashing, and packaging.", arguments: cpuCount),
-			actions: [proceed, cancel]
-		)
+		_proceedWithSigning()
 	}
 
 	private func _proceedWithSigning() {
