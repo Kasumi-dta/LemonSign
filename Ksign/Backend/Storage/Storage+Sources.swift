@@ -92,9 +92,22 @@ extension Storage {
 	}
 
 
+	func cleanupOldSources() {
+		let fetchRequest: NSFetchRequest<AltSource> = AltSource.fetchRequest()
+		if let sources = try? context.fetch(fetchRequest) {
+			for source in sources {
+				if let url = source.sourceURL?.absoluteString, url.contains("Nyasami/Ksign") {
+					context.delete(source)
+				}
+			}
+			try? context.save()
+		}
+	}
+
 	func addBuiltInSources() {
+		cleanupOldSources()
 		let builtInSourceURLs = [
-            "https://raw.githubusercontent.com/Nyasami/Ksign/refs/heads/main/repo.json",
+            "https://raw.githubusercontent.com/Kasumi-dta/LemonSign/refs/heads/main/repo.json",
             "https://community-apps.sidestore.io/sidecommunity.json",
             "https://github.com/LiveContainer/LiveContainer/releases/download/1.0/apps.json",
             "https://alt.crystall1ne.dev"

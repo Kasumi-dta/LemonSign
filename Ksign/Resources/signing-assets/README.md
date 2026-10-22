@@ -1,6 +1,6 @@
-﻿# Hướng dẫn nhúng chứng chỉ mặc định vào Ksign
+# Hướng dẫn nhúng chứng chỉ mặc định vào LemonSign
 
-Nếu bạn muốn Ksign tự động nhận diện và nạp sẵn chứng chỉ khi mở ứng dụng lần đầu (không cần người dùng phải tự tải và import file thủ công):
+Nếu bạn muốn LemonSign tự động nhận diện và nạp sẵn chứng chỉ khi mở ứng dụng lần đầu (không cần người dùng phải tự tải và import file thủ công):
 
 1. Tạo một thư mục con bên trong thư mục này với tên bất kỳ (ví dụ: MyCert).
 2. Bỏ 3 tệp sau vào thư mục con đó:

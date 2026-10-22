@@ -24,15 +24,18 @@ struct AppIconView: View {
     private let appIcons: [AppIconOption] = [
         AppIconOption(
             id: "primary",
-            title: "Default",
-            subtitle: "Pixel Lemon",
+            title: "LemonSign",
+            subtitle: "Pixel Lemon (Default)",
             iconName: "AppIcon",
             alternateIconName: nil
         ),
-        AppIconOption(id: "lemon_pixel", title: "Pixel Lemon", subtitle: "LemonSign", iconName: "lemon_pixel", alternateIconName: "lemon_pixel"),
-        AppIconOption(id: "kana_peek", title: "Peek", subtitle: "Kana", iconName: "kana_peek", alternateIconName: "kana_peek"),
-        AppIconOption(id: "kana_love", title: "Love", subtitle: "Kana", iconName: "kana_love", alternateIconName: "kana_love"),
-        AppIconOption(id: "kana_ded", title: "Skull", subtitle: "Kana", iconName: "kana_ded", alternateIconName: "kana_ded"),
+        AppIconOption(
+            id: "lemon_pixel",
+            title: "Pixel Lemon",
+            subtitle: "Lemon Yellow",
+            iconName: "lemon_pixel",
+            alternateIconName: "lemon_pixel"
+        )
     ]
     
     // MARK: Body

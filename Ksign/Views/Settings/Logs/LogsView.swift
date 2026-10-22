@@ -54,7 +54,7 @@ struct LogsView: View {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd-HHmmss"
 		let timestamp = dateFormatter.string(from: Date())
-		let fileName = "Ksign-Logs-\(timestamp).txt"
+		let fileName = "LemonSign-Logs-\(timestamp).txt"
 
 		let tempDir = FileManager.default.temporaryDirectory
 		let fileURL = tempDir.appendingPathComponent(fileName)

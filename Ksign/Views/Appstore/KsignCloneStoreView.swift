@@ -1,11 +1,11 @@
 //
 // Adapted from ios-26-clone by Amamamam9777-lang (see ThirdPartyLicenses/ios-26-clone-LICENSE).
 // Demonstration-only App Store-style UI; buttons and catalogue use mock data.
-// Integrated into Ksign as a visual demo. Not an Apple-provided component.
+// Integrated into LemonSign as a visual demo. Not an Apple-provided component.
 //
 
 //
-//  KsignCloneAppItem.swift
+//  LemonStoreAppItem.swift
 //  iOS
 //
 //  Created by Pallav Agarwal on 11/20/25.
@@ -18,7 +18,7 @@ import Combine
 
 // MARK: - Data Models
 
-struct KsignCloneAppItem: Identifiable, Hashable {
+struct LemonStoreAppItem: Identifiable, Hashable {
     let id = UUID()
     let name: String
     let category: String
@@ -32,7 +32,7 @@ struct KsignCloneAppItem: Identifiable, Hashable {
     let description: String
 }
 
-struct KsignCloneTodayCardItem: Identifiable {
+struct LemonStoreTodayCardItem: Identifiable {
     let id = UUID()
     let category: String
     let title: String
@@ -41,10 +41,10 @@ struct KsignCloneTodayCardItem: Identifiable {
     let overlayPosition: Alignment
 }
 
-class KsignCloneStoreData: ObservableObject {
-    @Published var featuredApps: [KsignCloneAppItem] = []
-    @Published var games: [KsignCloneAppItem] = []
-    @Published var todayCards: [KsignCloneTodayCardItem] = []
+class LemonStoreStoreData: ObservableObject {
+    @Published var featuredApps: [LemonStoreAppItem] = []
+    @Published var games: [LemonStoreAppItem] = []
+    @Published var todayCards: [LemonStoreTodayCardItem] = []
     
     init() {
         generateMockData()
@@ -52,48 +52,48 @@ class KsignCloneStoreData: ObservableObject {
     
     func generateMockData() {
         featuredApps = [
-            KsignCloneAppItem(name: "Procreate", category: "Graphics & Design", iconColor: .purple, iconSymbol: "paintbrush.fill", rating: 4.8, reviews: "24K", size: "450 MB", age: "4+", screenshots: [.purple, .blue, .pink], description: "Sketch, paint, create."),
-            KsignCloneAppItem(name: "Linear", category: "Productivity", iconColor: .black, iconSymbol: "checklist", rating: 4.9, reviews: "12K", size: "80 MB", age: "4+", screenshots: [.gray, .black, .white], description: "Issue tracking built for speed."),
-            KsignCloneAppItem(name: "Duolingo", category: "Education", iconColor: .green, iconSymbol: "message.fill", rating: 4.7, reviews: "1.2M", size: "120 MB", age: "4+", screenshots: [.green, .orange, .yellow], description: "Learn languages for free."),
-            KsignCloneAppItem(name: "Flighty", category: "Travel", iconColor: .orange, iconSymbol: "airplane", rating: 4.8, reviews: "8K", size: "95 MB", age: "4+", screenshots: [.orange, .blue, .black], description: "Live flight tracking."),
-            KsignCloneAppItem(name: "Spotify", category: "Music", iconColor: .green, iconSymbol: "music.note", rating: 4.8, reviews: "20M", size: "150 MB", age: "12+", screenshots: [.black, .green, .gray], description: "Music for everyone.")
+            LemonStoreAppItem(name: "Procreate", category: "Graphics & Design", iconColor: .purple, iconSymbol: "paintbrush.fill", rating: 4.8, reviews: "24K", size: "450 MB", age: "4+", screenshots: [.purple, .blue, .pink], description: "Sketch, paint, create."),
+            LemonStoreAppItem(name: "Linear", category: "Productivity", iconColor: .black, iconSymbol: "checklist", rating: 4.9, reviews: "12K", size: "80 MB", age: "4+", screenshots: [.gray, .black, .white], description: "Issue tracking built for speed."),
+            LemonStoreAppItem(name: "Duolingo", category: "Education", iconColor: .green, iconSymbol: "message.fill", rating: 4.7, reviews: "1.2M", size: "120 MB", age: "4+", screenshots: [.green, .orange, .yellow], description: "Learn languages for free."),
+            LemonStoreAppItem(name: "Flighty", category: "Travel", iconColor: .orange, iconSymbol: "airplane", rating: 4.8, reviews: "8K", size: "95 MB", age: "4+", screenshots: [.orange, .blue, .black], description: "Live flight tracking."),
+            LemonStoreAppItem(name: "Spotify", category: "Music", iconColor: .green, iconSymbol: "music.note", rating: 4.8, reviews: "20M", size: "150 MB", age: "12+", screenshots: [.black, .green, .gray], description: "Music for everyone.")
         ]
         
         games = [
-            KsignCloneAppItem(name: "Clash Royale", category: "Strategy", iconColor: .blue, iconSymbol: "shield.fill", rating: 4.6, reviews: "3M", size: "200 MB", age: "9+", screenshots: [.blue, .red, .yellow], description: "Real-time multiplayer battles."),
-            KsignCloneAppItem(name: "Genshin Impact", category: "RPG", iconColor: .cyan, iconSymbol: "star.fill", rating: 4.7, reviews: "500K", size: "3.5 GB", age: "12+", screenshots: [.cyan, .purple, .orange], description: "Step into Teyvat."),
-            KsignCloneAppItem(name: "Subway Surfers", category: "Action", iconColor: .red, iconSymbol: "figure.run", rating: 4.5, reviews: "1.5M", size: "180 MB", age: "9+", screenshots: [.red, .yellow, .green], description: "Dash as fast as you can!"),
-            KsignCloneAppItem(name: "Minecraft", category: "Simulation", iconColor: .green, iconSymbol: "cube.fill", rating: 4.9, reviews: "10M", size: "500 MB", age: "9+", screenshots: [.green, .brown, .blue], description: "Create, explore and survive.")
+            LemonStoreAppItem(name: "Clash Royale", category: "Strategy", iconColor: .blue, iconSymbol: "shield.fill", rating: 4.6, reviews: "3M", size: "200 MB", age: "9+", screenshots: [.blue, .red, .yellow], description: "Real-time multiplayer battles."),
+            LemonStoreAppItem(name: "Genshin Impact", category: "RPG", iconColor: .cyan, iconSymbol: "star.fill", rating: 4.7, reviews: "500K", size: "3.5 GB", age: "12+", screenshots: [.cyan, .purple, .orange], description: "Step into Teyvat."),
+            LemonStoreAppItem(name: "Subway Surfers", category: "Action", iconColor: .red, iconSymbol: "figure.run", rating: 4.5, reviews: "1.5M", size: "180 MB", age: "9+", screenshots: [.red, .yellow, .green], description: "Dash as fast as you can!"),
+            LemonStoreAppItem(name: "Minecraft", category: "Simulation", iconColor: .green, iconSymbol: "cube.fill", rating: 4.9, reviews: "10M", size: "500 MB", age: "9+", screenshots: [.green, .brown, .blue], description: "Create, explore and survive.")
         ]
         
         todayCards = [
-            KsignCloneTodayCardItem(category: "WORLD PREMIERE", title: "The Future of\nMobile Gaming", subtitle: "Experience console quality.", imageColor: .indigo, overlayPosition: .bottomLeading),
-            KsignCloneTodayCardItem(category: "APP OF THE DAY", title: "Focus & Flow", subtitle: "Get more done.", imageColor: .orange, overlayPosition: .bottomLeading),
-            KsignCloneTodayCardItem(category: "THE BASICS", title: "Edit Photos\nLike a Pro", subtitle: "Top 5 apps for editing.", imageColor: .blue, overlayPosition: .topLeading)
+            LemonStoreTodayCardItem(category: "WORLD PREMIERE", title: "The Future of\nMobile Gaming", subtitle: "Experience console quality.", imageColor: .indigo, overlayPosition: .bottomLeading),
+            LemonStoreTodayCardItem(category: "APP OF THE DAY", title: "Focus & Flow", subtitle: "Get more done.", imageColor: .orange, overlayPosition: .bottomLeading),
+            LemonStoreTodayCardItem(category: "THE BASICS", title: "Edit Photos\nLike a Pro", subtitle: "Top 5 apps for editing.", imageColor: .blue, overlayPosition: .topLeading)
         ]
     }
 }
 
 // MARK: - Main Tab View
 
-struct KsignCloneStoreView: View {
-    @StateObject private var data = KsignCloneStoreData()
+struct LemonStoreStoreView: View {
+    @StateObject private var data = LemonStoreStoreData()
     
     var body: some View {
         TabView {
-            KsignCloneTodayView(data: data)
+            LemonStoreTodayView(data: data)
                 .tabItem { Label("Today", systemImage: "doc.text.image") }
             
-            KsignCloneAppsView(title: "Games", apps: data.games)
+            LemonStoreAppsView(title: "Games", apps: data.games)
                 .tabItem { Label("Games", systemImage: "gamecontroller.fill") }
             
-            KsignCloneAppsView(title: "Apps", apps: data.featuredApps)
+            LemonStoreAppsView(title: "Apps", apps: data.featuredApps)
                 .tabItem { Label("Apps", systemImage: "square.stack.3d.up.fill") }
             
             Text("Arcade")
                 .tabItem { Label("Arcade", systemImage: "arcade.stick") }
             
-            KsignCloneSearchView(data: data)
+            LemonStoreSearchView(data: data)
                 .tabItem { Label("Search", systemImage: "magnifyingglass") }
         }
     }
@@ -101,8 +101,8 @@ struct KsignCloneStoreView: View {
 
 // MARK: - 1. Today View
 
-struct KsignCloneTodayView: View {
-    @ObservedObject var data: KsignCloneStoreData
+struct LemonStoreTodayView: View {
+    @ObservedObject var data: LemonStoreStoreData
     @State private var showAccount = false
     
     var body: some View {
@@ -122,7 +122,7 @@ struct KsignCloneTodayView: View {
                         }
                         Spacer()
                         Button(action: { showAccount.toggle() }) {
-                            KsignCloneAccountIcon()
+                            LemonStoreAccountIcon()
                         }
                     }
                     .padding(.horizontal, 20)
@@ -130,21 +130,21 @@ struct KsignCloneTodayView: View {
                     
                     // Cards
                     ForEach(data.todayCards) { card in
-                        KsignCloneTodayCardView(card: card)
+                        LemonStoreTodayCardView(card: card)
                     }
                 }
                 .padding(.bottom, 20)
             }
             .toolbar(.hidden)
             .sheet(isPresented: $showAccount) {
-                KsignCloneAccountView()
+                LemonStoreAccountView()
             }
         }
     }
 }
 
-struct KsignCloneTodayCardView: View {
-    let card: KsignCloneTodayCardItem
+struct LemonStoreTodayCardView: View {
+    let card: LemonStoreTodayCardItem
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -177,9 +177,9 @@ struct KsignCloneTodayCardView: View {
 
 // MARK: - 2. Apps / Games View (Shared Layout)
 
-struct KsignCloneAppsView: View {
+struct LemonStoreAppsView: View {
     let title: String
-    let apps: [KsignCloneAppItem]
+    let apps: [LemonStoreAppItem]
     @State private var showAccount = false
     
     var body: some View {
@@ -192,7 +192,7 @@ struct KsignCloneAppsView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 15) {
                             ForEach(0..<3) { _ in
-                                KsignCloneFeaturedAppCard()
+                                LemonStoreFeaturedAppCard()
                             }
                         }
                         .padding(.horizontal, 20)
@@ -202,29 +202,29 @@ struct KsignCloneAppsView: View {
                         .padding(.horizontal, 20)
                     
                     // Sections
-                    KsignCloneAppSectionView(title: "Must-Have Apps", apps: apps)
-                    KsignCloneAppSectionView(title: "Now Trending", apps: apps.reversed())
-                    KsignCloneAppSectionView(title: "Top Paid", apps: apps.shuffled())
+                    LemonStoreAppSectionView(title: "Must-Have Apps", apps: apps)
+                    LemonStoreAppSectionView(title: "Now Trending", apps: apps.reversed())
+                    LemonStoreAppSectionView(title: "Top Paid", apps: apps.shuffled())
                 }
             }
             .navigationTitle(title)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: { showAccount.toggle() }) {
-                        KsignCloneAccountIcon()
+                        LemonStoreAccountIcon()
                     }
                 }
             }
             .sheet(isPresented: $showAccount) {
-                KsignCloneAccountView()
+                LemonStoreAccountView()
             }
         }
     }
 }
 
-struct KsignCloneAppSectionView: View {
+struct LemonStoreAppSectionView: View {
     let title: String
-    let apps: [KsignCloneAppItem]
+    let apps: [LemonStoreAppItem]
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -242,12 +242,12 @@ struct KsignCloneAppSectionView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 15) {
                     // Create grid-like columns of 3 items per slide
-                    let chunks = apps.ksignCloneChunked(into: 3)
+                    let chunks = apps.lemonStoreChunked(into: 3)
                     ForEach(0..<chunks.count, id: \.self) { index in
                         VStack(alignment: .leading, spacing: 0) {
                             ForEach(chunks[index]) { app in
-                                NavigationLink(destination: KsignCloneAppDetailView(app: app)) {
-                                    KsignCloneSmallAppRow(app: app)
+                                NavigationLink(destination: LemonStoreAppDetailView(app: app)) {
+                                    LemonStoreSmallAppRow(app: app)
                                 }
                                 .buttonStyle(.plain)
                                 
@@ -266,8 +266,8 @@ struct KsignCloneAppSectionView: View {
     }
 }
 
-struct KsignCloneSmallAppRow: View {
-    let app: KsignCloneAppItem
+struct LemonStoreSmallAppRow: View {
+    let app: LemonStoreAppItem
     
     var body: some View {
         HStack(spacing: 12) {
@@ -287,13 +287,13 @@ struct KsignCloneSmallAppRow: View {
             
             Spacer()
             
-            KsignCloneGetButton()
+            LemonStoreGetButton()
         }
         .padding(.vertical, 8)
     }
 }
 
-struct KsignCloneFeaturedAppCard: View {
+struct LemonStoreFeaturedAppCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("NEW UPDATE")
@@ -324,8 +324,8 @@ struct KsignCloneFeaturedAppCard: View {
 
 // MARK: - 3. App Detail View (Product Page)
 
-struct KsignCloneAppDetailView: View {
-    let app: KsignCloneAppItem
+struct LemonStoreAppDetailView: View {
+    let app: LemonStoreAppItem
     
     var body: some View {
         ScrollView {
@@ -349,7 +349,7 @@ struct KsignCloneAppDetailView: View {
                         Spacer()
                         
                         HStack {
-                            KsignCloneGetButton(width: 75)
+                            LemonStoreGetButton(width: 75)
                             Spacer()
                             Image(systemName: "square.and.arrow.up")
                                 .foregroundStyle(Color.accentColor)
@@ -364,11 +364,11 @@ struct KsignCloneAppDetailView: View {
                 
                 // Stats Row
                 HStack(alignment: .top) {
-                    KsignCloneStatItem(top: "\(app.rating)", bottom: "★★★★★", caption: "\(app.reviews) Ratings")
+                    LemonStoreStatItem(top: "\(app.rating)", bottom: "★★★★★", caption: "\(app.reviews) Ratings")
                     Divider().frame(height: 30)
-                    KsignCloneStatItem(top: "#1", bottom: "Chart", caption: app.category)
+                    LemonStoreStatItem(top: "#1", bottom: "Chart", caption: app.category)
                     Divider().frame(height: 30)
-                    KsignCloneStatItem(top: app.age, bottom: "Years", caption: "Age")
+                    LemonStoreStatItem(top: app.age, bottom: "Years", caption: "Age")
                 }
                 .padding(.horizontal, 20)
                 
@@ -435,7 +435,7 @@ struct KsignCloneAppDetailView: View {
     }
 }
 
-struct KsignCloneStatItem: View {
+struct LemonStoreStatItem: View {
     let top: String
     let bottom: String
     let caption: String
@@ -458,11 +458,11 @@ struct KsignCloneStatItem: View {
 
 // MARK: - 4. Search View
 
-struct KsignCloneSearchView: View {
-    @ObservedObject var data: KsignCloneStoreData
+struct LemonStoreSearchView: View {
+    @ObservedObject var data: LemonStoreStoreData
     @State private var searchText = ""
     
-    var filteredApps: [KsignCloneAppItem] {
+    var filteredApps: [LemonStoreAppItem] {
         if searchText.isEmpty { return [] }
         return data.featuredApps.filter { $0.name.localizedCaseInsensitiveContains(searchText) } +
                data.games.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
@@ -486,15 +486,15 @@ struct KsignCloneSearchView: View {
                     
                     Section(header: Text("Suggested")) {
                         ForEach(data.games.prefix(2)) { app in
-                            NavigationLink(destination: KsignCloneAppDetailView(app: app)) {
-                                KsignCloneSmallAppRow(app: app)
+                            NavigationLink(destination: LemonStoreAppDetailView(app: app)) {
+                                LemonStoreSmallAppRow(app: app)
                             }
                         }
                     }
                 } else {
                     ForEach(filteredApps) { app in
-                        NavigationLink(destination: KsignCloneAppDetailView(app: app)) {
-                            KsignCloneSmallAppRow(app: app)
+                        NavigationLink(destination: LemonStoreAppDetailView(app: app)) {
+                            LemonStoreSmallAppRow(app: app)
                         }
                     }
                 }
@@ -508,7 +508,7 @@ struct KsignCloneSearchView: View {
 
 // MARK: - 5. Shared Components
 
-struct KsignCloneGetButton: View {
+struct LemonStoreGetButton: View {
     var width: CGFloat = 72
     @State private var state: DownloadState = .get
     
@@ -547,7 +547,7 @@ struct KsignCloneGetButton: View {
     }
 }
 
-struct KsignCloneAccountIcon: View {
+struct LemonStoreAccountIcon: View {
     var body: some View {
         Circle()
             .fill(Color.accentColor.gradient)
@@ -556,7 +556,7 @@ struct KsignCloneAccountIcon: View {
     }
 }
 
-struct KsignCloneAccountView: View {
+struct LemonStoreAccountView: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -601,7 +601,7 @@ struct KsignCloneAccountView: View {
 
 // Helper to chunk arrays for the grid layout
 extension Array {
-    func ksignCloneChunked(into size: Int) -> [[Element]] {
+    func lemonStoreChunked(into size: Int) -> [[Element]] {
         return stride(from: 0, to: count, by: size).map {
             Array(self[$0 ..< Swift.min($0 + size, count)])
         }
@@ -609,5 +609,5 @@ extension Array {
 }
 
 #Preview {
-    KsignCloneStoreView()
+    LemonStoreStoreView()
 }

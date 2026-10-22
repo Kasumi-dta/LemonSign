@@ -192,7 +192,7 @@ struct LibraryView: View {
 					?? (_signedApps.first(where: { $0.uuid == id }) as AppInfoPresentable?)
 				})
 				.compatNavigationTransition(id: _selectedApps.joined(separator: ","), ns: _namespace)
-				.onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("ksign.bulkSigningFinished"))) { notification in
+				.onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("lemonsign.bulkSigningFinished"))) { notification in
 					_selectedTab = 1
 				}
 			}

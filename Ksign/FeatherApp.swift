@@ -45,7 +45,7 @@ struct FeatherApp: App {
 	}
 	
 	private func _handleURL(_ url: URL) {
-		if url.scheme == "ksign" {
+		if url.scheme == "lemonsign" || url.scheme == "ksign" {
 			if let fullPath = url.validatedScheme(after: "/source/") {
 				FR.handleSource(fullPath) { }
 			}
@@ -84,9 +84,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         _createPipeline()
         _createSourcesDirectory()
-        if !UserDefaults.standard.bool(forKey: "hasInitializedBuiltInSources") {
+        Storage.shared.cleanupOldSources()
+        if !UserDefaults.standard.bool(forKey: "hasInitializedBuiltInSources_v2") {
             _initializeBuiltInSources()
-            UserDefaults.standard.set(true, forKey: "hasInitializedBuiltInSources")
+            UserDefaults.standard.set(true, forKey: "hasInitializedBuiltInSources_v2")
         }
         
         _clean()

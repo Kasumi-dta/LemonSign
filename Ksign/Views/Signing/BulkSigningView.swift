@@ -265,7 +265,7 @@ extension BulkSigningView {
 					UIAlertController.showAlertWithOk(title: "Error", message: error.localizedDescription)
 				}
 				DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-					NotificationCenter.default.post(name: NSNotification.Name("ksign.bulkSigningFinished"), object: nil)
+					NotificationCenter.default.post(name: NSNotification.Name("lemonsign.bulkSigningFinished"), object: nil)
 				}
 				dismiss()
 			}

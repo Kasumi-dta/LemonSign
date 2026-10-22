@@ -37,7 +37,7 @@
 
 /* Begin PBXFileReference section */
 		336D43972DB7454A00206400 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS18.2.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
-		3379C1B92DA869A1004372DA /* Ksign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ksign.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3379C1B92DA869A1004372DA /* LemonSign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LemonSign.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AABA5D192DB3C87800BFCD2C /* KsignTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KsignTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -128,7 +128,7 @@
 		3379C1BA2DA869A1004372DA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3379C1B92DA869A1004372DA /* Ksign.app */,
+				3379C1B92DA869A1004372DA /* LemonSign.app */,
 				AABA5D192DB3C87800BFCD2C /* KsignTests.xctest */,
 			);
 			name = Products;
@@ -173,7 +173,7 @@
 				C42CC1AE2F4370F20064A4A2 /* IDeviceSwift */,
 			);
 			productName = Feather;
-			productReference = 3379C1B92DA869A1004372DA /* Ksign.app */;
+			productReference = 3379C1B92DA869A1004372DA /* LemonSign.app */;
 			productType = "com.apple.product-type.application";
 		};
 		AABA5D182DB3C87800BFCD2C /* KsignTests */ = {
@@ -468,9 +468,9 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Ksign/Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Ksign;
+				INFOPLIST_KEY_CFBundleDisplayName = LemonSign;
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = NO;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2025 Nagata Asami";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2026 LemonSign Team";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -534,9 +534,9 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "SERVER=1";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Ksign/Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Ksign;
+				INFOPLIST_KEY_CFBundleDisplayName = LemonSign;
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = NO;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2025 Nagata Asami";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2026 LemonSign Team";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -593,7 +593,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ksign.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Ksign";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LemonSign.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LemonSign";
 			};
 			name = Debug;
 		};
@@ -616,7 +616,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ksign.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Ksign";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LemonSign.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LemonSign";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
