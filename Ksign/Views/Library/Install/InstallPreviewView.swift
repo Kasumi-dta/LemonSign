@@ -137,14 +137,6 @@ struct InstallPreviewView: View {
 	}
 	
 	private func _install() {
-        guard isSharing || app.identifier != Bundle.main.bundleIdentifier! || _installationMethod == 1 else {
-            UIAlertController.showAlertWithOk(
-                title: .localized("Install"),
-                message: .localized("You cannot update ‘%@‘ with itself, please use an alternative tool to update it.", arguments: Bundle.main.name)
-            )
-            return
-        }
-
 		Task.detached {
 			do {
 				let handler = await ArchiveHandler(app: app, viewModel: viewModel)
