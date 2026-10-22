@@ -10,3 +10,8 @@ deps
 # Encrypted Core Engine (Protected with AES-256-CBC)
 Zsign/*
 !Zsign/README.md
+
+# Private local scripts
+scripts/
+*.sh
+*.bat
