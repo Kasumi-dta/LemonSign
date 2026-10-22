@@ -1,0 +1,40 @@
+
+name: Build Ksign IPA
+
+on:
+  workflow_dispatch:
+    inputs:
+      runner:
+        description: 'macOS Runner environment'
+        required: true
+        default: 'macos-latest'
+        type: choice
+        options:
+          - macos-latest
+          - macos-15
+          - macos-14
+          - macos-26-intel
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ${{ inputs.runner || 'macos-latest' }}
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Build IPA
+        run: make
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: Ksign-IPA
+          path: packages/Ksign.ipa
+          if-no-files-found: error
+          retention-days: 14

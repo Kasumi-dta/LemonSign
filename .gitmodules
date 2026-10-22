@@ -1,0 +1,7 @@
+[submodule "Zsign"]
+	path = Zsign
+	url = https://github.com/khcrysalis/Zsign-Package
+	branch = package
+[submodule "IDeviceKit"]
+	path = IDeviceKit
+	url = https://github.com/khcrysalis/IDeviceKit
