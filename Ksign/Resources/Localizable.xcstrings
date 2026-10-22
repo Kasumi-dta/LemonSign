@@ -1,6 +1,23 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "SSL certificates updated successfully! Please restart the app or try installing again." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SSL certificates updated successfully! Please restart the app or try installing again."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cập nhật chứng chỉ SSL thành công! Vui lòng khởi động lại ứng dụng hoặc thử cài đặt lại."
+          }
+        }
+      }
+    },
     "" : {
       "shouldTranslate" : false
     },

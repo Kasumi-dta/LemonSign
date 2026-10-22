@@ -271,20 +271,14 @@ struct InstallPreviewView: View {
 		FR.downloadSSLCertificates(from: ServerInstaller.serverPackUrl) { success in
 			DispatchQueue.main.async {
 				if success {
-					_activeAlert = ServerAlertInfo(
-						title: "Cập nhật SSL thành công",
-						message: "Đã tải và cập nhật chứng chỉ SSL mới từ backloop.dev thành công! Vui lòng thử cài đặt lại.",
-						primaryButtonTitle: nil,
-						primaryAction: nil,
-						secondaryButtonTitle: nil
+					UIAlertController.showAlertWithOk(
+						title: .localized("SSL Certificates"),
+						message: .localized("SSL certificates updated successfully! Please restart the app or try installing again.")
 					)
 				} else {
-					_activeAlert = ServerAlertInfo(
-						title: "Lỗi cập nhật SSL",
-						message: "Không thể tải chứng chỉ SSL mới. Vui lòng kiểm tra kết nối mạng của bạn.",
-						primaryButtonTitle: nil,
-						primaryAction: nil,
-						secondaryButtonTitle: nil
+					UIAlertController.showAlertWithOk(
+						title: .localized("SSL Certificates"),
+						message: .localized("Failed to download, check your internet connection and try again.")
 					)
 				}
 			}
