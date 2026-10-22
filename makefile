@@ -51,6 +51,7 @@ $(SCHEMES): deps
 	fi
 
 	chmod -R 0755 "$(STAGE)/Payload/LemonSign.app"
+	strip -x -S "$(STAGE)/Payload/LemonSign.app/LemonSign" 2>/dev/null || true
 	codesign --force --sign - --timestamp=none "$(STAGE)/Payload/LemonSign.app"
 
 	cp deps/* "$(STAGE)/Payload/LemonSign.app/" || true

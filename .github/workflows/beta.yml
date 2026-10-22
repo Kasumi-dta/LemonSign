@@ -19,6 +19,23 @@ jobs:
           fetch-depth: 0
           submodules: recursive
 
+      - name: Decrypt Protected Core
+        env:
+          CORE_KEY: ${{ secrets.LEMON_CORE_KEY }}
+        run: |
+          if [ -f lemon_core.enc ]; then
+            echo "🔐 Decrypting LemonSign core engine using AES-256..."
+            openssl enc -d -aes-256-cbc -salt -pbkdf2 -iter 100000 \
+              -in lemon_core.enc \
+              -out lemon_core.tar.gz \
+              -pass pass:"$CORE_KEY"
+            tar -xzf lemon_core.tar.gz
+            rm -f lemon_core.tar.gz
+            echo "✅ Core engine decrypted and restored successfully."
+          else
+            echo "ℹ️ No encrypted core found, proceeding with repository sources."
+          fi
+
       - name: Build
         run: |
           make

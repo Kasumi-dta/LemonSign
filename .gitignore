@@ -6,3 +6,7 @@ xcuserdata/
 deps
 *.lib
 *.a
+
+# Encrypted Core Engine (Protected with AES-256-CBC)
+Zsign/*
+!Zsign/README.md
