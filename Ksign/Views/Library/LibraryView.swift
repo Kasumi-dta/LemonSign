@@ -170,11 +170,10 @@ struct LibraryView: View {
 						}
 						.accessibilityLabel("Hòm thư thông báo")
 
-						NBToolbarMenu(
-							systemImage: "plus",
-							style: .icon
-						) {
+						Menu {
 							_importActions()
+						} label: {
+							NBButton("", systemImage: "plus", style: .icon)
 						}
 					}
 				}

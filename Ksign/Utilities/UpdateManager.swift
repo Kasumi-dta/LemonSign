@@ -234,7 +234,7 @@ final class UpdateManager: NSObject {
 				actions: [downloadAction, githubAction, cancelAction]
 			)
 		} else if isManualCheck {
-			let title = .localized("LemonSign Mailbox: You're Up to Date")
+			let title = String.localized("LemonSign Mailbox: You're Up to Date")
 			let message = String.localized("You're using the latest version of LemonSign (v%@).\n\n✨ What's New:\n- 🛡️ 100% Certificate Preservation: Keeps all existing .p12 certificates and configurations.\n- ⚡ Automatic LemonTurbo Engine: High-speed multi-threaded signing (popups removed).\n- 📬 Mailbox notification on Home screen for quick update checks.\n- 🚀 Accelerated payload streaming & instant OTA install.\n- 🌐 Complete multi-language support.\n- 🍋 Exclusive Lemon Yellow branding.\n\nEverything is up to date!", arguments: currentVersion)
 			UIAlertController.showAlertWithOk(
 				title: title,
