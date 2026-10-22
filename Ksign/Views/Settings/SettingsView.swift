@@ -104,6 +104,9 @@ extension SettingsView {
 			NavigationLink(destination: AboutNyaView()) {
                 Label(.localized("About"), systemImage: "info.circle")
             }
+			Button(.localized("Check for Updates"), systemImage: "arrow.triangle.2.circlepath.circle") {
+				UpdateManager.shared.checkForUpdates(isManualCheck: true)
+			}
 			Button(.localized("Telegram Channel"), systemImage: "paperplane.circle") {
 				UIApplication.open("https://t.me/applep12vnn")
 			}

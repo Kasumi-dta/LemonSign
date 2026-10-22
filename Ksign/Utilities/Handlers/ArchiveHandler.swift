@@ -45,7 +45,7 @@ final class ArchiveHandler: NSObject {
 	}
 	
 	func archive() async throws -> URL {
-		return try await Task.detached(priority: .background) { [self] in
+		return try await Task.detached(priority: .userInitiated) { [self] in
 			guard let payloadUrl = await self._payloadUrl else {
 				throw SigningFileHandlerError.appNotFound
 			}
@@ -53,13 +53,16 @@ final class ArchiveHandler: NSObject {
 			let zipUrl = self._uniqueWorkDir.appendingPathComponent("Archive.zip")
 			let ipaUrl = self._uniqueWorkDir.appendingPathComponent("Archive.ipa")
 			
+			let compIndex = ArchiveHandler.getCompressionLevel()
+			let safeIndex = max(0, min(compIndex, ZipCompression.allCases.count - 1))
+			let compression = ZipCompression.allCases[safeIndex]
+			
 			try await Zip.zipFiles(
 				paths: [payloadUrl],
 				zipFilePath: zipUrl,
 				password: nil,
-				compression: ZipCompression.allCases[ArchiveHandler.getCompressionLevel()],
+				compression: compression,
 				progress: { progress in
-					
 					Task { @MainActor in
 						self.viewModel.packageProgress = progress
 					}
@@ -89,6 +92,9 @@ final class ArchiveHandler: NSObject {
 	}
 	
 	static func getCompressionLevel() -> Int {
-		UserDefaults.standard.integer(forKey: "Feather.compressionLevel")
+		if UserDefaults.standard.object(forKey: "Feather.compressionLevel") == nil {
+			return 1 // BestSpeed: Instant fast packaging for installation
+		}
+		return UserDefaults.standard.integer(forKey: "Feather.compressionLevel")
 	}
 }

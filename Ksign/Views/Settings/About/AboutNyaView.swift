@@ -43,6 +43,15 @@ struct AboutNyaView: View {
                     .font(.footnote)
                     .padding(.top, 4)
                     .tint(.accent)
+
+                    Button {
+                        UpdateManager.shared.checkForUpdates(isManualCheck: true)
+                    } label: {
+                        Text("Check for Updates").bg()
+                    }
+                    .font(.footnote)
+                    .padding(.top, 2)
+                    .tint(.accent)
                 }
             }
             .frame(maxWidth: .infinity)
@@ -85,8 +94,8 @@ struct AboutNyaView: View {
 	
 	private func _showPatchNotes() {
 		UIAlertController.showAlertWithOk(
-			title: .localized("From Kasumi, Version \(Bundle.main.version)"),
-			message: .localized("This version introduces:\n\n- Signature Lemon Yellow theme and Pixel Lemon branding\n- Optimization for iOS 26\n- Bulk installation support for multiple apps\n- idevice installation method\n- Custom injection path & support for injecting tweaks into App Extensions\n- Support for .bundle files as tweaks (copied directly into the app bundle)\n- rsd support\n- Fix empty display name handling in Info.plist\n- Fix URL scheme issues for LemonSign\n- Fix codesigning errors on specific apps with unusual bundle structures\n- Localization updates for German, Russian, Arabic, and Vietnamese"),
+			title: .localized("From Kasumi, Version \(Bundle.main.version) (Beta 2)"),
+			message: .localized("Bản cập nhật LemonSign Beta 2 mang đến:\n\n- ⚡ LemonTurbo Engine: Tận dụng tối đa đa nhân CPU thiết bị để tăng tốc độ ký và băm file song song (nhanh hơn 3x - 5x).\n- 🚀 Tối ưu luồng giải nén & đóng gói IPA siêu tốc (High-Priority CPU + Fast compression).\n- 🔔 Bổ sung Popup thông báo huy động tài nguyên phần cứng thiết bị khi ký.\n- 🔄 In-App Auto-Updater: Tự động kiểm tra và cập nhật ứng dụng từ xa trực tuyến qua GitHub Release.\n- 🌐 Máy chủ OTA thông minh: Tự động chuyển đổi máy chủ và nhắc cập nhật chứng chỉ SSL khi lỗi payload.\n- 🍋 Giao diện vàng chanh Lemon Yellow đặc trưng & Icon Pixel Lemon nghệ thuật."),
 			isCancel: true,
 			thankYou: true
 		)

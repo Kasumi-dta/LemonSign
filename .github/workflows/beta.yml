@@ -44,6 +44,14 @@ jobs:
           
           cat release_notes.md
 
+          gh release delete beta2 --cleanup-tag -y || true
+          
+          gh release create beta2 packages/*.ipa \
+            --title "LemonSign Beta 2 (LemonTurbo Engine)" \
+            --notes "$(cat release_notes.md)" \
+            --prerelease \
+            --target ${{ github.sha }}
+
           gh release delete beta --cleanup-tag -y || true
           
           gh release create beta packages/*.ipa \
@@ -60,7 +68,7 @@ jobs:
           COMMIT_MSG=$(git log -1 --pretty=%B)
           
           REPO="${{ github.repository }}"
-          TAG="beta"
+          TAG="beta2"
           FILENAME="LemonSign.ipa"
           
           DOWNLOAD_URL="https://github.com/$REPO/releases/download/$TAG/$FILENAME"

@@ -40,6 +40,7 @@ struct FeatherApp: App {
 			.onAppear {
 				accentColorManager.updateGlobalTintColor()
 				if logsManager.isCapturing { logsManager.startCapture() }
+				UpdateManager.shared.checkOnLaunch()
 			}
 		}
 	}

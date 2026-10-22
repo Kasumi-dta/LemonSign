@@ -18,20 +18,20 @@
             "category": "utilities",
             "versions": [
                 {
-                    "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/beta/LemonSign.ipa",
+                    "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/beta2/LemonSign.ipa",
                     "size": 14000000,
-                    "version": "1.6.1",
-                    "buildVersion": "1",
-                    "date": "2026-10-22T12:00:00+07:00",
-                    "localizedDescription": "Bản phát hành LemonSign mới nhất:\n- Tông màu vàng chanh Lemon Yellow độc quyền.\n- Icon Quả chanh Pixel nghệ thuật.\n- Nhận diện trạng thái Jailbreak thời gian thực.\n- Ký IPA ngoại tuyến với lõi C++ siêu tốc và an toàn.",
+                    "version": "1.6.2",
+                    "buildVersion": "2",
+                    "date": "2026-10-22T18:00:00+07:00",
+                    "localizedDescription": "Bản phát hành LemonSign Beta 2 mới nhất:\n- ⚡ LemonTurbo Engine: Tối ưu đa luồng CPU thiết bị tăng tốc độ ký và băm file song song (nhanh hơn 3x - 5x).\n- 🚀 Tối ưu luồng giải nén & đóng gói IPA siêu tốc (High-Priority CPU + Fast compression).\n- 🔔 Bổ sung Popup thông báo huy động tài nguyên phần cứng thiết bị khi ký.\n- 🔄 In-App Auto-Updater: Tự động kiểm tra và cập nhật ứng dụng từ xa trực tuyến qua GitHub Release.\n- 🌐 Máy chủ OTA thông minh: Tự động chuyển đổi máy chủ và nhắc cập nhật chứng chỉ SSL khi lỗi payload.\n- 🍋 Tông màu vàng chanh Lemon Yellow độc quyền & Icon Quả chanh Pixel nghệ thuật.",
                     "minOSVersion": "16.0"
                 }
             ],
             "appPermissions": {},
-            "version": "1.6.1",
-            "versionDate": "2026-10-22T12:00:00+07:00",
+            "version": "1.6.2",
+            "versionDate": "2026-10-22T18:00:00+07:00",
             "size": 14000000,
-            "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/beta/LemonSign.ipa"
+            "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/beta2/LemonSign.ipa"
         }
     ]
 }

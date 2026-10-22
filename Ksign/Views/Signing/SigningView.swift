@@ -297,13 +297,32 @@ extension SigningView {
 			return
 		}
 
-		let generator = UIImpactFeedbackGenerator(style: .light)
+		let cpuCount = ProcessInfo.processInfo.activeProcessorCount
+		let proceed = UIAlertAction(title: .localized("Ký siêu tốc (Bắt đầu)"), style: .default) { [self] _ in
+			_proceedWithSigning()
+		}
+		let cancel = UIAlertAction(title: .localized("Cancel"), style: .cancel, handler: nil)
+
+		UIAlertController.showAlert(
+			title: "⚡ LemonTurbo Engine",
+			message: "LemonSign sẽ huy động tối đa tài nguyên thiết bị (\(cpuCount) nhân CPU) để tăng tốc độ ký, băm file song song và đóng gói cài đặt ứng dụng siêu tốc.",
+			actions: [proceed, cancel]
+		)
+	}
+
+	private func _proceedWithSigning() {
+		let generator = UIImpactFeedbackGenerator(style: .medium)
 		generator.impactOccurred()
 		_isLogsPresenting = _optionsManager.options.signingLogs
 		_isSigning = true
 #if DEBUG
 		LogsManager.shared.startCapture()
 #endif
+		NotificationCenter.default.post(
+			name: NSNotification.Name("lemonsign.turboActive"),
+			object: nil,
+			userInfo: ["message": "⚡ Đang sử dụng tài nguyên đa nhân thiết bị để tăng tốc độ ký..."]
+		)
 		FR.signPackageFile(
 			app,
 			using: _temporaryOptions,

@@ -57,7 +57,7 @@ final class AppFileHandler: NSObject, @unchecked Sendable {
 		let library = UserDefaults.standard.string(forKey: "Feather.extractionLibrary") ?? "Zip"
 		
 		try await withCheckedThrowingContinuation { continuation in
-			DispatchQueue.global(qos: .utility).async {
+			DispatchQueue.global(qos: .userInitiated).async {
 				do {
 					if library == "ZIPFoundation" {
 						try self._ZIPFoundation(download: download)

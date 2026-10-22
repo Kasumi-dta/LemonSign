@@ -4,6 +4,9 @@
 #include "macho.h"
 #include "sys/stat.h"
 #include "sys/types.h"
+#include <thread>
+#include <vector>
+#include <algorithm>
 
 ZBundle::ZBundle()
 {
@@ -180,7 +183,19 @@ bool ZBundle::GenerateCodeResources(const string& strFolder, jvalue& jvCodeRes)
 	jvCodeRes["files"] = jvalue(jvalue::E_OBJECT);
 	jvCodeRes["files2"] = jvalue(jvalue::E_OBJECT);
 
-	for (string strKey : setFiles) {
+	struct FileHashTask {
+		string strKey;
+		string strFile;
+		string strSHA1Base64;
+		string strSHA256Base64;
+		bool bomit1;
+		bool bomit2;
+	};
+
+	vector<FileHashTask> tasks;
+	tasks.reserve(setFiles.size());
+
+	for (const string& strKey : setFiles) {
 		if (m_bRemoveProvision && strKey == "embedded.mobileprovision") {
 			string strProvFile = strFolder + "/embedded.mobileprovision";
 			remove(strProvFile.c_str());
@@ -188,39 +203,78 @@ bool ZBundle::GenerateCodeResources(const string& strFolder, jvalue& jvCodeRes)
 			continue;
 		}
 
-		string strFile = strFolder + "/" + strKey;
-		string strSHA1Base64;
-		string strSHA256Base64;
-		ZSHA::SHABase64File(strFile.c_str(), strSHA1Base64, strSHA256Base64);
-
-#ifdef _WIN32
-		strKey = ic.A2U8(strKey);
-#endif
-
-		bool bomit1 = false;
-		bool bomit2 = false;
+		FileHashTask task;
+		task.strKey = strKey;
+		task.strFile = strFolder + "/" + strKey;
+		task.bomit1 = false;
+		task.bomit2 = false;
 
 		if (ZFile::IsPathSuffix(strKey, ".lproj/locversion.plist")) {
-			bomit1 = true;
-			bomit2 = true;
+			task.bomit1 = true;
+			task.bomit2 = true;
 		}
 
 		if (ZFile::IsPathSuffix(strKey, ".DS_Store") || "Info.plist" == strKey || "PkgInfo" == strKey) {
-			bomit2 = true;
+			task.bomit2 = true;
 		}
 
-		if (!bomit1) {
+		tasks.push_back(std::move(task));
+	}
+
+	size_t totalTasks = tasks.size();
+	unsigned int numThreads = std::thread::hardware_concurrency();
+	if (numThreads == 0) numThreads = 4;
+	if (numThreads > totalTasks) numThreads = (unsigned int)totalTasks;
+	if (numThreads > 16) numThreads = 16;
+	if (numThreads < 1) numThreads = 1;
+
+	ZLog::PrintV(">>> [LemonTurbo] Parallel hashing %zu files across %u CPU cores...\n", totalTasks, numThreads);
+
+	if (numThreads > 1 && totalTasks > 1) {
+		vector<std::thread> workers;
+		workers.reserve(numThreads);
+		size_t chunkSize = (totalTasks + numThreads - 1) / numThreads;
+
+		for (unsigned int t = 0; t < numThreads; t++) {
+			size_t start = t * chunkSize;
+			size_t end = std::min(start + chunkSize, totalTasks);
+			if (start >= end) break;
+
+			workers.emplace_back([&tasks, start, end]() {
+				for (size_t i = start; i < end; i++) {
+					ZSHA::SHABase64File(tasks[i].strFile.c_str(), tasks[i].strSHA1Base64, tasks[i].strSHA256Base64);
+				}
+			});
+		}
+
+		for (auto& w : workers) {
+			if (w.joinable()) {
+				w.join();
+			}
+		}
+	} else {
+		for (size_t i = 0; i < totalTasks; i++) {
+			ZSHA::SHABase64File(tasks[i].strFile.c_str(), tasks[i].strSHA1Base64, tasks[i].strSHA256Base64);
+		}
+	}
+
+	for (const auto& task : tasks) {
+		string strKey = task.strKey;
+#ifdef _WIN32
+		strKey = ic.A2U8(strKey);
+#endif
+		if (!task.bomit1) {
 			if (string::npos != strKey.rfind(".lproj/")) {
-				jvCodeRes["files"][strKey]["hash"] = "data:" + strSHA1Base64;
+				jvCodeRes["files"][strKey]["hash"] = "data:" + task.strSHA1Base64;
 				jvCodeRes["files"][strKey]["optional"] = true;
 			} else {
-				jvCodeRes["files"][strKey] = "data:" + strSHA1Base64;
+				jvCodeRes["files"][strKey] = "data:" + task.strSHA1Base64;
 			}
 		}
 
-		if (!bomit2) {
-			jvCodeRes["files2"][strKey]["hash"] = "data:" + strSHA1Base64;
-			jvCodeRes["files2"][strKey]["hash2"] = "data:" + strSHA256Base64;
+		if (!task.bomit2) {
+			jvCodeRes["files2"][strKey]["hash"] = "data:" + task.strSHA1Base64;
+			jvCodeRes["files2"][strKey]["hash2"] = "data:" + task.strSHA256Base64;
 			if (string::npos != strKey.rfind(".lproj/")) {
 				jvCodeRes["files2"][strKey]["optional"] = true;
 			}
