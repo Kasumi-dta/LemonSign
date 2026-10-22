@@ -21,6 +21,10 @@ let package = Package(
 			name: "Zsign",
 			targets: ["Zsign"]
 		),
+		.library(
+			name: "ZsignSwift",
+			targets: ["Zsign"]
+		),
 	],
 	dependencies: [
 		.package(url: "https://github.com/krzyzanowskim/OpenSSL", from: "3.3.3001")
@@ -34,7 +38,9 @@ let package = Package(
 			path: ".",
 			exclude: [
 				"src/common/archive.cpp",
-				"src/zsign.cpp"
+				"src/zsign.cpp",
+				"build",
+				"test"
 			],
 			sources: [
 				"src/archo.cpp",
