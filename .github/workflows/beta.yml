@@ -72,11 +72,11 @@ jobs:
           
           cat release_notes.md
 
-          APP_VER=$(jq -r '.apps[0].version' repo.json 2>/dev/null || echo "1.6.3.1")
-          gh release delete beta3 --cleanup-tag -y || true
+          APP_VER=$(jq -r '.apps[0].version' repo.json 2>/dev/null || echo "1.6.4")
+          gh release delete beta4 --cleanup-tag -y || true
           
-          gh release create beta3 packages/*.ipa \
-            --title "LemonSign Beta 3 (v$APP_VER)" \
+          gh release create beta4 packages/*.ipa \
+            --title "LemonSign Beta 4 (v$APP_VER)" \
             --notes "$(cat release_notes.md)" \
             --prerelease \
             --target ${{ github.sha }}
@@ -97,7 +97,7 @@ jobs:
           COMMIT_MSG=$(git log -1 --pretty=%B)
           
           REPO="${{ github.repository }}"
-          TAG="beta3"
+          TAG="beta4"
           FILENAME="LemonSign.ipa"
           
           DOWNLOAD_URL="https://github.com/$REPO/releases/download/$TAG/$FILENAME"

@@ -31,7 +31,7 @@ struct CertificatesCellView: View {
 		.onAppear {
 			withAnimation {
 				data = Storage.shared.getProvisionFileDecoded(for: cert)
-//                Storage.shared.revokagedCertificate(for: cert)
+				Storage.shared.revokagedCertificate(for: cert)
 			}
 		}
 	}
@@ -63,12 +63,15 @@ extension CertificatesCellView {
 			pills.append(NBPillItem(title: "PPQCheck", icon: "checkmark.shield", color: .red))
 		}
         
-        if cert.revoked {
-            pills.append(NBPillItem(title: "Revoked", icon: "xmark.octagon", color: .red))
-        }
-        else {
-            pills.append(NBPillItem(title: "Valid", icon: "checkmark.circle", color: .green))
-        }
+		if cert.revoked {
+			pills.append(NBPillItem(title: String.localized("Revoked"), icon: "xmark.octagon.fill", color: .red))
+		}
+		else if let exp = cert.expiration, exp < Date() {
+			pills.append(NBPillItem(title: String.localized("Expired"), icon: "clock.badge.xmark.fill", color: .orange))
+		}
+		else {
+			pills.append(NBPillItem(title: String.localized("Valid"), icon: "checkmark.circle.fill", color: .green))
+		}
 		
 		if let info = cert.expiration?.expirationInfo() {
 			pills.append(NBPillItem(

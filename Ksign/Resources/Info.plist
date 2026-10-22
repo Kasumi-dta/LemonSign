@@ -237,5 +237,10 @@
 			</dict>
 		</dict>
 	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>apple-magnifier</string>
+		<string>trollstore</string>
+	</array>
 </dict>
 </plist>

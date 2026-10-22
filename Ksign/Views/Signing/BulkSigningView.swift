@@ -253,8 +253,7 @@ extension BulkSigningView {
 	}
 
 	private func _proceedWithBulkSigning() {
-		let generator = UIImpactFeedbackGenerator(style: .medium)
-		generator.impactOccurred()
+		HapticManager.shared.impact(.medium)
 		_isSigning = true
 
 		NotificationCenter.default.post(
@@ -271,7 +270,10 @@ extension BulkSigningView {
 				certificate: _selectedCert()
 			) { [self] error in
 				if let error {
+					HapticManager.shared.notification(.error)
 					UIAlertController.showAlertWithOk(title: "Error", message: error.localizedDescription)
+				} else {
+					HapticManager.shared.notification(.success)
 				}
 				DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
 					NotificationCenter.default.post(name: NSNotification.Name("lemonsign.bulkSigningFinished"), object: nil)

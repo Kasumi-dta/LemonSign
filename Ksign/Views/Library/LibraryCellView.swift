@@ -228,6 +228,21 @@ extension LibraryCellView {
 			}
 		}
 		
+		if TrollStoreHelper.isTrollStoreAvailable {
+			Button {
+				Task {
+					let handler = ArchiveHandler(app: app)
+					if let ipaUrl = try? await handler.archive() {
+						await MainActor.run {
+							TrollStoreHelper.install(fileUrl: ipaUrl)
+						}
+					}
+				}
+			} label: {
+				Label(String.localized("Install with TrollStore"), systemImage: "sparkles")
+			}
+		}
+		
 		Button(.localized("Show Dylibs")) {
 			selectedAppDylibsPresenting = AnyApp(base: app)
 		}

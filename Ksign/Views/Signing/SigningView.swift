@@ -302,8 +302,7 @@ extension SigningView {
 	}
 
 	private func _proceedWithSigning() {
-		let generator = UIImpactFeedbackGenerator(style: .medium)
-		generator.impactOccurred()
+		HapticManager.shared.impact(.medium)
 		_isLogsPresenting = _optionsManager.options.signingLogs
 		_isSigning = true
 #if DEBUG
@@ -321,6 +320,7 @@ extension SigningView {
 			certificate: _selectedCert()
 		) { [self] error in
 			if let error {
+				HapticManager.shared.notification(.error)
 				let ok = UIAlertAction(title: .localized("Dismiss"), style: .cancel) { _ in
 					dismiss()
 				}
@@ -331,6 +331,7 @@ extension SigningView {
 					actions: [ok]
 				)
 			} else {
+				HapticManager.shared.notification(.success)
 				// Remove app after signed option thing
 				if _temporaryOptions.removeApp && !app.isSigned {
 					Storage.shared.deleteApp(for: app)

@@ -194,6 +194,15 @@ extension DownloadManager: URLSessionDownloadDelegate {
 				}
 				if err == nil {
 					self._notifyDownloadCompleted(fileName: url.lastPathComponent)
+					HapticManager.shared.notification(.success)
+					if let dl = dl, dl.id.contains("LemonSign_Update") {
+						NotificationCenter.default.post(
+							name: NSNotification.Name("lemonsign.autoUpdateReady"),
+							object: nil
+						)
+					}
+				} else {
+					HapticManager.shared.notification(.error)
 				}
 				completion(err)
 			}

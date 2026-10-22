@@ -166,6 +166,12 @@ struct InstallPreviewView: View {
                         let handler = await InstallationProxy(viewModel: viewModel)
                         try await handler.install(at: packageUrl, suspend: app.identifier == Bundle.main.bundleIdentifier!)
                     }
+                    else if await _installationMethod == 2 {
+                        await MainActor.run {
+                            TrollStoreHelper.install(fileUrl: packageUrl)
+                            dismiss()
+                        }
+                    }
 				} else {
 					let package = try await handler.moveToArchive(packageUrl, shouldOpen: !_useShareSheet)
 					

@@ -13,10 +13,16 @@ struct InstallationView: View {
     @AppStorage("Feather.installationMethod") private var _installationMethod: Int = 0
     @State private var _showMethodChangedAlert = false
 
-    private let _installationMethods: [String] = [
-        .localized("Server"),
-        .localized("idevice")
-    ]
+    private var _installationMethods: [String] {
+        var methods = [
+            String.localized("Server"),
+            String.localized("idevice")
+        ]
+        if TrollStoreHelper.isTrollStoreAvailable {
+            methods.append("TrollStore")
+        }
+        return methods
+    }
     
     // MARK: Body
     var body: some View {

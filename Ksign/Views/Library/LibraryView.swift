@@ -239,6 +239,14 @@ struct LibraryView: View {
                     _selectedInstallAppPresenting = AnyApp(base: app)
 				}
 			}
+			.onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("lemonsign.autoUpdateReady"))) { _ in
+				if let lemonApp = _importedApps.first(where: {
+					$0.identifier == Bundle.main.bundleIdentifier ||
+					$0.name?.lowercased().contains("lemonsign") == true
+				}) {
+					_selectedSigningAppPresenting = AnyApp(base: lemonApp, signAndInstall: true)
+				}
+			}
         }
         .onChange(of: _isEditMode) { state in
             if !state.isEditing {
