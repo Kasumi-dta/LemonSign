@@ -13,6 +13,7 @@
 
 
 import SwiftUI
+import NimbleExtensions
 import Combine
 
 // MARK: - Data Models
@@ -260,7 +261,7 @@ struct KsignCloneAppSectionView: View {
                 }
                 .padding(.horizontal, 20)
             }
-            .scrollTargetBehavior(.viewAligned)
+            .compatScrollTargetBehavior()
         }
     }
 }

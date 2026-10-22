@@ -53,8 +53,10 @@ final class ZsignHandler {
             customName: _options.appName ?? "",
             customVersion: _options.appVersion ?? "",
             removeProvision: !_options.removeProvisioning,
-            completion: { _, error in
-                self.hadError = error
+            completion: { success in
+                if !success {
+                    self.hadError = SigningFileHandlerError.signFailed
+                }
             }
         )
     }
@@ -68,8 +70,10 @@ final class ZsignHandler {
 			customVersion: _options.appVersion ?? "",
 			adhoc: true,
             removeProvision: !_options.removeProvisioning,
-            completion: { _, error in
-                self.hadError = error
+            completion: { success in
+                if !success {
+                    self.hadError = SigningFileHandlerError.signFailed
+                }
             }
         )
              

@@ -89,3 +89,11 @@ void password_check_fix_free(NSString *path) {
 	// free my boy
 	BIO_free(in);
 }
+
+void password_check_fix_WHAT_THE_FUCK(NSString *path) {
+	password_check_fix(path);
+}
+
+void password_check_fix_WHAT_THE_FUCK_free(NSString *path) {
+	password_check_fix_free(path);
+}
