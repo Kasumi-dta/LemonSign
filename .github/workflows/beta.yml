@@ -4,11 +4,22 @@ on:
   push:
     branches: [ "main" ]
   workflow_dispatch:
+    inputs:
+      runner:
+        description: 'macOS Runner environment'
+        required: true
+        default: 'macos-26-intel'
+        type: choice
+        options:
+          - macos-26-intel
+          - macos-latest
+          - macos-15
+          - macos-14
 
 jobs:
   build:
     name: Build Beta
-    runs-on: macos-latest
+    runs-on: ${{ inputs.runner || 'macos-26-intel' }}
     permissions:
       contents: write
 
