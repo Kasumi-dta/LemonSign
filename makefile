@@ -1,4 +1,4 @@
-NAME := Ksign
+NAME := LemonSign
 PLATFORM := iphoneos
 SCHEMES := Ksign
 TMP := $(TMPDIR)/$(NAME)
@@ -42,16 +42,22 @@ $(SCHEMES): deps
 	rm -rf "$(STAGE)/"
 	mkdir -p "$(STAGE)/Payload"
 
-	mv "$(APP)/$@.app" "$(STAGE)/Payload/$@.app"
+	@if [ -d "$(APP)/LemonSign.app" ]; then \
+		mv "$(APP)/LemonSign.app" "$(STAGE)/Payload/LemonSign.app"; \
+	elif [ -d "$(APP)/$@.app" ]; then \
+		mv "$(APP)/$@.app" "$(STAGE)/Payload/LemonSign.app"; \
+	else \
+		mv "$$(find $(APP) -name '*.app' -maxdepth 1)" "$(STAGE)/Payload/LemonSign.app"; \
+	fi
 
-	chmod -R 0755 "$(STAGE)/Payload/$@.app"
-	codesign --force --sign - --timestamp=none "$(STAGE)/Payload/$@.app"
+	chmod -R 0755 "$(STAGE)/Payload/LemonSign.app"
+	codesign --force --sign - --timestamp=none "$(STAGE)/Payload/LemonSign.app"
 
-	cp deps/* "$(STAGE)/Payload/$@.app/" || true
+	cp deps/* "$(STAGE)/Payload/LemonSign.app/" || true
 
-	rm -rf "$(STAGE)/Payload/$@.app/_CodeSignature"
+	rm -rf "$(STAGE)/Payload/LemonSign.app/_CodeSignature"
 	ln -sf "$(STAGE)/Payload" Payload
 	
 	mkdir -p packages
-	zip -r9 "packages/$@.ipa" Payload
-	cp "packages/$@.ipa" "packages/LemonSign.ipa" || true
+	zip -r9 "packages/LemonSign.ipa" Payload
+	rm -f packages/Ksign.ipa

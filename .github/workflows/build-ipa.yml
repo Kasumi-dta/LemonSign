@@ -1,5 +1,5 @@
 
-name: Build Ksign IPA
+name: Build LemonSign IPA
 
 on:
   workflow_dispatch:
@@ -35,6 +35,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: LemonSign-IPA
-          path: packages/*.ipa
+          path: packages/LemonSign.ipa
           if-no-files-found: error
           retention-days: 14

@@ -490,8 +490,8 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.2;
 				MARKETING_VERSION = 1.6.1;
-				PRODUCT_BUNDLE_IDENTIFIER = nya.asami.ksign;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kasumidta.lemonsign;
+				PRODUCT_NAME = LemonSign;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -556,8 +556,8 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.2;
 				MARKETING_VERSION = 1.6.1;
-				PRODUCT_BUNDLE_IDENTIFIER = nya.asami.ksign;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kasumidta.lemonsign;
+				PRODUCT_NAME = LemonSign;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				STRIPFLAGS = "-rSTx";

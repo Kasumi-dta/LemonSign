@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleName</key>
+	<string>LemonSign</string>
 	<key>CFBundleDisplayName</key>
 	<string>LemonSign</string>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
@@ -49,7 +51,7 @@
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>nya.asami.ksign.cert</string>
+				<string>com.kasumidta.lemonsign.cert</string>
 			</array>
 		</dict>
 	</array>
@@ -125,9 +127,10 @@
 			<key>CFBundleURLIconFile</key>
 			<string>ksign_extension</string>
 			<key>CFBundleURLName</key>
-			<string>nya.asami.ksign</string>
+			<string>com.kasumidta.lemonsign</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>lemonsign</string>
 				<string>ksign</string>
 			</array>
 		</dict>
@@ -220,7 +223,7 @@
 				<string>KSIGN</string>
 			</dict>
 			<key>UTTypeIdentifier</key>
-			<string>nya.asami.ksign.cert</string>
+			<string>com.kasumidta.lemonsign.cert</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
