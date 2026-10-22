@@ -75,18 +75,8 @@ struct SettingsDonationCellView: View {
 			}
 			
 			VStack(alignment: .leading, spacing: 3) {
-				HStack(spacing: 6) {
-					Text("LemonSign")
-						.font(.title3.bold())
-					
-					Text("3105")
-						.font(.caption2.bold())
-						.foregroundStyle(.black)
-						.padding(.horizontal, 6)
-						.padding(.vertical, 2)
-						.background(Color.accentColor)
-						.clipShape(Capsule())
-				}
+				Text("LemonSign")
+					.font(.title3.bold())
 				
 				Text("v\(Bundle.main.version) • On-Device Signer")
 					.font(.caption)

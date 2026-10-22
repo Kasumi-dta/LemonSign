@@ -20,7 +20,7 @@
 </p>
 
 <p align="center">
-  An elegant, on-device iOS app signer and sideloading utility customized with the <b>3105 aesthetic</b> and signature <b>Lemon Yellow</b> theme.
+  An elegant, on-device iOS app signer and sideloading utility customized with signature <b>Lemon Yellow</b> theme.
 </p>
 
 ---
@@ -30,12 +30,12 @@ Yet another codesigning app, have you ever wondered what if Feather and Esign ha
 ## Why?
 Since Esign is end of service so people been moving to other signing apps, but Esign was a really big part of the community, so with the help of Feather as the base app, I tried to recreate Esign as close as possible so you guys can easier to get familiar and less app switching for smooth sideloading.
 
-LemonSign builds upon this foundation with a fresh **3105-inspired interface**, a signature lemon yellow identity, and complete offline signing capabilities.
+LemonSign builds upon this foundation with a fresh modern interface, a signature lemon yellow identity, and complete offline signing capabilities.
 
 Another reason is this app was built to make sideloading simpler and more accessible, allowing everyone to easily sign, inject dylibs/tweaks, and manage certificates directly on iOS devices without needing a computer!
 
 ## Features
-- 🍋 **Lemon Yellow 3105 Aesthetic**: Clean, modern interface designed with custom pixel art lemon branding.
+- 🍋 **Lemon Yellow Theme**: Clean, modern interface designed with custom pixel art lemon branding.
 - ✍️ **On-Device Signing**: Fast C++ `zsign` engine compiled directly into Swift for lightning-fast IPA signing.
 - 💉 **Tweak & Dylib Injection**: Inject modifications, frameworks, and tweaks into your IPAs seamlessly.
 - 📲 **Direct Local Server Install**: Built-in HTTPS server for one-click OTA installations directly on iOS.

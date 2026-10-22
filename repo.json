@@ -12,8 +12,8 @@
             "bundleIdentifier": "com.kasumidta.lemonsign",
             "developerName": "Kasumi-dta",
             "iconURL": "https://raw.githubusercontent.com/Kasumi-dta/LemonSign/main/assets/logo.png",
-            "localizedDescription": "An elegant, on-device iOS app signer and sideloading utility customized with 3105 aesthetic and signature Lemon Yellow theme.",
-            "subtitle": "The cleaner Esign app with 3105 aesthetic.",
+            "localizedDescription": "An elegant, on-device iOS app signer and sideloading utility customized with signature Lemon Yellow theme.",
+            "subtitle": "The cleaner Esign app with Lemon Yellow theme.",
             "tintColor": "FFD60A",
             "category": "utilities",
             "versions": [
