@@ -8,18 +8,18 @@ on:
       runner:
         description: 'macOS Runner environment'
         required: true
-        default: 'macos-26-intel'
+        default: 'macos-latest'
         type: choice
         options:
-          - macos-26-intel
           - macos-latest
           - macos-15
           - macos-14
+          - macos-26-intel
 
 jobs:
   build:
     name: Build Beta
-    runs-on: ${{ inputs.runner || 'macos-26-intel' }}
+    runs-on: ${{ inputs.runner || 'macos-latest' }}
     permissions:
       contents: write
 
