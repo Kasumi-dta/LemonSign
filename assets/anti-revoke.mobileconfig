@@ -9,13 +9,8 @@
 			<dict>
 				<key>DNSProtocol</key>
 				<string>HTTPS</string>
-				<key>ServerAddresses</key>
-				<array>
-					<string>0.0.0.0</string>
-					<string>127.0.0.1</string>
-				</array>
 				<key>ServerURL</key>
-				<string>https://anti-revoke.lemonsign.local/dns-query</string>
+				<string>https://y5orj5gvbz.cloudflare-gateway.com/dns-query</string>
 				<key>SupplementalMatchDomains</key>
 				<array>
 					<string>ocsp.apple.com</string>
@@ -33,7 +28,7 @@
 			<key>PayloadDescription</key>
 			<string>Chặn máy chủ Apple OCSP và PPQ kiểm tra thu hồi chứng chỉ P12 / Doanh nghiệp</string>
 			<key>PayloadDisplayName</key>
-			<string>LemonSign Anti-Revoke DNS</string>
+			<string>KhoinDNS Anti-Revoke</string>
 			<key>PayloadIdentifier</key>
 			<string>com.lemonsign.dnsSettings.managed.antirevoke</string>
 			<key>PayloadType</key>
@@ -47,9 +42,9 @@
 		</dict>
 	</array>
 	<key>PayloadDescription</key>
-	<string>Hồ sơ cấu hình bảo vệ chứng chỉ ứng dụng LemonSign, ngăn chặn Apple thu hồi chứng chỉ P12 / Enterprise.</string>
+	<string>Hồ sơ cấu hình DNS bảo vệ chứng chỉ ứng dụng LemonSign, ngăn chặn Apple thu hồi chứng chỉ.</string>
 	<key>PayloadDisplayName</key>
-	<string>LemonSign Anti-Revoke Profile</string>
+	<string>LemonSign KhoinDNS Anti-Revoke</string>
 	<key>PayloadIdentifier</key>
 	<string>com.lemonsign.antirevoke.profile</string>
 	<key>PayloadOrganization</key>

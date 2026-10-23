@@ -23,13 +23,8 @@ struct AntiRevokeProfile {
     			<dict>
     				<key>DNSProtocol</key>
     				<string>HTTPS</string>
-    				<key>ServerAddresses</key>
-    				<array>
-    					<string>0.0.0.0</string>
-    					<string>127.0.0.1</string>
-    				</array>
     				<key>ServerURL</key>
-    				<string>https://anti-revoke.lemonsign.local/dns-query</string>
+    				<string>https://y5orj5gvbz.cloudflare-gateway.com/dns-query</string>
     				<key>SupplementalMatchDomains</key>
     				<array>
     					<string>ocsp.apple.com</string>
@@ -47,7 +42,7 @@ struct AntiRevokeProfile {
     			<key>PayloadDescription</key>
     			<string>Chặn máy chủ Apple OCSP và PPQ kiểm tra thu hồi chứng chỉ P12 / Doanh nghiệp</string>
     			<key>PayloadDisplayName</key>
-    			<string>LemonSign Anti-Revoke DNS</string>
+    			<string>KhoinDNS Anti-Revoke</string>
     			<key>PayloadIdentifier</key>
     			<string>com.lemonsign.dnsSettings.managed.antirevoke</string>
     			<key>PayloadType</key>
@@ -61,9 +56,9 @@ struct AntiRevokeProfile {
     		</dict>
     	</array>
     	<key>PayloadDescription</key>
-    	<string>Hồ sơ cấu hình bảo vệ chứng chỉ ứng dụng LemonSign, ngăn chặn Apple thu hồi chứng chỉ P12 / Enterprise.</string>
+    	<string>Hồ sơ cấu hình DNS bảo vệ chứng chỉ ứng dụng LemonSign, ngăn chặn Apple thu hồi chứng chỉ.</string>
     	<key>PayloadDisplayName</key>
-    	<string>LemonSign Anti-Revoke Profile</string>
+    	<string>LemonSign KhoinDNS Anti-Revoke</string>
     	<key>PayloadIdentifier</key>
     	<string>com.lemonsign.antirevoke.profile</string>
     	<key>PayloadOrganization</key>
@@ -284,7 +279,7 @@ struct AntiRevokeView: View {
                     _stepRow(number: "2", text: "Khi Safari hiển thị hộp thoại, bấm 'Cho phép' để tải hồ sơ cấu hình.")
                     _stepRow(number: "3", text: "Vào Cài đặt của iPhone/iPad > chọn 'Đã tải về hồ sơ' (ngay dưới tên Apple ID).")
                     _stepRow(number: "4", text: "Nhấn 'Cài đặt' ở góc trên bên phải và nhập mật mã mở máy của bạn.")
-                    _stepRow(number: "5", text: "Vào Cài đặt > Cài đặt chung > VPN & Quản lý thiết bị > DNS > Chọn cấu hình LemonSign Anti-Revoke.")
+                    _stepRow(number: "5", text: "Vào Cài đặt > Cài đặt chung > VPN & Quản lý thiết bị > DNS > Chọn cấu hình KhoinDNS Anti-Revoke.")
                 }
                 .padding(.vertical, 4)
             }
