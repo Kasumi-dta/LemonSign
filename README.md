@@ -52,7 +52,9 @@ You can create an Issue at [Issues](https://github.com/Kasumi-dta/LemonSign/issu
 You can also join our Telegram channel at [applep12vnn](https://t.me/applep12vnn) for updates, certificates, and community discussion.
 
 ## Download
-Go to **[Release Beta 3](https://github.com/Kasumi-dta/LemonSign/releases/tag/beta3)** and download `LemonSign.ipa`.
+- 🌟 **Latest Release**: [**LemonSign v1.6.5.2**](https://github.com/Kasumi-dta/LemonSign/releases/tag/v1.6.5.2)
+- 📦 **Direct IPA Download**: [**LemonSign.ipa (v1.6.5.2)**](https://github.com/Kasumi-dta/LemonSign/releases/download/v1.6.5.2/LemonSign.ipa)
+- 🚀 **All Releases & Betas**: [**GitHub Releases**](https://github.com/Kasumi-dta/LemonSign/releases)
 
 ## Special thanks
 - Feather by [claration](https://github.com/claration/Feather)

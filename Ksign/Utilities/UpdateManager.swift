@@ -54,10 +54,10 @@ final class UpdateManager: NSObject {
 				   ($0["bundleIdentifier"] as? String)?.contains("lemonsign") == true ||
 				   ($0["name"] as? String)?.contains("LemonSign") == true
 			   }) {
-				let remoteVersion = lemonApp["version"] as? String ?? "1.6.3.1"
-				let remoteBuildStr = (lemonApp["buildVersion"] as? String) ?? "\(lemonApp["buildVersion"] as? Int ?? 4)"
-				let remoteBuild = Int(remoteBuildStr) ?? 4
-				let downloadURL = lemonApp["downloadURL"] as? String ?? "https://github.com/Kasumi-dta/LemonSign/releases/download/beta3/LemonSign.ipa"
+				let remoteVersion = lemonApp["version"] as? String ?? "1.6.5.2"
+				let remoteBuildStr = (lemonApp["buildVersion"] as? String) ?? "\(lemonApp["buildVersion"] as? Int ?? 10)"
+				let remoteBuild = Int(remoteBuildStr) ?? 10
+				let downloadURL = lemonApp["downloadURL"] as? String ?? "https://github.com/Kasumi-dta/LemonSign/releases/download/v1.6.5.2/LemonSign.ipa"
 				let desc = lemonApp["localizedDescription"] as? String ?? ""
 
 				DispatchQueue.main.async {
@@ -65,7 +65,7 @@ final class UpdateManager: NSObject {
 					self?._processRelease(
 						version: remoteVersion,
 						build: remoteBuild,
-						tag: "beta3",
+						tag: "v\(remoteVersion)",
 						name: "LemonSign v\(remoteVersion)",
 						body: desc,
 						downloadURL: downloadURL,
