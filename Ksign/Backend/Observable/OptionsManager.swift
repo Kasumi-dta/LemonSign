@@ -142,7 +142,7 @@ struct Options: Codable, Equatable {
 		ipadFullscreen: false,
 		removeSupportedDevices: true,
 		removeURLScheme: false,
-		removeProvisioning: true,
+		removeProvisioning: false,
 		removeWatchPlaceholder: false,
 		changeLanguageFilesForCustomDisplayName: false,
 		doAdhocSigning: false,

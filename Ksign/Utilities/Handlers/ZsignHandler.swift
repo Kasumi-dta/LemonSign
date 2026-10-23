@@ -52,7 +52,7 @@ final class ZsignHandler {
             customIdentifier: _options.appIdentifier ?? "",
             customName: _options.appName ?? "",
             customVersion: _options.appVersion ?? "",
-            removeProvision: !_options.removeProvisioning,
+            removeProvision: _options.removeProvisioning,
             completion: { success in
                 if !success {
                     self.hadError = SigningFileHandlerError.signFailed
@@ -69,7 +69,7 @@ final class ZsignHandler {
 			customName: _options.appName ?? "",
 			customVersion: _options.appVersion ?? "",
 			adhoc: true,
-            removeProvision: !_options.removeProvisioning,
+            removeProvision: _options.removeProvisioning,
             completion: { success in
                 if !success {
                     self.hadError = SigningFileHandlerError.signFailed

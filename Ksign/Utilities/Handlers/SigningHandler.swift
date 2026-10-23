@@ -86,7 +86,9 @@ final class SigningHandler: NSObject {
 		}
 		
         try await _removeCodeSignature(for: movedAppPath)
-		try await _removeProvisioning(for: movedAppPath)
+        if _options.removeProvisioning {
+            try await _removeProvisioning(for: movedAppPath)
+        }
 		
         try await _inject(for: movedAppPath, with: _options.injectionFiles, with: _options)
         

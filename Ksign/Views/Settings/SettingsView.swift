@@ -61,9 +61,6 @@ struct SettingsView: View {
                                 .foregroundColor(.secondary)
                         }
                     }
-                    NavigationLink(destination: AntiRevokeView()) {
-                        Label("Lá chắn Chống Thu hồi", systemImage: "shield.lefthalf.filled")
-                    }
                     NavigationLink(destination: TweakHubView()) {
                         Label("Kho Tweak & Dylib", systemImage: "sparkles.rectangle.stack.fill")
                     }
@@ -71,7 +68,7 @@ struct SettingsView: View {
                         Label("AirShare WiFi & QR", systemImage: "wifi.circle.fill")
                     }
                 } footer: {
-                    Text("Bộ công cụ mở rộng: 3105, Lá chắn chặn thu hồi chứng chỉ, thư viện tweak tiêm tự động và chia sẻ không dây.")
+                    Text("Bộ công cụ mở rộng: 3105, thư viện tweak tiêm tự động và chia sẻ không dây.")
                 }
                 
                 NBSection(.localized("Certificates")) {

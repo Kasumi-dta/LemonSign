@@ -152,7 +152,7 @@ extension AppIconView {
                 
                 Spacer()
                 
-                if selectedIcon == iconOption.alternateIconName {
+                if (selectedIcon == nil && iconOption.alternateIconName == nil) || (selectedIcon != nil && selectedIcon == iconOption.alternateIconName) {
                     Image(systemName: "checkmark.circle.fill")
                         .foregroundColor(Color(hex: "FFD60A"))
                         .font(.title3)
@@ -183,7 +183,12 @@ extension AppIconView {
     }
     
     private func _changeAppIcon(to iconOption: AppIconOption) {
-        guard selectedIcon != iconOption.alternateIconName else { return }
+        let targetIcon = iconOption.alternateIconName
+        let currentIcon = UIApplication.shared.alternateIconName
+        guard currentIcon != targetIcon else {
+            selectedIcon = targetIcon
+            return
+        }
         
         guard UIApplication.shared.supportsAlternateIcons else {
             errorMessage = "Thiết bị không hỗ trợ đổi biểu tượng thay thế."
@@ -191,16 +196,18 @@ extension AppIconView {
             return
         }
         
-        UIApplication.shared.setAlternateIconName(iconOption.alternateIconName) { error in
-            DispatchQueue.main.async {
-                if let error = error {
-                    print("[AppIcon] Failed to change app icon: \(error.localizedDescription)")
-                    self.errorMessage = "Không thể đổi biểu tượng: \(error.localizedDescription)"
-                    self.showErrorAlert = true
-                } else {
-                    self.selectedIcon = iconOption.alternateIconName
-                    self.successMessage = "Đã chuyển sang biểu tượng: \(iconOption.title)"
-                    self.showSuccessAlert = true
+        DispatchQueue.main.async {
+            UIApplication.shared.setAlternateIconName(targetIcon) { error in
+                DispatchQueue.main.async {
+                    if let error = error {
+                        print("[AppIcon] Failed to change app icon: \(error.localizedDescription)")
+                        self.errorMessage = "Không thể đổi biểu tượng: \(error.localizedDescription)"
+                        self.showErrorAlert = true
+                    } else {
+                        self.selectedIcon = targetIcon
+                        self.successMessage = "Đã chuyển sang biểu tượng: \(iconOption.title)"
+                        self.showSuccessAlert = true
+                    }
                 }
             }
         }
