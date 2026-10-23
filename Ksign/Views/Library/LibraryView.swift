@@ -325,7 +325,6 @@ extension LibraryView {
 
 		HapticManager.shared.impact(.medium)
 		var options = OptionsManager.shared.options
-		options.compression = 0
 		options.removeApp = true
 
 		FR.signPackageFile(
