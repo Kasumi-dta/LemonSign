@@ -168,7 +168,7 @@ struct AppContainerRow: View {
             
             Image(systemName: "chevron.right")
                 .font(.caption.weight(.bold))
-                .foregroundColor(.tertiary)
+                .foregroundColor(.secondary)
         }
         .padding(12)
         .background(Color(uiColor: .secondarySystemGroupedBackground))

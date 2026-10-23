@@ -74,20 +74,31 @@ jobs:
 
           APP_VER=$(jq -r '.apps[0].version' repo.json 2>/dev/null || echo "1.6.5.3")
           TAG="v$APP_VER"
-          gh release delete "$TAG" --cleanup-tag -y || true
           
-          gh release create "$TAG" packages/*.ipa \
-            --title "LemonSign v$APP_VER" \
-            --notes "$(cat release_notes.md)" \
-            --target ${{ github.sha }}
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG exists, updating assets..."
+            gh release upload "$TAG" packages/*.ipa --clobber
+            gh release edit "$TAG" --title "LemonSign v$APP_VER" --notes "$(cat release_notes.md)"
+          else
+            echo "Creating new release $TAG..."
+            gh release create "$TAG" packages/*.ipa \
+              --title "LemonSign v$APP_VER" \
+              --notes "$(cat release_notes.md)" \
+              --target ${{ github.sha }}
+          fi
 
-          gh release delete beta --cleanup-tag -y || true
-          
-          gh release create beta packages/*.ipa \
-            --title "LemonSign Beta Build" \
-            --notes "$(cat release_notes.md)" \
-            --prerelease \
-            --target ${{ github.sha }}
+          if gh release view beta >/dev/null 2>&1; then
+            echo "Release beta exists, updating assets..."
+            gh release upload beta packages/*.ipa --clobber
+            gh release edit beta --title "LemonSign Beta Build" --notes "$(cat release_notes.md)"
+          else
+            echo "Creating new beta release..."
+            gh release create beta packages/*.ipa \
+              --title "LemonSign Beta Build" \
+              --notes "$(cat release_notes.md)" \
+              --prerelease \
+              --target ${{ github.sha }}
+          fi
 
       - name: Notify Discord
         if: ${{ env.DISCORD_WEBHOOK != '' }}
