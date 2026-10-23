@@ -18,6 +18,15 @@
             "category": "utilities",
             "versions": [
                 {
+                    "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v2.1/LemonSign.ipa",
+                    "size": 15500000,
+                    "version": "2.1",
+                    "buildVersion": "15",
+                    "date": "2026-10-24T02:15:00+07:00",
+                    "localizedDescription": "Bản phát hành LemonSign v2.1:\n- ⚡ Tối ưu tốc độ cài đặt tức thì (Tip 2 & 3): Áp dụng chuẩn nén Store (mức 0) & 1MB buffer streaming giữ kết nối keep-alive, cài đặt nhanh và mượt tương đương ESign.\n- 🛡️ Chuyển sang KhoinDNS chuẩn (Cloudflare Gateway DoH): Chặn thu hồi chứng chỉ Apple OCSP/PPQ không lỗi, không sinh app/icon rác ngoài màn hình.\n- 🧹 Dọn dẹp giao diện: Loại bỏ nút 'Xong' thừa trên thanh tiêu đề Cài đặt.\n- 🔒 Chuẩn hóa hiển thị SSL Let's Encrypt nội bộ: Phân biệt rõ thời gian đồng bộ và hạn chứng chỉ.",
+                    "minOSVersion": "16.0"
+                },
+                {
                     "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v2.0/LemonSign.ipa",
                     "size": 15500000,
                     "version": "2.0",
@@ -28,11 +37,11 @@
                 }
             ],
             "appPermissions": {},
-            "version": "2.0",
-            "buildVersion": "14",
-            "versionDate": "2026-10-23T23:55:00+07:00",
+            "version": "2.1",
+            "buildVersion": "15",
+            "versionDate": "2026-10-24T02:15:00+07:00",
             "size": 15500000,
-            "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v2.0/LemonSign.ipa"
+            "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v2.1/LemonSign.ipa"
         },
         {
             "name": "3105",
