@@ -92,7 +92,14 @@ final class SSLManager: NSObject {
 		return Calendar.current.date(from: comps)
 	}
 	
-	func isExpiredOrExpiringSoon(daysThreshold: Int = 14) -> Bool {
+	func isExpired() -> Bool {
+		guard isSSLCertificatePresent(), let expDate = sslExpirationDate() else {
+			return true
+		}
+		return expDate <= Date()
+	}
+	
+	func isExpiredOrExpiringSoon(daysThreshold: Int = 0) -> Bool {
 		guard isSSLCertificatePresent() else {
 			return true
 		}

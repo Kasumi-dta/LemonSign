@@ -21,17 +21,6 @@ struct AppstoreView: View {
 	var body: some View {
 		NavigationStack {
             SourceAppsView(fromAppStore: true, object: Array(_sources), viewModel: _viewModel)
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        Button {
-                            NotificationCenter.default.post(name: NSNotification.Name("lemonsign.openSettings"), object: nil)
-                        } label: {
-                            Image(systemName: "gearshape.fill")
-                                .font(.body.weight(.semibold))
-                                .foregroundColor(Color(hex: "FFD60A"))
-                        }
-                    }
-                }
 		}
 		.task(id: Array(_sources)) {
 			await _viewModel.fetchSources(_sources)

@@ -114,16 +114,6 @@ struct FilesView: View {
                                 deleteButton
                             }
                         }
-                    } else if isRootView {
-                        ToolbarItem(placement: .topBarLeading) {
-                            Button {
-                                NotificationCenter.default.post(name: NSNotification.Name("lemonsign.openSettings"), object: nil)
-                            } label: {
-                                Image(systemName: "gearshape.fill")
-                                    .font(.body.weight(.semibold))
-                                    .foregroundColor(Color(hex: "FFD60A"))
-                            }
-                        }
                     }
                 }
             
@@ -239,6 +229,9 @@ struct FilesView: View {
     // MARK: - Helper Properties
     
     private var navigationTitle: String {
+        if isRootView {
+            return .localized("Files")
+        }
         if let directoryURL = directoryURL {
             return directoryURL.lastPathComponent
         } else {

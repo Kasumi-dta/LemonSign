@@ -128,19 +128,26 @@ struct ServerView: View {
 	}
 	
 	private func _refreshSSLStatus() {
-		let isExpiring = SSLManager.shared.isExpiredOrExpiringSoon(daysThreshold: 14)
-		_isSslUpToDate = !isExpiring
-		_sslStatusBadgeText = !isExpiring ? "Bản mới nhất (Hợp lệ)" : "Cần cập nhật"
+		guard SSLManager.shared.isSSLCertificatePresent(),
+			  let expDate = SSLManager.shared.sslExpirationDate() else {
+			_isSslUpToDate = false
+			_sslStatusBadgeText = "Cần cập nhật"
+			_sslExpirationText = "Chưa có chứng chỉ"
+			_sslVersionText = "Chưa cài đặt"
+			_sslLastUpdatedText = "Chưa cập nhật"
+			_sslDomainText = "localhost.backloop.dev"
+			return
+		}
+		
+		let isExpired = expDate <= Date()
+		_isSslUpToDate = !isExpired
+		_sslStatusBadgeText = !isExpired ? "Bản mới nhất" : "Cần cập nhật (Đã hết hạn)"
 		_sslVersionText = "v\(SSLManager.shared.sslVersion()) (Let's Encrypt)"
 		_sslDomainText = SSLManager.shared.commonNameString()
 		
-		if let date = SSLManager.shared.sslExpirationDate() {
-			let formatter = DateFormatter()
-			formatter.dateFormat = "dd/MM/yyyy"
-			_sslExpirationText = "HSD: \(formatter.string(from: date))"
-		} else {
-			_sslExpirationText = "Tự động gia hạn"
-		}
+		let formatter = DateFormatter()
+		formatter.dateFormat = "dd/MM/yyyy"
+		_sslExpirationText = "HSD: \(formatter.string(from: expDate))"
 		
 		if let updateDate = SSLManager.shared.lastUpdatedDate() {
 			let formatter = DateFormatter()

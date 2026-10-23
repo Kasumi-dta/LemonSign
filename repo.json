@@ -18,21 +18,21 @@
             "category": "utilities",
             "versions": [
                 {
-                    "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v1.6.6/LemonSign.ipa",
+                    "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v2.0/LemonSign.ipa",
                     "size": 15500000,
-                    "version": "1.6.6",
-                    "buildVersion": "13",
-                    "date": "2026-10-23T22:45:00+07:00",
-                    "localizedDescription": "Bản phát hành LemonSign v1.6.6:\n- ⚡ Tối ưu luồng Ký & Cài đặt: Khắc phục lỗi dừng sau khi ký không gửi Payload, bổ sung nút 'Ký & Cài đặt ngay' trực tiếp.\n- 🔒 Cập nhật & Kiểm tra Chứng chỉ SSL nội bộ: Hiển thị trạng thái Bản mới nhất, ngày giờ cập nhật chính xác (timestamp), và tên miền localhost.backloop.dev.\n- 📱 Bố cục Tabbar 5 mục chuẩn: Đưa Cài đặt vào giữa thanh công cụ, chuyển 3105 vào menu Công cụ Sideload & Hệ thống trong Cài đặt.\n- 🛡️ Lá chắn Chống Thu hồi (Anti-Revoke Shield): Cài đặt hồ sơ DNS chặn Apple OCSP/PPQ bảo vệ chứng chỉ không bị thu hồi.\n- 🧩 Kho Tweak & Dylib (Tweak Hub): Hỗ trợ tiêm sẵn Adblock Pro, Bypass Jailbreak, 120 FPS Unlocker khi ký IPA.\n- 🎨 Bộ sưu tập Đổi Icon App: 5 biểu tượng màn hình chính (Pixel Lemon, Cyber Dark, Glitch Neon, Retro Apple, Stealth) không hiệu ứng âm thanh.\n- 📡 AirShare WiFi & Mã QR: Chia sẻ file IPA qua mạng nội bộ tốc độ cao không cần cáp nối.",
+                    "version": "2.0",
+                    "buildVersion": "14",
+                    "date": "2026-10-23T23:55:00+07:00",
+                    "localizedDescription": "Bản phát hành LemonSign v2.0:\n- ⚡ Sửa dứt điểm luồng Ký & Cài đặt: Tự động kích hoạt trạng thái gửi Payload, bổ sung nút 'Ký & Cài đặt ngay' trực tiếp.\n- 🔒 Sửa lỗi trạng thái SSL: Hiển thị chính xác 'Bản mới nhất (Đã xác minh)' khi chứng chỉ còn hạn và vừa cập nhật, hiển thị ngày giờ cập nhật chi tiết.\n- 📱 Tinh chỉnh Tabbar 5 mục chuẩn: Loại bỏ nút bánh răng thừa ở góc trên các tab, chuẩn hóa tiêu đề 'Tệp' (thay cho 'Documents').\n- 🛡️ Lá chắn Chống Thu hồi (Anti-Revoke Shield): Cài đặt hồ sơ DNS chặn Apple OCSP/PPQ bảo vệ chứng chỉ P12 / Enterprise.\n- 🧩 Kho Tweak & Dylib tích hợp (Tweak Hub): Tùy chọn tiêm Adblock Pro, Bypass Jailbreak, 120 FPS Unlocker khi ký IPA.\n- 🎨 Bộ sưu tập Đổi Icon App: 5 biểu tượng màn hình chính (Pixel Lemon, Cyber Dark, Glitch Neon, Retro Apple, Stealth) không âm thanh.\n- 📡 AirShare WiFi & Mã QR: Chia sẻ file IPA qua mạng nội bộ tốc độ cao không cần dây cáp.",
                     "minOSVersion": "16.0"
                 }
             ],
             "appPermissions": {},
-            "version": "1.6.6",
-            "buildVersion": "13",
-            "versionDate": "2026-10-23T22:45:00+07:00",
+            "version": "2.0",
+            "buildVersion": "14",
+            "versionDate": "2026-10-23T23:55:00+07:00",
             "size": 15500000,
-            "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v1.6.6/LemonSign.ipa"
+            "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v2.0/LemonSign.ipa"
         },
         {
             "name": "3105",
