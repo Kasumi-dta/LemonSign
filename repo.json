@@ -18,12 +18,12 @@
             "category": "utilities",
             "versions": [
                 {
-                    "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v2.2/LemonSign.ipa",
+                    "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v5.2.3/LemonSign.ipa",
                     "size": 15500000,
-                    "version": "2.2",
-                    "buildVersion": "16",
-                    "date": "2026-10-24T03:30:00+07:00",
-                    "localizedDescription": "Bản phát hành LemonSign v2.2:\n- 🛡️ Khắc phục triệt để lỗi 'Không thể xác minh tính toàn vẹn' khi ký chứng chỉ cá nhân Apple Developer: Đảm bảo embedded.mobileprovision và team entitlements luôn được đóng gói đầy đủ và chuẩn xác vào bundle ứng dụng.\n- 🎨 Sửa dứt điểm lỗi đổi biểu tượng ứng dụng (OSStatus -54): Tích hợp trọn bộ bộ icon vào Asset Catalog và Info.plist chuẩn LaunchServices.\n- 🧹 Xóa bỏ hoàn toàn phần cấu hình DNS chặn thu hồi khỏi Cài đặt theo yêu cầu.\n- ⚡ Giữ nguyên cơ chế ký và stream payload tốc độ cao chuẩn KSign mượt mà.",
+                    "version": "5.2.3",
+                    "buildVersion": "523",
+                    "date": "2026-10-24T03:45:00+07:00",
+                    "localizedDescription": "Bản phát hành LemonSign v5.2.3:\n- 🛡️ Khắc phục triệt để lỗi 'Không thể xác minh tính toàn vẹn' khi ký chứng chỉ cá nhân Apple Developer: Đảm bảo embedded.mobileprovision và team entitlements luôn được đóng gói đầy đủ và chuẩn xác vào bundle ứng dụng.\n- 🎨 Sửa dứt điểm lỗi đổi biểu tượng ứng dụng (OSStatus -54): Tích hợp trọn bộ bộ icon vào Asset Catalog và Info.plist chuẩn LaunchServices.\n- 🧹 Xóa bỏ hoàn toàn phần cấu hình DNS chặn thu hồi khỏi Cài đặt theo yêu cầu.\n- ⚡ Giữ nguyên cơ chế ký và stream payload tốc độ cao chuẩn KSign mượt mà.",
                     "minOSVersion": "16.0"
                 },
                 {
@@ -46,11 +46,11 @@
                 }
             ],
             "appPermissions": {},
-            "version": "2.2",
-            "buildVersion": "16",
-            "versionDate": "2026-10-24T03:30:00+07:00",
+            "version": "5.2.3",
+            "buildVersion": "523",
+            "versionDate": "2026-10-24T03:45:00+07:00",
             "size": 15500000,
-            "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v2.2/LemonSign.ipa"
+            "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v5.2.3/LemonSign.ipa"
         },
         {
             "name": "3105",
