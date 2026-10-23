@@ -82,6 +82,54 @@ final class ThreeOneStore: ObservableObject {
             targetApp: "System Preferences"
         ),
         ThreeOnePackage(
+            id: "disable.supervision",
+            name: "Ẩn / Tắt Giám sát (Un-Supervise)",
+            author: "YangJiii",
+            kind: .tool,
+            description: "Xóa bỏ cờ giám sát và ẩn hoàn toàn dòng thông báo 'iPhone này được quản lý và giám sát bởi tổ chức' trong Cài đặt và Màn hình khóa.",
+            version: "2.1",
+            iconSystemName: "shield.slash.fill",
+            accentColor: Color(hex: "FFD60A"),
+            isInstalled: false,
+            targetApp: "System Preferences"
+        ),
+        ThreeOnePackage(
+            id: "mute.camera.sound",
+            name: "Tắt âm chụp ảnh Camera",
+            author: "YangJiii",
+            kind: .patch,
+            description: "Tắt âm thanh màn trập khi chụp hình trên các thiết bị iPhone thị trường Nhật Bản (J/A) và Hàn Quốc (KH/A).",
+            version: "1.3",
+            iconSystemName: "camera.badge.ellipsis",
+            accentColor: Color(hex: "FFD60A"),
+            isInstalled: false,
+            targetApp: "Camera"
+        ),
+        ThreeOnePackage(
+            id: "hide.home.bar",
+            name: "Ẩn vạch Home Bar",
+            author: "0xjohnny",
+            kind: .patch,
+            description: "Ẩn vạch ngang Home indicator dưới đáy màn hình, trải nghiệm toàn màn hình sạch sẽ.",
+            version: "1.1",
+            iconSystemName: "iphone.slash",
+            accentColor: Color(hex: "FFD60A"),
+            isInstalled: false,
+            targetApp: "SpringBoard"
+        ),
+        ThreeOnePackage(
+            id: "disable.low.power",
+            name: "Chặn cảnh báo Pin yếu",
+            author: "YangJiii",
+            kind: .patch,
+            description: "Vô hiệu hóa cửa sổ thông báo pin yếu phiền phức ở mức 20% và 10% khi đang chơi game hoặc xem video.",
+            version: "1.0",
+            iconSystemName: "battery.25",
+            accentColor: Color(hex: "FFD60A"),
+            isInstalled: false,
+            targetApp: "SpringBoard"
+        ),
+        ThreeOnePackage(
             id: "dialer.neon.cyber",
             name: "Neon Glow Dialer",
             author: "duongduong0908",
