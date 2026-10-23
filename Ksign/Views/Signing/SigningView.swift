@@ -360,14 +360,13 @@ extension SigningView {
 					Storage.shared.deleteApp(for: app)
 				}
                 
-				let targetApp = app
 				dismiss()
 				
 				if shouldInstall || signAndInstall {
-					DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+					DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
 						NotificationCenter.default.post(
 							name: NSNotification.Name("feather.installApp"),
-							object: targetApp
+							object: nil
 						)
 					}
 				}

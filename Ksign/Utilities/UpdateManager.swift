@@ -13,7 +13,7 @@ final class UpdateManager: NSObject {
 
 	// Current app constants for this build
 	static let currentAppVersion = "5.2.3"
-	static let currentAppBuild = 523
+	static let currentAppBuild = 524
 	static let currentAppTag = "v5.2.3"
 
 	private let _repoJsonUrl = "https://raw.githubusercontent.com/Kasumi-dta/LemonSign/refs/heads/main/repo.json"

@@ -201,7 +201,7 @@ extension AppIconView {
                 DispatchQueue.main.async {
                     if let error = error {
                         print("[AppIcon] Failed to change app icon: \(error.localizedDescription)")
-                        self.errorMessage = "Không thể đổi biểu tượng: \(error.localizedDescription)"
+                        self.errorMessage = "Không thể đổi biểu tượng: \(error.localizedDescription)\n\nLưu ý: iOS yêu cầu LemonSign phải được ký với Bundle ID khớp chính xác với App ID trong chứng chỉ của bạn để LaunchServices cấp quyền thay đổi biểu tượng màn hình chính."
                         self.showErrorAlert = true
                     } else {
                         self.selectedIcon = targetIcon
