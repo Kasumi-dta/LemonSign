@@ -21,7 +21,7 @@ final class ArchiveHandler: NSObject {
 	private var _app: AppInfoPresentable
 	private let _uniqueWorkDir: URL
 	
-	init(app: AppInfoPresentable, viewModel: InstallerStatusViewModel) {
+	init(app: AppInfoPresentable, viewModel: InstallerStatusViewModel = InstallerStatusViewModel(isIdevice: false)) {
 		self.viewModel = viewModel
 		self._app = app
 		self._uniqueWorkDir = _fileManager.temporaryDirectory

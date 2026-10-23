@@ -8,6 +8,7 @@
 import SwiftUI
 import NimbleExtensions
 import NimbleViews
+import IDeviceSwift
 
 // MARK: - View
 struct LibraryCellView: View {
@@ -231,7 +232,7 @@ extension LibraryCellView {
 		if TrollStoreHelper.isTrollStoreAvailable {
 			Button {
 				Task {
-					let handler = ArchiveHandler(app: app)
+					let handler = ArchiveHandler(app: app, viewModel: InstallerStatusViewModel(isIdevice: false))
 					if let ipaUrl = try? await handler.archive() {
 						await MainActor.run {
 							TrollStoreHelper.install(fileUrl: ipaUrl)
