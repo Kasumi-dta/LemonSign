@@ -33,6 +33,33 @@
             "versionDate": "2026-10-23T16:15:00+07:00",
             "size": 15000000,
             "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v1.6.5.2/LemonSign.ipa"
+        },
+        {
+            "name": "Dopamine",
+            "bundleIdentifier": "com.opa334.Dopamine",
+            "developerName": "opa334",
+            "iconURL": "https://raw.githubusercontent.com/Kasumi-dta/LemonSign/main/assets/dopamine.png",
+            "localizedDescription": "Dopamine là công cụ Jailbreak Rootless chính thức của tác giả opa334 dành cho các thiết bị chạy iOS 15.0 đến 16.6.5 (hỗ trợ chip arm64e từ A12 đến A16/M1/M2). Tích hợp sẵn môi trường Procursus bootstrap và hệ thống ElleKit tweak injection tiên tiến, hoạt động ổn định và bảo mật cao.",
+            "subtitle": "Rootless Jailbreak cho iOS 15.0 - 16.6.5 (A12 - A16)",
+            "tintColor": "2B50ED",
+            "category": "utilities",
+            "versions": [
+                {
+                    "downloadURL": "https://github.com/opa334/Dopamine/releases/download/3.0.12/Dopamine.ipa",
+                    "size": 55420784,
+                    "version": "3.0.12",
+                    "buildVersion": "3012",
+                    "date": "2026-10-20T05:30:00+07:00",
+                    "localizedDescription": "Bản phát hành Dopamine 3.0.12 chính thức từ opa334:\n- Tối ưu hoá kernel exploit kfd và badRecovery.\n- Cập nhật Procursus bootstrap và ElleKit mới nhất.\n- Tương thích tốt nhất với iOS 15.0 - 16.6.5.",
+                    "minOSVersion": "15.0"
+                }
+            ],
+            "appPermissions": {},
+            "version": "3.0.12",
+            "buildVersion": "3012",
+            "versionDate": "2026-10-20T05:30:00+07:00",
+            "size": 55420784,
+            "downloadURL": "https://github.com/opa334/Dopamine/releases/download/3.0.12/Dopamine.ipa"
         }
     ]
 }

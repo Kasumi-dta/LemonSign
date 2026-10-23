@@ -42,7 +42,7 @@ Another reason is this app was built to make sideloading simpler and more access
 - 🛡️ **Live Jailbreak Detection**: Real-time status indicator recognizing Stock iOS vs Rootless/Rootful jailbreak.
 - 💉 **Tweak & Dylib Injection**: Inject modifications, frameworks, and tweaks into your IPAs seamlessly.
 - 📲 **Smart Localhost OTA Server**: Built-in server with automatic fallback and SSL certificate renewal prompt.
-- 📦 **Multi-Repo Sources**: Browse and download IPAs directly from AltStore and ESign repository sources.
+- 📦 **Multi-Repo Sources & Built-in Tools**: Browse and download IPAs directly from AltStore and ESign sources, with built-in official **Dopamine Jailbreak** and community tools.
 - 🛠️ **Built-in File & Plist Editor**: Inspect app bundles, modify `Info.plist`, view hex, and unpack IPAs.
 - 🔌 **IDevice Tunnel Support**: Local device tunnel pairing for trusted installation flows.
 
