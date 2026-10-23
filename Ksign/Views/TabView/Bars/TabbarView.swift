@@ -20,5 +20,10 @@ struct TabbarView: View {
 					.tag(tab)
 			}
 		}
+		.onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("feather.changeTab"))) { notification in
+			if let target = notification.object as? TabEnum {
+				selectedTab = target
+			}
+		}
 	}
 }

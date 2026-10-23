@@ -235,17 +235,14 @@ struct LibraryView: View {
 				}
 			}
 			.onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("feather.installApp"))) { notification in
-                if let app = _signedApps.first {
-                    _selectedInstallAppPresenting = AnyApp(base: app)
+				if let customApp = notification.object as? AppInfoPresentable {
+					_selectedInstallAppPresenting = AnyApp(base: customApp)
+				} else if let app = _signedApps.first {
+					_selectedInstallAppPresenting = AnyApp(base: app)
 				}
 			}
 			.onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("lemonsign.autoUpdateReady"))) { _ in
-				if let lemonApp = _importedApps.first(where: {
-					$0.identifier == Bundle.main.bundleIdentifier ||
-					$0.name?.lowercased().contains("lemonsign") == true
-				}) {
-					_selectedSigningAppPresenting = AnyApp(base: lemonApp, signAndInstall: true)
-				}
+				_autoSignAndInstallUpdate()
 			}
         }
         .onChange(of: _isEditMode) { state in
@@ -290,6 +287,66 @@ extension LibraryView {
 		
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
 			_selectedApps.removeAll()
+		}
+	}
+}
+
+// MARK: - Extension: Zero-Touch Auto Update
+extension LibraryView {
+	private func _autoSignAndInstallUpdate() {
+		NotificationCenter.default.post(
+			name: NSNotification.Name("feather.changeTab"),
+			object: TabEnum.library
+		)
+
+		let fetchRequest = Imported.fetchRequest()
+		fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Imported.date, ascending: false)]
+		let apps = (try? Storage.shared.context.fetch(fetchRequest)) ?? []
+		guard let lemonApp = apps.first(where: {
+			$0.identifier == Bundle.main.bundleIdentifier ||
+			$0.name?.lowercased().contains("lemonsign") == true
+		}) ?? _importedApps.first(where: {
+			$0.identifier == Bundle.main.bundleIdentifier ||
+			$0.name?.lowercased().contains("lemonsign") == true
+		}) else {
+			return
+		}
+
+		let certRequest = CertificatePair.fetchRequest()
+		certRequest.sortDescriptors = [NSSortDescriptor(keyPath: \CertificatePair.date, ascending: false)]
+		let certs = (try? Storage.shared.context.fetch(certRequest)) ?? []
+		let storedCertIndex = UserDefaults.standard.integer(forKey: "feather.selectedCert")
+		let activeCert: CertificatePair? = certs.indices.contains(storedCertIndex) ? certs[storedCertIndex] : nil
+
+		guard let activeCert = activeCert else {
+			_selectedSigningAppPresenting = AnyApp(base: lemonApp, signAndInstall: true)
+			return
+		}
+
+		HapticManager.shared.impact(.medium)
+		var options = OptionsManager.shared.options
+		options.compression = 0
+		options.removeApp = true
+
+		FR.signPackageFile(
+			lemonApp,
+			using: options,
+			icon: nil,
+			certificate: activeCert
+		) { error in
+			if let error = error {
+				HapticManager.shared.notification(.error)
+				_selectedSigningAppPresenting = AnyApp(base: lemonApp, signAndInstall: true)
+			} else {
+				HapticManager.shared.notification(.success)
+				Storage.shared.deleteApp(for: lemonApp)
+				DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+					NotificationCenter.default.post(
+						name: NSNotification.Name("feather.installApp"),
+						object: nil
+					)
+				}
+			}
 		}
 	}
 }
