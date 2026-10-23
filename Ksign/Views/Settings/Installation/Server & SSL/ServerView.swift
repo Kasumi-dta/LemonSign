@@ -14,6 +14,11 @@ struct ServerView: View {
 	@AppStorage("Feather.serverMethod") private var _serverMethod: Int = 0
 	@State private var _isUpdatingSSL: Bool = false
 	@State private var _sslExpirationText: String = ""
+	@State private var _sslLastUpdatedText: String = ""
+	@State private var _sslStatusBadgeText: String = "Bản mới nhất"
+	@State private var _isSslUpToDate: Bool = true
+	@State private var _sslVersionText: String = "v1.0"
+	@State private var _sslDomainText: String = "localhost.backloop.dev"
 	
 	private var _serverMethods: [String] {
 		[
@@ -40,10 +45,48 @@ struct ServerView: View {
 			
 			Section {
 				HStack {
-					Label("Chứng chỉ SSL nội bộ", systemImage: "lock.shield")
+					Label("Trạng thái chứng chỉ", systemImage: "shield.lefthalf.filled")
+					Spacer()
+					HStack(spacing: 6) {
+						Circle()
+							.fill(_isSslUpToDate ? Color.green : Color.orange)
+							.frame(width: 8, height: 8)
+						Text(_sslStatusBadgeText)
+							.font(.footnote)
+							.fontWeight(.semibold)
+							.foregroundColor(_isSslUpToDate ? .green : .orange)
+					}
+				}
+				
+				HStack {
+					Label("Phiên bản SSL", systemImage: "checkmark.seal.fill")
+					Spacer()
+					Text(_sslVersionText)
+						.font(.footnote)
+						.foregroundColor(.secondary)
+				}
+				
+				HStack {
+					Label("Thời gian cập nhật", systemImage: "clock.arrow.circlepath")
+					Spacer()
+					Text(_sslLastUpdatedText.isEmpty ? "Mặc định (Chưa cập nhật)" : _sslLastUpdatedText)
+						.font(.footnote)
+						.foregroundColor(.secondary)
+				}
+				
+				HStack {
+					Label("Hạn sử dụng", systemImage: "calendar.badge.clock")
 					Spacer()
 					Text(_sslExpirationText.isEmpty ? "Tự động gia hạn" : _sslExpirationText)
 						.font(.footnote)
+						.foregroundColor(.secondary)
+				}
+				
+				HStack {
+					Label("Tên miền hỗ trợ", systemImage: "network")
+					Spacer()
+					Text(_sslDomainText)
+						.font(.caption)
 						.foregroundColor(.secondary)
 				}
 				
@@ -59,8 +102,10 @@ struct ServerView: View {
 					}
 				}
 				.disabled(_isUpdatingSSL)
+			} header: {
+				Text("Chứng chỉ SSL HTTPS Nội bộ")
 			} footer: {
-				Text("Chứng chỉ SSL Let's Encrypt cho *.backloop.dev được tự động kiểm tra và cập nhật ngầm khi mở app hoặc khi cài đặt.")
+				Text("Chứng chỉ SSL Let's Encrypt cho localhost.backloop.dev bảo đảm cài đặt OTA nội bộ không bao giờ bị Apple chặn. Khi có bản cập nhật mới, bấm nút trên để tải và đồng bộ thời gian ngay.")
 			}
 		}
 		.onAppear(perform: _refreshSSLStatus)
@@ -83,13 +128,26 @@ struct ServerView: View {
 	}
 	
 	private func _refreshSSLStatus() {
+		let isExpiring = SSLManager.shared.isExpiredOrExpiringSoon(daysThreshold: 14)
+		_isSslUpToDate = !isExpiring
+		_sslStatusBadgeText = !isExpiring ? "Bản mới nhất (Hợp lệ)" : "Cần cập nhật"
+		_sslVersionText = "v\(SSLManager.shared.sslVersion()) (Let's Encrypt)"
+		_sslDomainText = SSLManager.shared.commonNameString()
+		
 		if let date = SSLManager.shared.sslExpirationDate() {
 			let formatter = DateFormatter()
-			formatter.dateStyle = .medium
-			formatter.timeStyle = .none
+			formatter.dateFormat = "dd/MM/yyyy"
 			_sslExpirationText = "HSD: \(formatter.string(from: date))"
 		} else {
 			_sslExpirationText = "Tự động gia hạn"
+		}
+		
+		if let updateDate = SSLManager.shared.lastUpdatedDate() {
+			let formatter = DateFormatter()
+			formatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
+			_sslLastUpdatedText = formatter.string(from: updateDate)
+		} else {
+			_sslLastUpdatedText = "Mặc định ban đầu"
 		}
 	}
 	
@@ -100,9 +158,12 @@ struct ServerView: View {
 				_isUpdatingSSL = false
 				_refreshSSLStatus()
 				if success {
+					let now = DateFormatter()
+					now.dateFormat = "HH:mm:ss dd/MM/yyyy"
+					let timeStr = now.string(from: Date())
 					UIAlertController.showAlertWithOk(
-						title: .localized("SSL Certificates"),
-						message: .localized("SSL certificates updated successfully! Please restart the app or try installing again.")
+						title: "Chứng chỉ SSL đã cập nhật",
+						message: "Đã tải và cài đặt bản SSL mới nhất thành công lúc \(timeStr)!\n\nTrạng thái: Bản mới nhất\nTên miền: \(_sslDomainText)"
 					)
 				} else {
 					UIAlertController.showAlertWithOk(

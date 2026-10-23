@@ -27,10 +27,7 @@ struct TabbarView: View {
 			}
 		}
 		.onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("lemonsign.openSettings"))) { _ in
-			showSettings = true
-		}
-		.sheet(isPresented: $showSettings) {
-			SettingsView()
+			selectedTab = .settings
 		}
 	}
 }

@@ -272,7 +272,7 @@ extension LibraryCellView {
 				}
 			} else {
 				Button {
-					selectedSigningAppPresenting = AnyApp(base: app)
+					selectedSigningAppPresenting = AnyApp(base: app, signAndInstall: true)
 				} label: {
 					FRExpirationPillView(
 						title: .localized("Sign"),

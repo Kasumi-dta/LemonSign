@@ -38,6 +38,19 @@ struct SigningTweaksView: View {
 					Label(.localized("Inject into Extensions"), systemImage: "syringe")
 				}
 			}
+			
+			Section {
+				NavigationLink(destination: TweakHubView()) {
+					HStack {
+						Label("Kho Tweak Sẵn Có (Tweak Hub)", systemImage: "sparkles.rectangle.stack.fill")
+							.foregroundColor(Color(hex: "FFD60A"))
+						Spacer()
+						Text("Adblock, Bypass JB...")
+							.font(.caption)
+							.foregroundColor(.secondary)
+					}
+				}
+			}
 			if !options.injectionFiles.isEmpty {
 				NBSection(.localized("Added Tweaks")) {
 					ForEach(options.injectionFiles, id: \.absoluteString) { tweak in

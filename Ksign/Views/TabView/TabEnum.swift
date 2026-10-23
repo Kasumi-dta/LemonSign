@@ -35,7 +35,7 @@ enum TabEnum: String, CaseIterable, Hashable {
         case .files:        return "folder.fill"
 		case .sources: 		return "shippingbox.fill"
 		case .library: 		return "tray.full.fill"
-		case .settings: 	return "slider.horizontal.3"
+		case .settings: 	return "gearshape.fill"
 		case .certificates: return "person.badge.shield.checkmark.fill"
 		case .appstore: 	return "shippingbox.fill"
         case .downloader:   return "arrow.down.circle.fill"
@@ -61,7 +61,7 @@ enum TabEnum: String, CaseIterable, Hashable {
 		return [
             .files,
             .library,
-            .threeOneOSFive,
+            .settings,
             .appstore,
             .downloader,
 		]
@@ -70,7 +70,7 @@ enum TabEnum: String, CaseIterable, Hashable {
 	static var customizableTabs: [TabEnum] {
 		return [
 			.certificates,
-			.settings,
+			.threeOneOSFive,
 		]
 	}
 }

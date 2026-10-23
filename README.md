@@ -52,8 +52,8 @@ You can create an Issue at [Issues](https://github.com/Kasumi-dta/LemonSign/issu
 You can also join our Telegram channel at [applep12vnn](https://t.me/applep12vnn) for updates, certificates, and community discussion.
 
 ## Download
-- 🌟 **Latest Release**: [**LemonSign v1.6.5.4**](https://github.com/Kasumi-dta/LemonSign/releases/tag/v1.6.5.4)
-- 📦 **Direct IPA Download**: [**LemonSign.ipa (v1.6.5.4)**](https://github.com/Kasumi-dta/LemonSign/releases/download/v1.6.5.4/LemonSign.ipa)
+- 🌟 **Latest Release**: [**LemonSign v1.6.6**](https://github.com/Kasumi-dta/LemonSign/releases/tag/v1.6.6)
+- 📦 **Direct IPA Download**: [**LemonSign.ipa (v1.6.6)**](https://github.com/Kasumi-dta/LemonSign/releases/download/v1.6.6/LemonSign.ipa)
 - 🚀 **All Releases & Betas**: [**GitHub Releases**](https://github.com/Kasumi-dta/LemonSign/releases)
 
 ## Special thanks

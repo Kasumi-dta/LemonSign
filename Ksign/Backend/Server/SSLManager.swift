@@ -41,6 +41,26 @@ final class SSLManager: NSObject {
 		serverDirectory.appendingPathComponent("commonName.txt")
 	}
 	
+	func lastUpdatedDate() -> Date? {
+		let time = _userDefaults.double(forKey: _lastUpdatedKey)
+		guard time > 0 else { return nil }
+		return Date(timeIntervalSince1970: time)
+	}
+	
+	func sslVersion() -> String {
+		return _userDefaults.string(forKey: "Feather.sslVersion") ?? "1.0"
+	}
+	
+	func commonNameString() -> String {
+		if let str = try? String(contentsOf: commonNameURL, encoding: .utf8).trimmingCharacters(in: .whitespacesAndNewlines), !str.isEmpty {
+			if str.hasPrefix("*.") {
+				return "localhost." + str.dropFirst(2)
+			}
+			return str
+		}
+		return "localhost.backloop.dev"
+	}
+	
 	func isSSLCertificatePresent() -> Bool {
 		let fm = FileManager.default
 		return fm.fileExists(atPath: crtURL.path) &&
@@ -144,7 +164,8 @@ final class SSLManager: NSObject {
 					let fm = FileManager.default
 					try fm.createDirectoryIfNeeded(at: self.serverDirectory)
 					
-					let commonName = pack.info.domains?.commonName ?? "*.backloop.dev"
+					let rawCommonName = pack.info.domains?.commonName ?? "*.backloop.dev"
+					let commonName = rawCommonName.hasPrefix("*.") ? ("localhost." + rawCommonName.dropFirst(2)) : (rawCommonName == "*" ? "localhost.backloop.dev" : rawCommonName)
 					
 					try pack.key.write(to: self.pemURL, atomically: true, encoding: .utf8)
 					try pack.cert.write(to: self.crtURL, atomically: true, encoding: .utf8)
@@ -152,6 +173,11 @@ final class SSLManager: NSObject {
 					
 					if let notAfter = pack.info.notAfter {
 						self._userDefaults.set(notAfter, forKey: self._notAfterKey)
+					}
+					if let ver = pack.version?.num {
+						self._userDefaults.set(ver, forKey: "Feather.sslVersion")
+					} else {
+						self._userDefaults.set("1.0", forKey: "Feather.sslVersion")
 					}
 					self._userDefaults.set(Date().timeIntervalSince1970, forKey: self._lastUpdatedKey)
 					

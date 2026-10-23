@@ -248,10 +248,12 @@ struct LibraryView: View {
 				}
 			}
 			.onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("feather.installApp"))) { notification in
-				if let customApp = notification.object as? AppInfoPresentable {
-					_selectedInstallAppPresenting = AnyApp(base: customApp)
-				} else if let app = _signedApps.first {
-					_selectedInstallAppPresenting = AnyApp(base: app)
+				DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+					if let customApp = notification.object as? AppInfoPresentable {
+						_selectedInstallAppPresenting = AnyApp(base: customApp)
+					} else if let app = _signedApps.first {
+						_selectedInstallAppPresenting = AnyApp(base: app)
+					}
 				}
 			}
 			.onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("lemonsign.autoUpdateReady"))) { _ in

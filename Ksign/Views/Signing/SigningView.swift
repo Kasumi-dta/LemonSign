@@ -80,10 +80,21 @@ struct SigningView: View {
 					.tint(.secondary)
 					.compatMatchedTransitionSource(id: "showLogs", ns: _namespace)
 				} else {
-					Button() {
-						_start()
-					} label: {
-						NBSheetButton(title: .localized("Start Signing"))
+					VStack(spacing: 8) {
+						Button() {
+							_start(shouldInstall: true)
+						} label: {
+							NBSheetButton(title: "⚡ Ký & Cài đặt ngay")
+						}
+						
+						Button() {
+							_start(shouldInstall: false)
+						} label: {
+							Text("Chỉ ký (Lưu vào thư viện)")
+								.font(.subheadline)
+								.foregroundColor(.secondary)
+								.padding(.vertical, 4)
+						}
 					}
 				}
 			}
@@ -300,7 +311,7 @@ extension SigningView {
 
 // MARK: - Extension: View (import)
 extension SigningView {
-	private func _start() {
+	private func _start(shouldInstall: Bool = true) {
 		guard _selectedCert() != nil || _temporaryOptions.doAdhocSigning || _temporaryOptions.onlyModify else {
 			UIAlertController.showAlertWithOk(
 				title: .localized("No Certificate"),
@@ -310,10 +321,10 @@ extension SigningView {
 			return
 		}
 
-		_proceedWithSigning()
+		_proceedWithSigning(shouldInstall: shouldInstall)
 	}
 
-	private func _proceedWithSigning() {
+	private func _proceedWithSigning(shouldInstall: Bool = true) {
 		HapticManager.shared.impact(.medium)
 		_isLogsPresenting = _optionsManager.options.signingLogs
 		_isSigning = true
@@ -349,15 +360,17 @@ extension SigningView {
 					Storage.shared.deleteApp(for: app)
 				}
                 
-				if signAndInstall {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                        NotificationCenter.default.post(
-                            name: NSNotification.Name("feather.installApp"),
-                            object: nil
-                        )
-                    }
-                }
+				let targetApp = app
 				dismiss()
+				
+				if shouldInstall || signAndInstall {
+					DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+						NotificationCenter.default.post(
+							name: NSNotification.Name("feather.installApp"),
+							object: targetApp
+						)
+					}
+				}
 			}
 		}
 	}

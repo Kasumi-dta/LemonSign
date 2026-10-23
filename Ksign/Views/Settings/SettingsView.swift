@@ -45,7 +45,34 @@ struct SettingsView: View {
 					NavigationLink(destination: AppearanceView()) {
                         Label(.localized("Appearance"), systemImage: "paintbrush")
                     }
+					NavigationLink(destination: AlternateIconView()) {
+                        Label("Biểu tượng Ứng dụng", systemImage: "app.dashed")
+                    }
 				}
+                
+                NBSection("Công cụ Sideload & Hệ thống") {
+                    NavigationLink(destination: ThreeOneOSFiveView()) {
+                        HStack {
+                            Label("Bộ công cụ 3105", systemImage: "puzzlepiece.extension.fill")
+                                .foregroundColor(Color(hex: "FFD60A"))
+                            Spacer()
+                            Text("MobileGestalt & Lab")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    NavigationLink(destination: AntiRevokeView()) {
+                        Label("Lá chắn Chống Thu hồi", systemImage: "shield.lefthalf.filled")
+                    }
+                    NavigationLink(destination: TweakHubView()) {
+                        Label("Kho Tweak & Dylib", systemImage: "sparkles.rectangle.stack.fill")
+                    }
+                    NavigationLink(destination: AirShareView()) {
+                        Label("AirShare WiFi & QR", systemImage: "wifi.circle.fill")
+                    }
+                } footer: {
+                    Text("Bộ công cụ mở rộng: 3105, Lá chắn chặn thu hồi chứng chỉ, thư viện tweak tiêm tự động và chia sẻ không dây.")
+                }
                 
                 NBSection(.localized("Certificates")) {
                     NavigationLink(destination: CertificatesView()) {

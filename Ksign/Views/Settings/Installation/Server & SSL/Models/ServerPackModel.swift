@@ -10,9 +10,11 @@ struct ServerPackModel: Decodable {
 	var ca: String
 	var key: String
 	var info: ServerPackInfo
+	var version: PackVersion?
+	var domain: String?
 	
 	private enum CodingKeys: String, CodingKey {
-		case cert, ca, key1, key2, info
+		case cert, ca, key1, key2, info, version, domain
 	}
 	
 	init(from decoder: Decoder) throws {
@@ -23,6 +25,13 @@ struct ServerPackModel: Decodable {
 		let key2 = try container.decode(String.self, forKey: .key2)
 		key = key1 + key2
 		info = try container.decode(ServerPackInfo.self, forKey: .info)
+		version = try? container.decodeIfPresent(PackVersion.self, forKey: .version)
+		domain = try? container.decodeIfPresent(String.self, forKey: .domain)
+	}
+	
+	struct PackVersion: Decodable {
+		var num: String?
+		var message: String?
 	}
 	
 	struct ServerPackInfo: Decodable {

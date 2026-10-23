@@ -36,6 +36,12 @@ struct AppearanceView: View {
                 }
                 .pickerStyle(.segmented)
             }
+            
+            Section {
+                NavigationLink(destination: AlternateIconView()) {
+                    Label("Biểu tượng Ứng dụng", systemImage: "app.dashed")
+                }
+            }
 			
 			NBSection(.localized("Sources")) {
                 _storePreview()

@@ -46,7 +46,19 @@ extension ServerInstaller {
 	}
 	
 	// MARK: Files/IP
-	static let sni: String = {
+	static func sanitizeHostname(_ raw: String) -> String {
+		let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+		if trimmed.hasPrefix("*.") {
+			return "localhost." + trimmed.dropFirst(2)
+		} else if trimmed.contains("*") {
+			return trimmed.replacingOccurrences(of: "*", with: "localhost")
+		} else if trimmed.isEmpty {
+			return "localhost.backloop.dev"
+		}
+		return trimmed
+	}
+
+	static var sni: String {
 		let localhost = "127.0.0.1"
 		
 		if getServerMethod() == 1 {
@@ -54,9 +66,12 @@ extension ServerInstaller {
 			? (getLocalAddress() ?? localhost)
 			: localhost
 		} else {
-			return readCommonName() ?? localhost
+			if let common = readCommonName() {
+				return sanitizeHostname(common)
+			}
+			return "localhost.backloop.dev"
 		}
-	}()
+	}
 	
 	static func tls() throws -> TLSConfiguration? {
 		guard
