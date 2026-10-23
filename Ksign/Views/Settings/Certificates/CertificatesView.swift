@@ -60,20 +60,18 @@ struct CertificatesView: View {
             }
         }
 		.toolbar {
-			if _bindingSelectedCert == nil {
-				NBToolbarButton(
-					systemImage: "plus",
-					style: .icon,
-					placement: .topBarTrailing
-				) {
-					_isAddingPresenting = true
-				}
-			}
-			if certificates.count > 0 {
 			NBToolbarButton(
-				systemImage: "arrow.counterclockwise",
+				systemImage: "plus",
 				style: .icon,
 				placement: .topBarTrailing
+			) {
+				_isAddingPresenting = true
+			}
+			if certificates.count > 0 {
+				NBToolbarButton(
+					systemImage: "arrow.counterclockwise",
+					style: .icon,
+					placement: .topBarTrailing
 				) {
 					for cert in certificates {
 						Storage.shared.revokagedCertificate(for: cert)
@@ -112,6 +110,14 @@ extension CertificatesView {
 						lineWidth: 2
 					)
 			)
+			.overlay(alignment: .topTrailing) {
+				if _selectedCertBinding.wrappedValue == index {
+					Image(systemName: "checkmark.circle.fill")
+						.font(.system(size: 20))
+						.foregroundColor(.accentColor)
+						.padding(10)
+				}
+			}
 			.contextMenu {
 				_contextActions(for: cert)
 				Divider()
@@ -141,6 +147,9 @@ extension CertificatesView {
                 )
             } else {
                 Storage.shared.deleteCertificate(for: cert)
+                if _selectedCertBinding.wrappedValue >= certificates.count - 1 {
+                    _selectedCertBinding.wrappedValue = max(0, certificates.count - 2)
+                }
             }
 		} label: {
 			Label(.localized("Delete"), systemImage: "trash")

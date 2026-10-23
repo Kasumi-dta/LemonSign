@@ -184,6 +184,18 @@ extension BulkSigningView {
 						cert: cert
 					)
 				}
+			} else {
+				NavigationLink {
+					CertificatesView(selectedCert: $_temporaryCertificate)
+				} label: {
+					HStack {
+						Label(.localized("Select Certificate"), systemImage: "signature")
+						Spacer()
+						Image(systemName: "chevron.right")
+							.font(.footnote)
+							.foregroundColor(.secondary)
+					}
+				}
 			}
 		}
 	}

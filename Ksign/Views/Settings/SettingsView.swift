@@ -47,6 +47,15 @@ struct SettingsView: View {
 				}
                 
                 NBSection(.localized("Certificates")) {
+                    NavigationLink(destination: CertificatesView()) {
+                        HStack {
+                            Label(.localized("Certificates"), systemImage: "signature")
+                            Spacer()
+                            Text("\(_certificates.count)")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                    }
                     
                     if let cert = selectedCertificate {
                         CertificatesCellView(cert: cert)
@@ -55,10 +64,6 @@ struct SettingsView: View {
                             .font(.footnote)
                             .foregroundColor(.disabled())
                     }
-                    NavigationLink(destination: CertificatesView()) {
-                        Label(.localized("Certificates"), systemImage: "signature")
-                    }
-                 
                 } footer: {
                     Text(.localized("Add and manage certificates used for signing applications."))
                 }

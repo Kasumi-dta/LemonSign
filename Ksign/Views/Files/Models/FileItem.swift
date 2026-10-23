@@ -37,6 +37,11 @@ struct FileItem: Identifiable, Hashable {
         return ext == "p12"
     }
     
+    var isMobileProvision: Bool {
+        guard let ext = fileExtension?.lowercased() else { return false }
+        return ext == "mobileprovision"
+    }
+    
     var isKsignFile: Bool {
         guard let ext = fileExtension?.lowercased() else { return false }
         return ext == "ksign"

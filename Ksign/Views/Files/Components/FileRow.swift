@@ -72,6 +72,8 @@ struct FileRow: View {
                     _iconBadge(systemName: "list.bullet.rectangle.portrait.fill")
                 } else if file.isP12Certificate {
                     _iconBadge(systemName: "key.fill")
+                } else if file.isMobileProvision {
+                    _iconBadge(systemName: "signature")
                 } else if file.isKsignFile {
                     _iconBadge(systemName: "questionmark")
                 } else {
@@ -187,7 +189,7 @@ struct FileRow: View {
             }
         }
         
-        if file.isP12Certificate {
+        if file.isP12Certificate || file.isMobileProvision {
             Button {
                 viewModel.importCertificate(file)
             } label: {

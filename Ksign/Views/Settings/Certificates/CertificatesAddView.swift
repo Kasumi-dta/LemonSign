@@ -73,17 +73,20 @@ struct CertificatesAddView: View {
 			}
 			.sheet(isPresented: $_isImportingP12Presenting) {
 				FileImporterRepresentableView(
-					allowedContentTypes: [UTType.p12],
+					allowedContentTypes: [UTType.p12, UTType.pkcs12, UTType(filenameExtension: "p12")].compactMap { $0 },
 					onDocumentsPicked: { urls in
 						guard let selectedFileURL = urls.first else { return }
 						self._p12URL = selectedFileURL
 						self._isFromKsign = false
+						if self._certificateName.isEmpty {
+							self._certificateName = selectedFileURL.deletingPathExtension().lastPathComponent
+						}
 					}
 				)
 			}
 			.sheet(isPresented: $_isImportingMobileProvisionPresenting) {
 				FileImporterRepresentableView(
-					allowedContentTypes: [UTType.mobileProvision],
+					allowedContentTypes: [UTType.mobileProvision, UTType(filenameExtension: "mobileprovision")].compactMap { $0 },
 					onDocumentsPicked: { urls in
 						guard let selectedFileURL = urls.first else { return }
 						self._provisionURL = selectedFileURL
@@ -118,12 +121,34 @@ extension CertificatesAddView {
 		hasData: Data? = nil,
 		action: @escaping () -> Void
 	) -> some View {
-		Button(title) {
-			action()
+		Button(action: action) {
+			HStack {
+				VStack(alignment: .leading, spacing: 3) {
+					Text(title)
+						.font(.body)
+						.foregroundColor(.primary)
+					if let file = file {
+						Text(file.lastPathComponent)
+							.font(.caption)
+							.foregroundColor(.secondary)
+							.lineLimit(1)
+					} else if hasData != nil {
+						Text(.localized("File selected"))
+							.font(.caption)
+							.foregroundColor(.secondary)
+					}
+				}
+				Spacer()
+				if file != nil || hasData != nil {
+					Image(systemName: "checkmark.circle.fill")
+						.foregroundColor(.green)
+				} else {
+					Image(systemName: "chevron.right")
+						.font(.footnote)
+						.foregroundColor(.secondary)
+				}
+			}
 		}
-		.foregroundColor((file == nil && hasData == nil) ? .accentColor : .disabled())
-		.disabled(file != nil || hasData != nil)
-		.animation(.easeInOut(duration: 0.3), value: file != nil || hasData != nil)
 	}
 }
 
@@ -144,8 +169,13 @@ extension CertificatesAddView {
             provisionURL: provisionURL,
             p12Password: _p12Password,
             certificateName: _certificateName
-        ) { _ in
-            dismiss()
+        ) { error in
+            if let error = error {
+                _errorMessage = error.localizedDescription
+                _isErrorPresenting = true
+            } else {
+                dismiss()
+            }
         }
 	}
 }
