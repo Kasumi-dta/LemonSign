@@ -16,6 +16,7 @@ struct ExtendedTabbarView: View {
 	@StateObject var viewModel = SourcesViewModel.shared
 	
 	@State private var _isAddingPresenting = false
+	@State private var _showSettings = false
 	
 	@FetchRequest(
 		entity: AltSource.entity(),
@@ -76,6 +77,12 @@ struct ExtendedTabbarView: View {
 		.sheet(isPresented: $_isAddingPresenting) {
 			SourcesAddView()
 				.presentationDetents([.medium])
+		}
+		.onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("lemonsign.openSettings"))) { _ in
+			_showSettings = true
+		}
+		.sheet(isPresented: $_showSettings) {
+			SettingsView()
 		}
 	}
 	

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TabbarView: View {
 	@State private var selectedTab: TabEnum = .files
+	@State private var showSettings = false
 
 	var body: some View {
 		TabView(selection: $selectedTab) {
@@ -24,6 +25,12 @@ struct TabbarView: View {
 			if let target = notification.object as? TabEnum {
 				selectedTab = target
 			}
+		}
+		.onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("lemonsign.openSettings"))) { _ in
+			showSettings = true
+		}
+		.sheet(isPresented: $showSettings) {
+			SettingsView()
 		}
 	}
 }

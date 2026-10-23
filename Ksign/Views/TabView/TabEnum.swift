@@ -64,13 +64,13 @@ enum TabEnum: String, CaseIterable, Hashable {
             .threeOneOSFive,
             .appstore,
             .downloader,
-			.settings,
 		]
 	}
 	
 	static var customizableTabs: [TabEnum] {
 		return [
-			.certificates
+			.certificates,
+			.settings,
 		]
 	}
 }

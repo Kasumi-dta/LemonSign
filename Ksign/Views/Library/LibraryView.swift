@@ -134,7 +134,20 @@ struct LibraryView: View {
             }
 			.toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    EditButton()
+                    if _isEditMode.isEditing {
+                        EditButton()
+                    } else {
+                        HStack(spacing: 12) {
+                            Button {
+                                NotificationCenter.default.post(name: NSNotification.Name("lemonsign.openSettings"), object: nil)
+                            } label: {
+                                Image(systemName: "gearshape.fill")
+                                    .font(.body.weight(.semibold))
+                                    .foregroundColor(Color(hex: "FFD60A"))
+                            }
+                            EditButton()
+                        }
+                    }
                 }
                 if _isEditMode.isEditing {
 					ToolbarItemGroup(placement: .topBarTrailing) {

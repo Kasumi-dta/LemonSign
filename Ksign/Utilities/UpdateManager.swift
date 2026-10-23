@@ -12,9 +12,9 @@ final class UpdateManager: NSObject {
 	static let shared = UpdateManager()
 
 	// Current app constants for this build
-	static let currentAppVersion = "1.6.5.3"
-	static let currentAppBuild = 11
-	static let currentAppTag = "v1.6.5.3"
+	static let currentAppVersion = "1.6.5.4"
+	static let currentAppBuild = 12
+	static let currentAppTag = "v1.6.5.4"
 
 	private let _repoJsonUrl = "https://raw.githubusercontent.com/Kasumi-dta/LemonSign/refs/heads/main/repo.json"
 	private let _releasesApiUrl = "https://api.github.com/repos/Kasumi-dta/LemonSign/releases?per_page=5"
@@ -54,10 +54,10 @@ final class UpdateManager: NSObject {
 				   ($0["bundleIdentifier"] as? String)?.contains("lemonsign") == true ||
 				   ($0["name"] as? String)?.contains("LemonSign") == true
 			   }) {
-				let remoteVersion = lemonApp["version"] as? String ?? "1.6.5.3"
-				let remoteBuildStr = (lemonApp["buildVersion"] as? String) ?? "\(lemonApp["buildVersion"] as? Int ?? 11)"
-				let remoteBuild = Int(remoteBuildStr) ?? 11
-				let downloadURL = lemonApp["downloadURL"] as? String ?? "https://github.com/Kasumi-dta/LemonSign/releases/download/v1.6.5.3/LemonSign.ipa"
+				let remoteVersion = lemonApp["version"] as? String ?? "1.6.5.4"
+				let remoteBuildStr = (lemonApp["buildVersion"] as? String) ?? "\(lemonApp["buildVersion"] as? Int ?? 12)"
+				let remoteBuild = Int(remoteBuildStr) ?? 12
+				let downloadURL = lemonApp["downloadURL"] as? String ?? "https://github.com/Kasumi-dta/LemonSign/releases/download/v1.6.5.4/LemonSign.ipa"
 				let desc = lemonApp["localizedDescription"] as? String ?? ""
 
 				DispatchQueue.main.async {

@@ -102,6 +102,17 @@ struct DownloaderView: View {
             .sheet(isPresented: $showDocumentPicker) {
                 documentPickerSheet
             }
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        NotificationCenter.default.post(name: NSNotification.Name("lemonsign.openSettings"), object: nil)
+                    } label: {
+                        Image(systemName: "gearshape.fill")
+                            .font(.body.weight(.semibold))
+                            .foregroundColor(Color(hex: "FFD60A"))
+                    }
+                }
+            }
         }
     }
 }

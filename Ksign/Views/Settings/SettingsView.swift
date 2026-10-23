@@ -10,6 +10,7 @@ import NimbleViews
 
 // MARK: - View
 struct SettingsView: View {
+	@Environment(\.dismiss) private var dismiss
     @AppStorage("feather.selectedCert") private var _storedSelectedCert: Int = 0
     @FetchRequest(
         entity: CertificatePair.entity(),
@@ -97,6 +98,15 @@ struct SettingsView: View {
                 }
 
             }
+			.toolbar {
+				ToolbarItem(placement: .topBarTrailing) {
+					Button(.localized("Done")) {
+						dismiss()
+					}
+					.fontWeight(.bold)
+					.foregroundColor(Color(hex: "DDA200"))
+				}
+			}
         }
     }
 }
