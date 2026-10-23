@@ -139,7 +139,7 @@ struct InstallPreviewView: View {
 	private func _install() {
 		Task.detached {
 			do {
-				let handler = await ArchiveHandler(app: app, viewModel: viewModel)
+				let handler = await ArchiveHandler(app: app, viewModel: viewModel, isSharing: isSharing)
 				try await handler.move()
 				
 				let packageUrl = try await handler.archive()

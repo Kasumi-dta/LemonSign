@@ -10,7 +10,7 @@ import Zip
 import NimbleViews
 
 struct ArchiveView: View {
-	@AppStorage("Feather.compressionLevel") private var _compressionLevel: Int = ZipCompression.DefaultCompression.rawValue
+	@AppStorage("Feather.compressionLevel") private var _compressionLevel: Int = ZipCompression.NoCompression.rawValue
 	@AppStorage("Feather.useShareSheetForArchiving") private var _useShareSheet: Bool = true
 	@AppStorage("Feather.useLastExportLocation") private var _useLastExportLocation: Bool = false
 	@AppStorage("Feather.extractionLibrary") private var _extractionLibrary: String = "Zip"
@@ -23,6 +23,8 @@ struct ArchiveView: View {
 						Text(level.label).tag(level)
 					}
 				}
+			} footer: {
+				Text(.localized("Compression level for exported files. Local installation always uses high-speed Store mode (0) for instant install."))
 			}
 			
 			Section {

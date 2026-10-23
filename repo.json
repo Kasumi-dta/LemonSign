@@ -18,21 +18,21 @@
             "category": "utilities",
             "versions": [
                 {
-                    "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/beta5/LemonSign.ipa",
+                    "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v1.6.5.1/LemonSign.ipa",
                     "size": 15000000,
-                    "version": "1.6.5",
-                    "buildVersion": "8",
-                    "date": "2026-10-23T11:15:00+07:00",
-                    "localizedDescription": "Bản phát hành LemonSign Beta 5 (v1.6.5):\n- ⚡ Tự động ký & Cài đặt 1-chạm (Zero-Touch Auto Update): Tải bản mới về app tự động nạp thư viện, tự động ký với chứng chỉ active và bật popup cài đặt ngay lập tức.\n- 🛡️ Khắc phục hoàn toàn rào cản chứng chỉ: Cho phép thêm không giới hạn chứng chỉ, tự động nhận diện cặp .p12 và .mobileprovision, luôn mở nút thêm (+) ở màn hình ký.\n- 🚀 Tích hợp TrollStore & OCSP Status Pills: Kiểm tra thu hồi thời gian thực và hỗ trợ cài qua TrollStore.",
+                    "version": "1.6.5.1",
+                    "buildVersion": "9",
+                    "date": "2026-10-23T12:15:00+07:00",
+                    "localizedDescription": "Bản phát hành LemonSign v1.6.5.1:\n- ⚡ Tối ưu hoá tốc độ cài đặt (Instant Install): Bỏ độ trễ nén, áp dụng cơ chế NoCompression Store (0) và bộ nhớ đệm IPA giúp bật popup cài đặt tức thì như ESign.\n- 🚀 Tăng tốc độ truyền tải Local Server: Nâng buffer stream lên 512KB/chunk, giảm tải CPU và tăng tốc vòng quay cài đặt trên màn hình chính.\n- 🛡️ Quản lý đa chứng chỉ & Cập nhật tự động 1-chạm hoàn thiện.",
                     "minOSVersion": "16.0"
                 }
             ],
             "appPermissions": {},
-            "version": "1.6.5",
-            "buildVersion": "8",
-            "versionDate": "2026-10-23T11:15:00+07:00",
+            "version": "1.6.5.1",
+            "buildVersion": "9",
+            "versionDate": "2026-10-23T12:15:00+07:00",
             "size": 15000000,
-            "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/beta5/LemonSign.ipa"
+            "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v1.6.5.1/LemonSign.ipa"
         }
     ]
 }

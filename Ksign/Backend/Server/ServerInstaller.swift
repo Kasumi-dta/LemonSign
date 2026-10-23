@@ -64,7 +64,8 @@ class ServerInstaller: Identifiable, ObservableObject {
 				self._updateStatus(.sendingPayload)
 				
 				let res = req.fileio.streamFile(
-					at: packageUrl.path
+					at: packageUrl.path,
+					chunkSize: 512 * 1024
 				) { result in
                     switch result {
                     case .success:

@@ -12,9 +12,9 @@ final class UpdateManager: NSObject {
 	static let shared = UpdateManager()
 
 	// Current app constants for this build
-	static let currentAppVersion = "1.6.5"
-	static let currentAppBuild = 8
-	static let currentAppTag = "beta5"
+	static let currentAppVersion = "1.6.5.1"
+	static let currentAppBuild = 9
+	static let currentAppTag = "v1.6.5.1"
 
 	private let _repoJsonUrl = "https://raw.githubusercontent.com/Kasumi-dta/LemonSign/refs/heads/main/repo.json"
 	private let _releasesApiUrl = "https://api.github.com/repos/Kasumi-dta/LemonSign/releases?per_page=5"

@@ -20,10 +20,12 @@ final class ArchiveHandler: NSObject {
 	
 	private var _app: AppInfoPresentable
 	private let _uniqueWorkDir: URL
+	var isSharing: Bool = false
 	
-	init(app: AppInfoPresentable, viewModel: InstallerStatusViewModel = InstallerStatusViewModel(isIdevice: false)) {
+	init(app: AppInfoPresentable, viewModel: InstallerStatusViewModel = InstallerStatusViewModel(isIdevice: false), isSharing: Bool = false) {
 		self.viewModel = viewModel
 		self._app = app
+		self.isSharing = isSharing
 		self._uniqueWorkDir = _fileManager.temporaryDirectory
 			.appendingPathComponent("FeatherInstall_\(_uuid)", isDirectory: true)
 		
@@ -31,6 +33,13 @@ final class ArchiveHandler: NSObject {
 	}
 	
 	func move() async throws {
+		if let uuidDir = Storage.shared.getUuidDirectory(for: _app) {
+			let cachedIpa = uuidDir.appendingPathComponent("package.ipa")
+			if _fileManager.fileExists(atPath: cachedIpa.path) {
+				return
+			}
+		}
+		
 		guard let appUrl = Storage.shared.getAppDirectory(for: _app) else {
 			throw SigningFileHandlerError.appNotFound
 		}
@@ -46,6 +55,14 @@ final class ArchiveHandler: NSObject {
 	
 	func archive() async throws -> URL {
 		return try await Task.detached(priority: .userInitiated) { [self] in
+			if let uuidDir = Storage.shared.getUuidDirectory(for: _app) {
+				let cachedIpa = uuidDir.appendingPathComponent("package.ipa")
+				if _fileManager.fileExists(atPath: cachedIpa.path) {
+					print("[\(_uuid)] Instant Install: Reusing cached IPA from \(cachedIpa.path)")
+					return cachedIpa
+				}
+			}
+			
 			guard let payloadUrl = await self._payloadUrl else {
 				throw SigningFileHandlerError.appNotFound
 			}
@@ -53,9 +70,10 @@ final class ArchiveHandler: NSObject {
 			let zipUrl = self._uniqueWorkDir.appendingPathComponent("Archive.zip")
 			let ipaUrl = self._uniqueWorkDir.appendingPathComponent("Archive.ipa")
 			
+			// For local installations, FORCE NoCompression (Store mode level 0) for instantaneous packaging (<1s) and ultra-fast install!
 			let compIndex = ArchiveHandler.getCompressionLevel()
 			let safeIndex = max(0, min(compIndex, ZipCompression.allCases.count - 1))
-			let compression = ZipCompression.allCases[safeIndex]
+			let compression: ZipCompression = isSharing ? ZipCompression.allCases[safeIndex] : .NoCompression
 			
 			try await Zip.zipFiles(
 				paths: [payloadUrl],
@@ -69,6 +87,13 @@ final class ArchiveHandler: NSObject {
 				})
 			
 			try FileManager.default.moveItem(at: zipUrl, to: ipaUrl)
+			
+			// Cache to signed app directory for instant repeat installs
+			if let uuidDir = Storage.shared.getUuidDirectory(for: _app) {
+				let cachedIpa = uuidDir.appendingPathComponent("package.ipa")
+				try? FileManager.default.copyItem(at: ipaUrl, to: cachedIpa)
+			}
+			
 			return ipaUrl
 		}.value
 	}
