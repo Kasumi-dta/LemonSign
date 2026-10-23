@@ -18,21 +18,48 @@
             "category": "utilities",
             "versions": [
                 {
-                    "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v1.6.5.2/LemonSign.ipa",
+                    "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v1.6.5.3/LemonSign.ipa",
                     "size": 15000000,
-                    "version": "1.6.5.2",
-                    "buildVersion": "10",
-                    "date": "2026-10-23T16:15:00+07:00",
-                    "localizedDescription": "Bản phát hành LemonSign v1.6.5.2:\n- ⚡ Tự động chuyển Cục bộ hoàn toàn (Fully Local) trên iOS cao: Khắc phục lỗi Semi Local trên iOS 17+, tự động chuyển đổi sang HTTPS nội bộ không gián đoạn.\n- 🛡️ Tự động cập nhật chứng chỉ SSL ngầm: Tự động phát hiện chứng chỉ hết hạn/sắp hết hạn và tải bản mới từ pack.json, sửa triệt để lỗi ghi đè chứng chỉ cũ.\n- 🚀 Tối ưu hoá cài đặt tức thì & sao lưu mirror bảo đảm tính liên tục.",
+                    "version": "1.6.5.3",
+                    "buildVersion": "11",
+                    "date": "2026-10-23T18:15:00+07:00",
+                    "localizedDescription": "Bản phát hành LemonSign v1.6.5.3:\n- 🌟 Tích hợp trực tiếp 3105 lên thanh công cụ Tabbar: Mở và sử dụng đầy đủ các tính năng duyệt App Data, kho Patch (.3105), Theme bàn phím (.3105pass), Hình nền PosterBoard (.tendies) và Dọn rác ngay trong LemonSign.\n- 🛡️ Chế độ làm mờ bảo vệ (Smart Blur Overlay): Tự động phát hiện phiên bản iOS không tương thích và làm mờ mục 3105 để bảo đảm an toàn.\n- ⚡ Giữ nguyên tính năng ký IPA độc lập & giao diện vàng Lemon Yellow quen thuộc.",
                     "minOSVersion": "16.0"
                 }
             ],
             "appPermissions": {},
-            "version": "1.6.5.2",
-            "buildVersion": "10",
-            "versionDate": "2026-10-23T16:15:00+07:00",
+            "version": "1.6.5.3",
+            "buildVersion": "11",
+            "versionDate": "2026-10-23T18:15:00+07:00",
             "size": 15000000,
-            "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v1.6.5.2/LemonSign.ipa"
+            "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v1.6.5.3/LemonSign.ipa"
+        },
+        {
+            "name": "3105",
+            "bundleIdentifier": "com.apple.mobile.MobileHouseArrest",
+            "developerName": "YangJiii",
+            "iconURL": "https://raw.githubusercontent.com/Kasumi-dta/LemonSign/main/assets/3105.png",
+            "localizedDescription": "3105 là công cụ quản lý App Data, kho Patch (.3105), Theme bàn phím gọi điện (.3105pass), PosterBoard Wallpaper (.tendies) và trình dọn rác hệ thống dành cho iOS 17.0 - 18.7.1 của tác giả YangJiii.",
+            "subtitle": "Native App Data browser & Patch Manager (iOS 17 - 18)",
+            "tintColor": "FFD60A",
+            "category": "utilities",
+            "versions": [
+                {
+                    "downloadURL": "https://github.com/YangJiiii/3105/releases/download/v2.0/3105-2.0-build8-20260914-125906-unsigned.ipa",
+                    "size": 4604223,
+                    "version": "2.0",
+                    "buildVersion": "8",
+                    "date": "2026-09-14T12:59:00+07:00",
+                    "localizedDescription": "Bản phát hành 3105 v2.0 chính thức từ YangJiii:\n- Hỗ trợ kho marketplace cho patch, wallpaper, dialer themes.\n- Duyệt dữ liệu ứng dụng Application & App Group.\n- Tương thích iOS 17.0 - 17.7 và iOS 18.0 - 18.7.1.",
+                    "minOSVersion": "17.0"
+                }
+            ],
+            "appPermissions": {},
+            "version": "2.0",
+            "buildVersion": "8",
+            "versionDate": "2026-09-14T12:59:00+07:00",
+            "size": 4604223,
+            "downloadURL": "https://github.com/YangJiiii/3105/releases/download/v2.0/3105-2.0-build8-20260914-125906-unsigned.ipa"
         },
         {
             "name": "Dopamine",

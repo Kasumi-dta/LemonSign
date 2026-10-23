@@ -72,7 +72,7 @@ jobs:
           
           cat release_notes.md
 
-          APP_VER=$(jq -r '.apps[0].version' repo.json 2>/dev/null || echo "1.6.5.2")
+          APP_VER=$(jq -r '.apps[0].version' repo.json 2>/dev/null || echo "1.6.5.3")
           TAG="v$APP_VER"
           gh release delete "$TAG" --cleanup-tag -y || true
           
@@ -97,7 +97,7 @@ jobs:
           COMMIT_MSG=$(git log -1 --pretty=%B)
           
           REPO="${{ github.repository }}"
-          APP_VER=$(jq -r '.apps[0].version' repo.json 2>/dev/null || echo "1.6.5.2")
+          APP_VER=$(jq -r '.apps[0].version' repo.json 2>/dev/null || echo "1.6.5.3")
           TAG="v$APP_VER"
           FILENAME="LemonSign.ipa"
           FILENAME="LemonSign.ipa"
