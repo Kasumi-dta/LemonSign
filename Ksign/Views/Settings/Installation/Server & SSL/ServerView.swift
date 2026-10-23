@@ -104,8 +104,6 @@ struct ServerView: View {
 				.disabled(_isUpdatingSSL)
 			} header: {
 				Text("Chứng chỉ SSL HTTPS Nội bộ")
-			} footer: {
-				Text("Chứng chỉ SSL Let's Encrypt cho localhost.backloop.dev bảo đảm cài đặt OTA nội bộ không bao giờ bị Apple chặn. Hạn 29/10/2026 là thời hạn chứng chỉ do Let's Encrypt cấp cho máy chủ gốc backloop.dev (chu kỳ 90 ngày) và đang hoạt động tốt. Khi máy chủ gốc cấp chứng chỉ chu kỳ tiếp theo, LemonSign sẽ tự động cập nhật.")
 			}
 		}
 		.onAppear(perform: _refreshSSLStatus)

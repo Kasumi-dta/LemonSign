@@ -61,9 +61,9 @@ enum TabEnum: String, CaseIterable, Hashable {
 		return [
             .files,
             .library,
-            .settings,
-            .appstore,
             .downloader,
+            .appstore,
+            .settings,
 		]
 	}
 	

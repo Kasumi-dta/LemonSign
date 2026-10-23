@@ -18,6 +18,15 @@
             "category": "utilities",
             "versions": [
                 {
+                    "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v5.2.2/LemonSign.ipa",
+                    "size": 15500000,
+                    "version": "5.2.2",
+                    "buildVersion": "522",
+                    "date": "2026-10-24T02:45:00+07:00",
+                    "localizedDescription": "Bản phát hành LemonSign v5.2.2:\n- 🎨 Sửa triệt để lỗi đổi biểu tượng (OSStatus -54): Nhúng đầy đủ các file icon và phiên bản độ phân giải cao vào bundle gốc của app.\n- ⚡ Chuẩn hóa cơ chế ký và đóng gói Payload mượt mà chuẩn KSign: Trực tiếp stream file native, loại bỏ độ trễ và sao chép trùng lặp.\n- 🔄 Hoán đổi vị trí TabBar: Đưa tab 'Cài đặt' về góc phải chuẩn iOS và tab 'Tải về' vào vị trí trung tâm.\n- 🧹 Tinh gọn giao diện SSL: Xóa bỏ đoạn văn bản chú thích dài ở footer cài đặt SSL theo yêu cầu người dùng.",
+                    "minOSVersion": "16.0"
+                },
+                {
                     "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v2.1/LemonSign.ipa",
                     "size": 15500000,
                     "version": "2.1",
@@ -37,11 +46,11 @@
                 }
             ],
             "appPermissions": {},
-            "version": "2.1",
-            "buildVersion": "15",
-            "versionDate": "2026-10-24T02:15:00+07:00",
+            "version": "5.2.2",
+            "buildVersion": "522",
+            "versionDate": "2026-10-24T02:45:00+07:00",
             "size": 15500000,
-            "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v2.1/LemonSign.ipa"
+            "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v5.2.2/LemonSign.ipa"
         },
         {
             "name": "3105",

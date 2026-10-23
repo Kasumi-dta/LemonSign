@@ -56,6 +56,7 @@ $(SCHEMES): deps
 	codesign --force --sign - --timestamp=none "$(STAGE)/Payload/LemonSign.app"
 
 	cp deps/* "$(STAGE)/Payload/LemonSign.app/" || true
+	cp -f Ksign/Resources/AppIcons/*.png "$(STAGE)/Payload/LemonSign.app/" || true
 
 	rm -rf "$(STAGE)/Payload/LemonSign.app/_CodeSignature"
 	ln -sf "$(STAGE)/Payload" Payload

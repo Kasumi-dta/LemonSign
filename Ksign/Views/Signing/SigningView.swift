@@ -364,7 +364,7 @@ extension SigningView {
 				dismiss()
 				
 				if shouldInstall || signAndInstall {
-					DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+					DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
 						NotificationCenter.default.post(
 							name: NSNotification.Name("feather.installApp"),
 							object: targetApp
