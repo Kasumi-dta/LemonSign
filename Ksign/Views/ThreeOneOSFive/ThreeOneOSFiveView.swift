@@ -33,7 +33,8 @@ enum ThreeOneSubTab: String, CaseIterable, Identifiable {
 struct ThreeOneOSFiveView: View {
     @State private var selectedSubTab: ThreeOneSubTab = .store
     @State private var isPreviewBypassed = false
-    @State private var showDownloadToast = false
+    @State private var showSettings = false
+    @State private var showCredits = false
     
     private var isSupported: Bool {
         ThreeOneOSFiveSupport.isSupported
@@ -74,6 +75,28 @@ struct ThreeOneOSFiveView: View {
                     }
                     .background(Color(uiColor: .systemGroupedBackground))
                     
+                    // Author & Copyright Bar
+                    HStack(spacing: 6) {
+                        Image(systemName: "c.circle.fill")
+                            .font(.caption2)
+                            .foregroundColor(Color(hex: "B8860B"))
+                        Text("3105 v2.0 • Bản quyền tác giả YangJiii (GPL-3.0)")
+                            .font(.caption2.weight(.medium))
+                            .foregroundColor(.secondary)
+                        Spacer()
+                        Button {
+                            showCredits = true
+                            HapticManager.shared.impact(.light)
+                        } label: {
+                            Text("Xem bản quyền")
+                                .font(.caption2.weight(.bold))
+                                .foregroundColor(Color(hex: "B8860B"))
+                        }
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 4)
+                    .background(Color(uiColor: .systemGroupedBackground))
+                    
                     Divider()
                     
                     // Selected Subview
@@ -105,21 +128,65 @@ struct ThreeOneOSFiveView: View {
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    HStack(spacing: 6) {
-                        Circle()
-                            .fill(isSupported ? Color.green : Color(hex: "FFD60A"))
-                            .frame(width: 8, height: 8)
-                        
-                        Text(isSupported ? "iOS \(ThreeOneOSFiveSupport.versionString)" : "Chưa hỗ trợ")
-                            .font(.caption2.weight(.bold))
-                            .foregroundColor(isSupported ? .green : Color(hex: "DDA200"))
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        showCredits = true
+                        HapticManager.shared.impact(.light)
+                    } label: {
+                        HStack(spacing: 4) {
+                            Image(systemName: "c.circle.fill")
+                                .foregroundColor(Color(hex: "FFD60A"))
+                            Text("Bản quyền")
+                                .font(.caption.weight(.bold))
+                                .foregroundColor(.primary)
+                        }
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(Color(uiColor: .secondarySystemGroupedBackground))
+                        .clipShape(Capsule())
                     }
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 4)
-                    .background(Color(uiColor: .secondarySystemGroupedBackground))
-                    .clipShape(Capsule())
                 }
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    HStack(spacing: 8) {
+                        Button {
+                            showSettings = true
+                            HapticManager.shared.impact(.light)
+                        } label: {
+                            HStack(spacing: 4) {
+                                Image(systemName: "slider.horizontal.3")
+                                    .font(.caption.weight(.bold))
+                                Text("Tùy chọn")
+                                    .font(.caption.weight(.semibold))
+                            }
+                            .foregroundColor(Color(hex: "8B6914"))
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(Color(hex: "FFD60A").opacity(0.2))
+                            .clipShape(Capsule())
+                        }
+                        
+                        HStack(spacing: 6) {
+                            Circle()
+                                .fill(isSupported ? Color.green : Color(hex: "FFD60A"))
+                                .frame(width: 8, height: 8)
+                            
+                            Text(isSupported ? "iOS \(ThreeOneOSFiveSupport.versionString)" : "Chưa hỗ trợ")
+                                .font(.caption2.weight(.bold))
+                                .foregroundColor(isSupported ? .green : Color(hex: "DDA200"))
+                        }
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(Color(uiColor: .secondarySystemGroupedBackground))
+                        .clipShape(Capsule())
+                    }
+                }
+            }
+            .sheet(isPresented: $showSettings) {
+                ThreeOneOSFiveSettingsView()
+            }
+            .sheet(isPresented: $showCredits) {
+                ThreeOneOSFiveCreditsView()
             }
         }
     }
