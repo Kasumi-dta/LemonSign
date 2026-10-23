@@ -273,7 +273,7 @@ struct InstallPreviewView: View {
 						do {
 							try installer.restartAsFullyLocal()
 							UIApplication.shared.open(URL(string: installer.iTunesLink)!)
-							HapticManager.shared.playImpact(style: .medium)
+							HapticManager.shared.impact(.medium)
 						} catch {
 							print("[LemonSign] Restarting as Fully Local failed, updating SSL forcefully...")
 							SSLManager.shared.autoCheckAndUpdateSSL(force: true) { [self] success in
