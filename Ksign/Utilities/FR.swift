@@ -164,28 +164,13 @@ enum FR {
 		let generator = UINotificationFeedbackGenerator()
 		generator.prepare()
 		
-		NBFetchService().fetch(from: urlString) { (result: Result<ServerPackModel, Error>) in
-			switch result {
-			case .success(let pack):
-				do {
-					let serverDir = URL.documentsDirectory.appendingPathComponent("App").appendingPathComponent("Server")
-					let pemURL = serverDir.appendingPathComponent("server.pem")
-					let crtURL = serverDir.appendingPathComponent("server.crt")
-					let commonNameURL = serverDir.appendingPathComponent("commonName.txt")
-					
-					try FileManager.default.createDirectoryIfNeeded(at: serverDir)
-					try pack.key.write(to: pemURL, atomically: true, encoding: .utf8)
-					try pack.cert.write(to: crtURL, atomically: true, encoding: .utf8)
-					try pack.info.domains.commonName.write(to: commonNameURL, atomically: true, encoding: .utf8)
-					
-					generator.notificationOccurred(.success)
-					completion(true)
-				} catch {
-					completion(false)
-				}
-			case .failure(_):
-				completion(false)
+		SSLManager.shared.autoCheckAndUpdateSSL(force: true) { success in
+			if success {
+				generator.notificationOccurred(.success)
+			} else {
+				generator.notificationOccurred(.error)
 			}
+			completion(success)
 		}
 	}
 	#endif

@@ -26,12 +26,14 @@ struct ServerPackModel: Decodable {
 	}
 	
 	struct ServerPackInfo: Decodable {
-		var issuer: Domains
-		var domains: Domains
+		var issuer: Domains?
+		var domains: Domains?
+		var notAfter: String?
+		var notBefore: String?
 	}
 	
 	struct Domains: Decodable {
-		var commonName: String
+		var commonName: String?
 		
 		private enum CodingKeys: String, CodingKey {
 			case commonName = "commonName"

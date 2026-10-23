@@ -23,7 +23,7 @@ class ServerInstaller: Identifiable, ObservableObject {
 	var packageUrl: URL?
 	var app: AppInfoPresentable
 	@ObservedObject var viewModel: InstallerStatusViewModel
-	private let _server: Application
+	private var _server: Application
 
 	init(app: AppInfoPresentable, viewModel: InstallerStatusViewModel) throws {
 		self.app = app
@@ -102,8 +102,25 @@ class ServerInstaller: Identifiable, ObservableObject {
 		}
 	}
 		
+	func restartAsFullyLocal() throws {
+		_shutdownServer()
+		Self.setServerMethod(0)
+		self._server = try Self.setupApp(port: port)
+		try _configureRoutes()
+		try _server.server.start()
+		_needsShutdown = true
+		print("[ServerInstaller] Successfully restarted as Fully Local (HTTPS) on port \(port)")
+	}
+
+	static var isHighIOS: Bool {
+		ProcessInfo.processInfo.operatingSystemVersion.majorVersion >= 17
+	}
+		
 	static func getServerMethod() -> Int {
-		UserDefaults.standard.integer(forKey: "Feather.serverMethod")
+		if isHighIOS {
+			return 0
+		}
+		return UserDefaults.standard.integer(forKey: "Feather.serverMethod")
 	}
 	
 	static func getIPFix() -> Bool {

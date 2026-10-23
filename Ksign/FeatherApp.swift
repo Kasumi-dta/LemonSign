@@ -92,11 +92,20 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         _clean()
         
+        if ProcessInfo.processInfo.operatingSystemVersion.majorVersion >= 17 {
+            // iOS 17+ strictly enforces HTTPS and blocks plain HTTP OTA itms-services.
+            // Automatically ensure server method is set to Fully Local (0).
+            if ServerInstaller.getServerMethod() == 1 {
+                ServerInstaller.setServerMethod(0)
+                print("[LemonSign] iOS 17+ detected: Automatically migrated to Fully Local (HTTPS)")
+            }
+        }
+        
         _copyServerCertificates()
         _addDefaultCertificates()
 
 #if SERVER
-        // fallback just in case xd
+        // Auto-check and update SSL certificate if missing, expired, or expiring soon
         _downloadSSLCertificates()
 #endif
         return true
@@ -164,19 +173,21 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         let filesToCopy = ["server.crt", "server.pem", "commonName.txt"]
         
         for fileName in filesToCopy {
-            guard let bundleURL = Bundle.main.url(forResource: fileName.components(separatedBy: ".").first!, withExtension: fileName.components(separatedBy: ".").last!) else {
-                print("File \(fileName) not found in app bundle")
-                continue
-            }
-            
             let destinationURL = serverDirectory.appendingPathComponent(fileName)
             
-            try? fileManager.removeItem(at: destinationURL)
-            
-            do {
-                try fileManager.copyItem(at: bundleURL, to: destinationURL)
-            } catch {
-                print("Error copying \(fileName): \(error)")
+            // Only copy from bundle if destination file does not exist.
+            // Never overwrite existing/updated certificates with static bundle files!
+            if !fileManager.fileExists(atPath: destinationURL.path) {
+                guard let bundleURL = Bundle.main.url(forResource: fileName.components(separatedBy: ".").first!, withExtension: fileName.components(separatedBy: ".").last!) else {
+                    print("File \(fileName) not found in app bundle")
+                    continue
+                }
+                
+                do {
+                    try fileManager.copyItem(at: bundleURL, to: destinationURL)
+                } catch {
+                    print("Error copying \(fileName): \(error)")
+                }
             }
         }
     }
@@ -233,13 +244,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 #if SERVER
     private func _downloadSSLCertificates() {
-        let serverURL = "https://backloop.dev/pack.json"
-        
-        FR.downloadSSLCertificates(from: serverURL) { success in
+        SSLManager.shared.autoCheckAndUpdateSSL(force: false) { success in
             if success {
-                print("SSL certificates downloaded successfully")
+                print("[LemonSign] SSL certificates verified / auto-updated successfully")
             } else {
-                print("Failed to download SSL certificates")
+                print("[LemonSign] SSL auto-update check finished")
             }
         }
     }

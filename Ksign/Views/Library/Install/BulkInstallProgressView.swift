@@ -104,6 +104,10 @@ struct BulkInstallProgressView: View {
         }
         .onAppear(perform: _install)
         .onAppear {
+            if ServerInstaller.isHighIOS && _serverMethod == 1 {
+                _serverMethod = 0
+                ServerInstaller.setServerMethod(0)
+            }
             BackgroundAudioManager.shared.start()
         }
         .onDisappear {
@@ -197,25 +201,55 @@ struct BulkInstallProgressView: View {
 
     private func _startPayloadWatcher() {
         payloadTimeoutTask?.cancel()
+        
+        let timeoutNanoseconds: UInt64 = (_serverMethod == 1) ? 4_500_000_000 : 10_000_000_000
+        
         payloadTimeoutTask = Task { @MainActor in
-            try? await Task.sleep(nanoseconds: 12_000_000_000)
+            try? await Task.sleep(nanoseconds: timeoutNanoseconds)
             guard !Task.isCancelled else { return }
             
             switch viewModel.status {
             case .ready, .sendingManifest:
-                let nextMethod = ServerInstaller.switchServerMethod()
-                _serverMethod = nextMethod
-                let methodName = ServerInstaller.serverMethodDisplayName(nextMethod)
-                
-                _activeAlert = ServerAlertInfo(
-                    title: "Không nhận được Payload",
-                    message: "Máy chủ hiện tại không nhận được yêu cầu gửi Payload từ thiết bị (có thể do chứng chỉ SSL cục bộ đã hết hạn hoặc kết nối bị từ chối).\n\nLemonSign đã tự động đổi máy chủ sang:\n«\(methodName)».\n\nBạn hãy cập nhật chứng chỉ SSL mới để tiếp tục.",
-                    primaryButtonTitle: "Cập nhật SSL ngay",
-                    primaryAction: {
-                        _updateSSLCertificate()
-                    },
-                    secondaryButtonTitle: "Để sau"
-                )
+                if _serverMethod == 1 {
+                    print("[LemonSign] Semi Local timed out in bulk install. Auto-switching to Fully Local (HTTPS)...")
+                    _isWebviewPresenting = false
+                    _serverMethod = 0
+                    ServerInstaller.setServerMethod(0)
+                    
+                    SSLManager.shared.autoCheckAndUpdateSSL(force: false) { [self] _ in
+                        do {
+                            try installer.restartAsFullyLocal()
+                            UIApplication.shared.open(URL(string: installer.iTunesLink)!)
+                            HapticManager.shared.playImpact(style: .medium)
+                        } catch {
+                            print("[LemonSign] Restarting as Fully Local failed, updating SSL forcefully...")
+                            SSLManager.shared.autoCheckAndUpdateSSL(force: true) { [self] success in
+                                if success {
+                                    try? installer.restartAsFullyLocal()
+                                    UIApplication.shared.open(URL(string: installer.iTunesLink)!)
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    print("[LemonSign] Fully Local payload timeout, auto-updating SSL certificates...")
+                    SSLManager.shared.autoCheckAndUpdateSSL(force: true) { [self] success in
+                        if success {
+                            try? installer.restartAsFullyLocal()
+                            UIApplication.shared.open(URL(string: installer.iTunesLink)!)
+                        } else {
+                            _activeAlert = ServerAlertInfo(
+                                title: "Lỗi kết nối cài đặt",
+                                message: "Thiết bị không thể kết nối tới máy chủ cài đặt nội bộ. Vui lòng kiểm tra lại kết nối mạng hoặc thử lại.",
+                                primaryButtonTitle: "Thử lại",
+                                primaryAction: {
+                                    _updateSSLCertificate()
+                                },
+                                secondaryButtonTitle: "Đóng"
+                            )
+                        }
+                    }
+                }
             default:
                 break
             }
@@ -223,13 +257,11 @@ struct BulkInstallProgressView: View {
     }
     
     private func _updateSSLCertificate() {
-        FR.downloadSSLCertificates(from: ServerInstaller.serverPackUrl) { success in
+        SSLManager.shared.autoCheckAndUpdateSSL(force: true) { [self] success in
             DispatchQueue.main.async {
                 if success {
-                    UIAlertController.showAlertWithOk(
-                        title: .localized("SSL Certificates"),
-                        message: .localized("SSL certificates updated successfully! Please restart the app or try installing again.")
-                    )
+                    try? installer.restartAsFullyLocal()
+                    UIApplication.shared.open(URL(string: installer.iTunesLink)!)
                 } else {
                     UIAlertController.showAlertWithOk(
                         title: .localized("SSL Certificates"),
