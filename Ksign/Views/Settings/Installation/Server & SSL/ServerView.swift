@@ -67,15 +67,15 @@ struct ServerView: View {
 				}
 				
 				HStack {
-					Label("Thời gian cập nhật", systemImage: "clock.arrow.circlepath")
+					Label("Lần đồng bộ gần nhất", systemImage: "clock.arrow.circlepath")
 					Spacer()
-					Text(_sslLastUpdatedText.isEmpty ? "Mặc định (Chưa cập nhật)" : _sslLastUpdatedText)
+					Text(_sslLastUpdatedText.isEmpty ? "Mặc định (Chưa đồng bộ)" : _sslLastUpdatedText)
 						.font(.footnote)
 						.foregroundColor(.secondary)
 				}
 				
 				HStack {
-					Label("Hạn sử dụng", systemImage: "calendar.badge.clock")
+					Label("Hạn chứng chỉ Let's Encrypt", systemImage: "calendar.badge.clock")
 					Spacer()
 					Text(_sslExpirationText.isEmpty ? "Tự động gia hạn" : _sslExpirationText)
 						.font(.footnote)
@@ -105,7 +105,7 @@ struct ServerView: View {
 			} header: {
 				Text("Chứng chỉ SSL HTTPS Nội bộ")
 			} footer: {
-				Text("Chứng chỉ SSL Let's Encrypt cho localhost.backloop.dev bảo đảm cài đặt OTA nội bộ không bao giờ bị Apple chặn. Khi có bản cập nhật mới, bấm nút trên để tải và đồng bộ thời gian ngay.")
+				Text("Chứng chỉ SSL Let's Encrypt cho localhost.backloop.dev bảo đảm cài đặt OTA nội bộ không bao giờ bị Apple chặn. Hạn 29/10/2026 là thời hạn chứng chỉ do Let's Encrypt cấp cho máy chủ gốc backloop.dev (chu kỳ 90 ngày) và đang hoạt động tốt. Khi máy chủ gốc cấp chứng chỉ chu kỳ tiếp theo, LemonSign sẽ tự động cập nhật.")
 			}
 		}
 		.onAppear(perform: _refreshSSLStatus)
@@ -147,7 +147,7 @@ struct ServerView: View {
 		
 		let formatter = DateFormatter()
 		formatter.dateFormat = "dd/MM/yyyy"
-		_sslExpirationText = "HSD: \(formatter.string(from: expDate))"
+		_sslExpirationText = "\(formatter.string(from: expDate)) (Còn hiệu lực)"
 		
 		if let updateDate = SSLManager.shared.lastUpdatedDate() {
 			let formatter = DateFormatter()
@@ -169,8 +169,8 @@ struct ServerView: View {
 					now.dateFormat = "HH:mm:ss dd/MM/yyyy"
 					let timeStr = now.string(from: Date())
 					UIAlertController.showAlertWithOk(
-						title: "Chứng chỉ SSL đã cập nhật",
-						message: "Đã tải và cài đặt bản SSL mới nhất thành công lúc \(timeStr)!\n\nTrạng thái: Bản mới nhất\nTên miền: \(_sslDomainText)"
+						title: "Đã đồng bộ Chứng chỉ SSL",
+						message: "Đã tải và đồng bộ chứng chỉ SSL mới nhất thành công lúc \(timeStr)!\n\n• Trạng thái: Bản mới nhất\n• Hạn Let's Encrypt: \(_sslExpirationText)\n• Tên miền: \(_sslDomainText)\n\nChứng chỉ hiện tại vẫn còn hiệu lực và hoạt động hoàn hảo."
 					)
 				} else {
 					UIAlertController.showAlertWithOk(

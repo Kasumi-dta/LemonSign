@@ -226,18 +226,30 @@ struct AntiRevokeView: View {
             
             NBSection("Cài đặt Hồ sơ DNS Bảo vệ") {
                 Button {
+                    _installFromGitHub()
+                } label: {
+                    HStack {
+                        Label("Cài đặt Hồ sơ DNS (Khuyên dùng - Safari)", systemImage: "arrow.down.doc.fill")
+                            .foregroundColor(Color(hex: "FFD60A"))
+                            .fontWeight(.semibold)
+                        Spacer()
+                        Image(systemName: "safari")
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                    }
+                }
+                
+                Button {
                     _installProfileLocally()
                 } label: {
                     HStack {
-                        Label("Cài đặt Hồ sơ (Server Nội bộ - Khuyên dùng)", systemImage: "arrow.down.doc.fill")
-                            .foregroundColor(Color(hex: "FFD60A"))
-                            .fontWeight(.semibold)
+                        Label("Cài đặt qua Server nội bộ (Dự phòng / Offline)", systemImage: "network")
                         Spacer()
                         if isStartingServer {
                             ProgressView()
                                 .scaleEffect(0.8)
                         } else {
-                            Image(systemName: "safari")
+                            Image(systemName: "server.rack")
                                 .font(.footnote)
                                 .foregroundColor(.secondary)
                         }
@@ -258,24 +270,12 @@ struct AntiRevokeView: View {
                 }
                 
                 Button {
-                    _installFromGitHub()
-                } label: {
-                    HStack {
-                        Label("Tải về từ GitHub (Dự phòng)", systemImage: "link")
-                        Spacer()
-                        Image(systemName: "arrow.up.right.square")
-                            .font(.footnote)
-                            .foregroundColor(.secondary)
-                    }
-                }
-                
-                Button {
                     _copyHosts()
                 } label: {
                     Label("Sao chép danh sách chặn Hosts", systemImage: "doc.on.doc")
                 }
             } footer: {
-                Text("Nhấn 'Cài đặt Hồ sơ' để tải profile DNS mã hoá với MIME chuẩn. Sau khi tải, hãy vào Cài đặt iOS > Đã tải về hồ sơ > Cài đặt.")
+                Text("Nhấn 'Cài đặt Hồ sơ DNS' để tải cấu hình chặn máy chủ Apple thu hồi chứng chỉ qua Safari. Sau khi tải, hãy vào Cài đặt iOS > Đã tải về hồ sơ > Cài đặt.")
             }
             
             NBSection("Hướng dẫn kích hoạt trên iOS") {

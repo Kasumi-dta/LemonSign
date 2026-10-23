@@ -125,15 +125,6 @@ struct SettingsView: View {
                 }
 
             }
-			.toolbar {
-				ToolbarItem(placement: .topBarTrailing) {
-					Button(.localized("Done")) {
-						dismiss()
-					}
-					.fontWeight(.bold)
-					.foregroundColor(Color(hex: "DDA200"))
-				}
-			}
         }
     }
 }
