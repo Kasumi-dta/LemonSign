@@ -52,7 +52,7 @@ struct AirShareView: View {
                 .padding(.vertical, 12)
             }
             
-            Section("Thao tác Nhanh") {
+            NBSection("Thao tác Nhanh") {
                 Button {
                     UIPasteboard.general.string = shareURLString
                     copiedAlert = true
@@ -67,7 +67,7 @@ struct AirShareView: View {
                 }
             }
             
-            Section("Trạng thái Máy chủ Nội bộ") {
+            NBSection("Trạng thái Máy chủ Nội bộ") {
                 HStack {
                     Label("Địa chỉ IP nội bộ", systemImage: "network")
                     Spacer()

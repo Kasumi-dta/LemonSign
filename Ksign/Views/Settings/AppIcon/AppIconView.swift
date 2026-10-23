@@ -24,17 +24,38 @@ struct AppIconView: View {
     private let appIcons: [AppIconOption] = [
         AppIconOption(
             id: "primary",
-            title: "LemonSign",
-            subtitle: "Pixel Lemon (Default)",
+            title: "Pixel Lemon (Mặc định)",
+            subtitle: "Quả chanh pixel vàng sáng đặc trưng",
             iconName: "AppIcon",
             alternateIconName: nil
         ),
         AppIconOption(
             id: "lemon_pixel",
-            title: "Pixel Lemon",
-            subtitle: "Lemon Yellow",
+            title: "Pixel Lemon Retro",
+            subtitle: "Lemon Yellow Pixel Art",
             iconName: "lemon_pixel",
             alternateIconName: "lemon_pixel"
+        ),
+        AppIconOption(
+            id: "cyber",
+            title: "Cyber Dark",
+            subtitle: "Giao diện bóng tối viền dạ quang neon",
+            iconName: "AppIconCyber",
+            alternateIconName: "AppIconCyber"
+        ),
+        AppIconOption(
+            id: "neon",
+            title: "Glitch Neon",
+            subtitle: "Nghệ thuật tương lai tách màu RGB",
+            iconName: "AppIconNeon",
+            alternateIconName: "AppIconNeon"
+        ),
+        AppIconOption(
+            id: "stealth",
+            title: "Stealth Calculator",
+            subtitle: "Ngụy trang máy tính bảo vệ riêng tư",
+            iconName: "AppIconStealth",
+            alternateIconName: "AppIconStealth"
         )
     ]
     

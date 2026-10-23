@@ -38,7 +38,7 @@ struct AppearanceView: View {
             }
             
             Section {
-                NavigationLink(destination: AlternateIconView()) {
+                NavigationLink(destination: AppIconView()) {
                     Label("Biểu tượng Ứng dụng", systemImage: "app.dashed")
                 }
             }

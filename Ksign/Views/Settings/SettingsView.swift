@@ -45,7 +45,7 @@ struct SettingsView: View {
 					NavigationLink(destination: AppearanceView()) {
                         Label(.localized("Appearance"), systemImage: "paintbrush")
                     }
-					NavigationLink(destination: AlternateIconView()) {
+					NavigationLink(destination: AppIconView()) {
                         Label("Biểu tượng Ứng dụng", systemImage: "app.dashed")
                     }
 				}

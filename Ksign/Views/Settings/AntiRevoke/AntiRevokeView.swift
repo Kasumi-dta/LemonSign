@@ -60,7 +60,7 @@ struct AntiRevokeView: View {
                 .padding(.vertical, 4)
             }
             
-            Section("Cài đặt Hồ sơ DNS Bảo vệ") {
+            NBSection("Cài đặt Hồ sơ DNS Bảo vệ") {
                 Button {
                     _installProfile()
                 } label: {
@@ -84,7 +84,7 @@ struct AntiRevokeView: View {
                 Text("Nhấn 'Cài đặt Hồ sơ' để tải profile DNS mã hóa. Sau khi tải, hãy vào Cài đặt iOS > Đã tải về hồ sơ > Cài đặt.")
             }
             
-            Section("Hướng dẫn kích hoạt trên iOS") {
+            NBSection("Hướng dẫn kích hoạt trên iOS") {
                 VStack(alignment: .leading, spacing: 10) {
                     _stepRow(number: "1", text: "Nhấn nút 'Cài đặt Hồ sơ DNS' ở trên để mở liên kết tải về qua Safari.")
                     _stepRow(number: "2", text: "Khi Safari hiển thị hộp thoại, chọn 'Cho phép' để tải hồ sơ cấu hình.")
@@ -95,7 +95,7 @@ struct AntiRevokeView: View {
                 .padding(.vertical, 4)
             }
             
-            Section("Máy chủ bị chặn (Apple Revocation Servers)") {
+            NBSection("Máy chủ bị chặn (Apple Revocation Servers)") {
                 ForEach(blockedHosts, id: \.self) { host in
                     HStack {
                         Image(systemName: "nosign")

@@ -92,7 +92,7 @@ struct TweakHubView: View {
                 .padding(.vertical, 4)
             }
             
-            Section("Tự động tiêm khi Ký IPA") {
+            NBSection("Tự động tiêm khi Ký IPA") {
                 Toggle(isOn: $autoInjectAdblock) {
                     Label {
                         VStack(alignment: .leading) {
@@ -152,7 +152,7 @@ struct TweakHubView: View {
                 Text("Khi bật, LemonSign sẽ tự động ghép các dylib tương ứng vào file IPA trong quá trình ký bằng công cụ optool.")
             }
             
-            Section("Danh sách Tweak có sẵn trong Thư viện") {
+            NBSection("Danh sách Tweak có sẵn trong Thư viện") {
                 ForEach(presets) { tweak in
                     Button {
                         selectedTweakInfo = tweak
