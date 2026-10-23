@@ -14,7 +14,7 @@ public class NBFetchService {
 		case invalidURL
 		case networkError(Error)
 		case noData
-		case parsingError(Any)
+		case parsingError(String)
 		
 		public var errorDescription: String? {
 			switch self {
@@ -74,17 +74,17 @@ extension NBFetchService {
 							
                             if let debugDesc = underlyingError.userInfo["NSDebugDescription"] {
                                 print(debugDesc)
-                                completion(.failure(NBFetchServiceError.parsingError(debugDesc)))
+                                completion(.failure(NBFetchServiceError.parsingError(String(describing: debugDesc))))
                             } else {
                                 print(decodingError)
-                                completion(.failure(NBFetchServiceError.parsingError(decodingError)))
+                                completion(.failure(NBFetchServiceError.parsingError(decodingError.localizedDescription)))
                             }
 						}
 					}
 					
 				} catch {
                     print(error)
-					completion(.failure(NBFetchServiceError.parsingError(error)))
+					completion(.failure(NBFetchServiceError.parsingError(error.localizedDescription)))
 				}
 			}
 			
