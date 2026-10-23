@@ -10,18 +10,22 @@ import NimbleViews
 
 enum ThreeOneSubTab: String, CaseIterable, Identifiable {
     case store = "Cửa hàng"
+    case gestalt = "Gestalt"
+    case projects = "Bản vá"
+    case wallpapers = "Hình nền & Phím"
     case appData = "App Data"
     case cleaner = "Dọn dẹp"
-    case projects = "Bản vá"
     
     var id: String { rawValue }
     
     var iconName: String {
         switch self {
         case .store: return "bag.fill"
+        case .gestalt: return "slider.horizontal.2.square.on.square.fill"
+        case .projects: return "puzzlepiece.extension.fill"
+        case .wallpapers: return "photo.artframe"
         case .appData: return "externaldrive.fill"
         case .cleaner: return "trash.fill"
-        case .projects: return "puzzlepiece.extension.fill"
         }
     }
 }
@@ -40,28 +44,53 @@ struct ThreeOneOSFiveView: View {
             ZStack {
                 // Main Content View
                 VStack(spacing: 0) {
-                    // Sub Tab Picker
-                    Picker("Chuyên mục", selection: $selectedSubTab) {
-                        ForEach(ThreeOneSubTab.allCases) { tab in
-                            Text(tab.rawValue).tag(tab)
+                    // Sub Tab Chip Picker
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 8) {
+                            ForEach(ThreeOneSubTab.allCases) { tab in
+                                Button {
+                                    selectedSubTab = tab
+                                    HapticManager.shared.impact(.light)
+                                } label: {
+                                    HStack(spacing: 5) {
+                                        Image(systemName: tab.iconName)
+                                        Text(tab.rawValue)
+                                    }
+                                    .font(.footnote.weight(.semibold))
+                                    .padding(.horizontal, 13)
+                                    .padding(.vertical, 7)
+                                    .background(selectedSubTab == tab ? Color(hex: "FFD60A") : Color(uiColor: .secondarySystemGroupedBackground))
+                                    .foregroundColor(selectedSubTab == tab ? .black : .primary)
+                                    .clipShape(Capsule())
+                                    .overlay(
+                                        Capsule()
+                                            .strokeBorder(selectedSubTab == tab ? Color.clear : Color.primary.opacity(0.08), lineWidth: 1)
+                                    )
+                                }
+                            }
                         }
+                        .padding(.horizontal)
+                        .padding(.vertical, 6)
                     }
-                    .pickerStyle(.segmented)
-                    .padding(.horizontal)
-                    .padding(.top, 8)
-                    .padding(.bottom, 6)
+                    .background(Color(uiColor: .systemGroupedBackground))
+                    
+                    Divider()
                     
                     // Selected Subview
                     Group {
                         switch selectedSubTab {
                         case .store:
                             ThreeOneOSFiveMarketplaceView()
+                        case .gestalt:
+                            ThreeOneOSFiveGestaltView()
+                        case .projects:
+                            ThreeOneOSFiveProjectsView()
+                        case .wallpapers:
+                            ThreeOneOSFiveWallpaperLabView()
                         case .appData:
                             ThreeOneOSFiveAppDataView()
                         case .cleaner:
                             ThreeOneOSFiveCleanerView()
-                        case .projects:
-                            ThreeOneOSFiveProjectsView()
                         }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -100,79 +129,75 @@ struct ThreeOneOSFiveView: View {
             ZStack {
                 Circle()
                     .fill(Color(hex: "FFD60A").opacity(0.2))
-                    .frame(width: 80, height: 80)
+                    .frame(width: 76, height: 76)
                 
-                Image(systemName: "exclamationmark.triangle.fill")
-                    .font(.system(size: 38, weight: .bold))
+                Image(systemName: "exclamationmark.shield.fill")
+                    .font(.system(size: 38))
                     .foregroundColor(Color(hex: "FFD60A"))
             }
             
-            VStack(spacing: 8) {
-                Text("Thiết bị chưa hỗ trợ 3105")
-                    .font(.title2.weight(.bold))
+            VStack(spacing: 6) {
+                Text("Thiết bị chưa được hỗ trợ 3105")
+                    .font(.title3.weight(.bold))
                     .multilineTextAlignment(.center)
                 
-                Text("Thiết bị của bạn đang chạy **iOS \(ThreeOneOSFiveSupport.versionString)**.\nCác tính năng can thiệp sâu của 3105 yêu cầu:\n- iOS 17: 17.0 đến 17.7\n- iOS 18: 18.0 đến 18.7.1")
-                    .font(.footnote)
+                Text("Phiên bản iOS hiện tại của bạn là **iOS \(ThreeOneOSFiveSupport.versionString)**.")
+                    .font(.subheadline)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
-                    .padding(.horizontal, 16)
                 
-                Text("🛡️ Mọi tính năng Ký IPA, Cài đặt ứng dụng và Thư viện của LemonSign vẫn hoạt động bình thường.")
-                    .font(.caption2.weight(.medium))
+                Text(ThreeOneOSFiveSupport.compatibilityMessage)
+                    .font(.caption)
                     .foregroundColor(Color(hex: "DDA200"))
                     .multilineTextAlignment(.center)
-                    .padding(.horizontal, 20)
-                    .padding(.top, 4)
+                    .padding(.horizontal, 12)
+                    .padding(.top, 2)
             }
             
-            VStack(spacing: 10) {
-                Button {
-                    withAnimation(.spring()) {
-                        isPreviewBypassed = true
-                    }
-                    HapticManager.shared.impact(.light)
-                } label: {
-                    HStack {
-                        Image(systemName: "eye.fill")
-                        Text("Xem trước giao diện 3105")
-                    }
-                    .font(.subheadline.weight(.bold))
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 12)
-                    .background(Color(hex: "FFD60A"))
-                    .foregroundColor(.black)
-                    .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
-                }
+            VStack(alignment: .leading, spacing: 6) {
+                Text("Phạm vi iOS đã xác minh:")
+                    .font(.caption.weight(.bold))
+                    .foregroundColor(.primary)
                 
-                Button {
-                    if let url = URL(string: "https://github.com/YangJiiii/3105/releases/download/v2.0/3105-2.0-build8-20260914-125906-unsigned.ipa") {
-                        UIApplication.shared.open(url)
-                    }
-                } label: {
-                    HStack {
-                        Image(systemName: "arrow.down.circle")
-                        Text("Tải file IPA 3105 rời")
-                    }
-                    .font(.footnote.weight(.semibold))
+                Text(ThreeOneOSFiveSupport.supportedRangesDescription)
+                    .font(.caption2)
                     .foregroundColor(.secondary)
-                    .padding(.vertical, 6)
-                }
             }
-            .padding(.horizontal, 24)
-            .padding(.top, 6)
+            .padding(12)
+            .background(Color(uiColor: .tertiarySystemGroupedBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            
+            Button {
+                withAnimation(.spring()) {
+                    isPreviewBypassed = true
+                }
+            } label: {
+                HStack(spacing: 6) {
+                    Image(systemName: "eye.fill")
+                    Text("Xem trước giao diện (Chỉ đọc)")
+                }
+                .font(.subheadline.weight(.semibold))
+                .foregroundColor(.black)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 10)
+                .background(Color(hex: "FFD60A"))
+                .clipShape(Capsule())
+            }
+            
+            Text("Các tính năng Ký ứng dụng, Kho IPA và Chứng chỉ của LemonSign vẫn hoạt động 100% bình thường.")
+                .font(.caption2)
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 24)
         }
-        .padding(26)
-        .frame(maxWidth: 360)
-        .background(
-            RoundedRectangle(cornerRadius: 26, style: .continuous)
-                .fill(.ultraThinMaterial)
-                .shadow(color: Color.black.opacity(0.18), radius: 24, y: 10)
-        )
+        .padding(24)
+        .background(.ultraThinMaterial)
+        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .shadow(color: .black.opacity(0.18), radius: 20, y: 10)
         .overlay(
-            RoundedRectangle(cornerRadius: 26, style: .continuous)
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
                 .strokeBorder(Color(hex: "FFD60A").opacity(0.3), lineWidth: 1.5)
         )
-        .padding()
+        .padding(24)
     }
 }
