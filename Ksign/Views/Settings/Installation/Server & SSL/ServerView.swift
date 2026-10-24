@@ -209,7 +209,6 @@ struct ServerView: View {
 			} header: {
 				Text(_serverMethod == 0 ? "Chứng chỉ SSL & Máy chủ Cục bộ" : "Chứng chỉ SSL & Máy chủ Bán cục bộ")
 			}
-			}
 		}
 		.onAppear {
 			_refreshSSLStatus()
