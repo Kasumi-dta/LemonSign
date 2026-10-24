@@ -26,13 +26,11 @@ extension ServerInstaller {
 		let app = Application(env)
 		app.threadPool = .init(numberOfThreads: min(4, max(2, ProcessInfo.processInfo.activeProcessorCount)))
 		
-		if ServerInstaller.getServerMethod() != 1 {
-			if let tls = try Self.tls() {
-				app.http.server.configuration.tlsConfiguration = tls
-			} else {
-				print("[ServerInstaller] TLS configuration is nil, auto-updating SSL certificates in background...")
-				SSLManager.shared.autoCheckAndUpdateSSL(force: true)
-			}
+		if let tls = try Self.tls() {
+			app.http.server.configuration.tlsConfiguration = tls
+		} else {
+			print("[ServerInstaller] TLS configuration is nil, auto-updating SSL certificates in background...")
+			SSLManager.shared.autoCheckAndUpdateSSL(force: true)
 		}
 		
 		app.http.server.configuration.hostname = Self.sni

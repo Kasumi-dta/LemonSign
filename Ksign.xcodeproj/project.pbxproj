@@ -453,7 +453,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Ksign/Supporting Files/Feather.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 526;
+				CURRENT_PROJECT_VERSION = 527;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
@@ -490,7 +490,7 @@
 					"$(PROJECT_DIR)/Ksign/Resources/idevice",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.2;
-				MARKETING_VERSION = 5.2.5;
+				MARKETING_VERSION = 5.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kasumidta.lemonsign;
 				PRODUCT_NAME = LemonSign;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -523,7 +523,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Ksign/Supporting Files/Feather.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 526;
+				CURRENT_PROJECT_VERSION = 527;
 				DEAD_CODE_STRIPPING = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -558,7 +558,7 @@
 					"$(PROJECT_DIR)/Ksign/Resources/idevice",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.2;
-				MARKETING_VERSION = 5.2.5;
+				MARKETING_VERSION = 5.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kasumidta.lemonsign;
 				PRODUCT_NAME = LemonSign;
 				PROVISIONING_PROFILE_SPECIFIER = "";

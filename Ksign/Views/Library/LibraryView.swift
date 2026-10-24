@@ -329,6 +329,15 @@ extension LibraryView {
 		var options = OptionsManager.shared.options
 		options.removeApp = true
 
+		if let decoded = Storage.shared.getProvisionFileDecoded(for: activeCert),
+		   let entitlements = decoded.Entitlements,
+		   let appID = entitlements["application-identifier"]?.value as? String {
+			let certAppId = appID.split(separator: ".").dropFirst().joined(separator: ".")
+			if !certAppId.contains("*"), !certAppId.isEmpty {
+				options.appIdentifier = certAppId
+			}
+		}
+
 		FR.signPackageFile(
 			lemonApp,
 			using: options,

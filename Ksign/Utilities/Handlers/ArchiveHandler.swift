@@ -33,13 +33,6 @@ final class ArchiveHandler: NSObject {
 	}
 	
 	func move() async throws {
-		if !isSharing, let uuidDir = Storage.shared.getUuidDirectory(for: _app) {
-			let cachedIpa = uuidDir.appendingPathComponent("package.ipa")
-			if _fileManager.fileExists(atPath: cachedIpa.path) {
-				return
-			}
-		}
-
 		guard let appUrl = Storage.shared.getAppDirectory(for: _app) else {
 			throw SigningFileHandlerError.appNotFound
 		}
@@ -55,14 +48,6 @@ final class ArchiveHandler: NSObject {
 	
 	func archive() async throws -> URL {
 		return try await Task.detached(priority: .userInitiated) { [self] in
-			if !isSharing, let uuidDir = Storage.shared.getUuidDirectory(for: _app) {
-				let cachedIpa = uuidDir.appendingPathComponent("package.ipa")
-				if _fileManager.fileExists(atPath: cachedIpa.path) {
-					print("[\(_uuid)] Instant Install: Reusing cached IPA from \(cachedIpa.path)")
-					return cachedIpa
-				}
-			}
-
 			guard let payloadUrl = await self._payloadUrl else {
 				throw SigningFileHandlerError.appNotFound
 			}
@@ -70,10 +55,10 @@ final class ArchiveHandler: NSObject {
 			let zipUrl = self._uniqueWorkDir.appendingPathComponent("Archive.zip")
 			let ipaUrl = self._uniqueWorkDir.appendingPathComponent("Archive.ipa")
 			
-			// For local install: Use NoCompression (Store mode Level 0) for instantaneous packaging (<0.3s) and ultra-fast install!
+			// Use BestSpeed (Level 1 Deflate) - 100% compatible with iOS BOMCopier & installd, packaging in <0.5s!
 			let compIndex = ArchiveHandler.getCompressionLevel()
 			let safeIndex = max(0, min(compIndex, ZipCompression.allCases.count - 1))
-			let compression: ZipCompression = isSharing ? ZipCompression.allCases[safeIndex] : .NoCompression
+			let compression: ZipCompression = isSharing ? ZipCompression.allCases[safeIndex] : .BestSpeed
 			
 			try await Zip.zipFiles(
 				paths: [payloadUrl],
@@ -87,13 +72,6 @@ final class ArchiveHandler: NSObject {
 				})
 			
 			try FileManager.default.moveItem(at: zipUrl, to: ipaUrl)
-
-			// Cache to signed app directory for instant repeat installs
-			if !isSharing, let uuidDir = Storage.shared.getUuidDirectory(for: _app) {
-				let cachedIpa = uuidDir.appendingPathComponent("package.ipa")
-				try? FileManager.default.copyItem(at: ipaUrl, to: cachedIpa)
-			}
-
 			return ipaUrl
 		}.value
 	}

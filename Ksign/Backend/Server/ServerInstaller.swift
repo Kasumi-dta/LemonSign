@@ -78,6 +78,10 @@ class ServerInstaller: Identifiable, ObservableObject {
 				res.headers.replaceOrAdd(name: "Accept-Ranges", value: "bytes")
 				res.headers.replaceOrAdd(name: .cacheControl, value: "no-cache, no-store, must-revalidate")
 				res.headers.replaceOrAdd(name: "Connection", value: "keep-alive")
+				if let attrs = try? FileManager.default.attributesOfItem(atPath: packageUrl.path),
+				   let fileSize = attrs[.size] as? Int64 {
+					res.headers.replaceOrAdd(name: .contentLength, value: "\(fileSize)")
+				}
 				return res
 			case "/install":
 				var headers = HTTPHeaders()

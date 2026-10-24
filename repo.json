@@ -18,6 +18,15 @@
             "category": "utilities",
             "versions": [
                 {
+                    "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v5.2.6/LemonSign.ipa",
+                    "size": 15500000,
+                    "version": "5.2.6",
+                    "buildVersion": "527",
+                    "date": "2026-10-24T18:05:00+07:00",
+                    "localizedDescription": "Bản phát hành LemonSign v5.2.6 (Build 527):\n- 🛡️ Khắc phục triệt để lỗi 'Không thể cài đặt LemonSign': Bổ sung header Content-Length bắt buộc cho luồng tải OTA của iOS và chuẩn hóa mức nén Deflate BestSpeed (Level 1) tương thích 100% với trình giải nén BOMCopier của iOS.\n- 🔒 Luôn kích hoạt mã hóa TLS HTTPS nội bộ ngay cả ở chế độ Server ESign (Public Relay), ngăn chặn lỗi từ chối kết nối hoặc bị Apple ATS chặn.\n- 🔑 Tự động nhận diện và đồng bộ App ID chứng chỉ cá nhân Apple Developer (Explicit App ID) khi ký, tránh lỗi xung đột định danh ứng dụng.\n- ⚡ Tối ưu luồng đóng gói siêu tốc, an toàn và ổn định tuyệt đối.",
+                    "minOSVersion": "16.0"
+                },
+                {
                     "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v5.2.5/LemonSign.ipa",
                     "size": 15500000,
                     "version": "5.2.5",
@@ -55,11 +64,11 @@
                 }
             ],
             "appPermissions": {},
-            "version": "5.2.5",
-            "buildVersion": "526",
-            "versionDate": "2026-10-24T17:30:00+07:00",
+            "version": "5.2.6",
+            "buildVersion": "527",
+            "versionDate": "2026-10-24T18:05:00+07:00",
             "size": 15500000,
-            "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v5.2.5/LemonSign.ipa"
+            "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v5.2.6/LemonSign.ipa"
         },
         {
             "name": "3105",
