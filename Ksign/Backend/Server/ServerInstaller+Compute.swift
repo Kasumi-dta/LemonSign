@@ -13,7 +13,7 @@ import UIKit.UIGraphicsImageRenderer
 extension ServerInstaller {
 	var plistEndpoint: URL {
 		var comps = URLComponents()
-		comps.scheme = ServerInstaller.getServerMethod() == 1 ? "http" : "https"
+		comps.scheme = "https"
 		comps.host = Self.sni
 		comps.path = "/\(id).plist"
 		comps.port = port
@@ -22,7 +22,7 @@ extension ServerInstaller {
 
 	var payloadEndpoint: URL {
 		var comps = URLComponents()
-		comps.scheme = ServerInstaller.getServerMethod() == 1 ? "http" : "https"
+		comps.scheme = "https"
 		comps.host = Self.sni
 		comps.path = "/\(id).ipa"
 		comps.port = port
@@ -31,7 +31,7 @@ extension ServerInstaller {
 	
 	var pageEndpoint: URL {
 		var comps = URLComponents()
-		comps.scheme = ServerInstaller.getServerMethod() == 1 ? "http" : "https"
+		comps.scheme = "https"
 		comps.host = Self.sni
 		comps.path = "/install"
 		comps.port = port
@@ -39,9 +39,12 @@ extension ServerInstaller {
 	}
 	
 	var externalServerLink: String {
-		let baseUrl = "https://api.palera.in/genPlist?bundleid=\(app.identifier!)&name=\(app.name!)&version=\(app.version!)&fetchurl=\(self.payloadEndpoint.absoluteString)"
-		let encodedBaseUrl = baseUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-		let finalEncodedUrl = encodedBaseUrl.addingPercentEncoding(withAllowedCharacters: .alphanumerics)!
+		let bId = app.identifier ?? "com.kasumidta.lemonsign"
+		let name = app.name ?? "LemonSign"
+		let ver = app.version ?? "1.0"
+		let baseUrl = "https://api.palera.in/genPlist?bundleid=\(bId)&name=\(name)&version=\(ver)&fetchurl=\(self.payloadEndpoint.absoluteString)"
+		let encodedBaseUrl = baseUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? baseUrl
+		let finalEncodedUrl = encodedBaseUrl.addingPercentEncoding(withAllowedCharacters: .alphanumerics) ?? encodedBaseUrl
 		
 		return finalEncodedUrl
 	}

@@ -18,6 +18,15 @@
             "category": "utilities",
             "versions": [
                 {
+                    "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v5.2.5/LemonSign.ipa",
+                    "size": 15500000,
+                    "version": "5.2.5",
+                    "buildVersion": "526",
+                    "date": "2026-10-24T17:30:00+07:00",
+                    "localizedDescription": "Bản phát hành LemonSign v5.2.5 (Build 526):\n- 🌐 Tích hợp Máy chủ Cài đặt ESign (Public Relay api.palera.in) song song cùng Máy chủ Nội bộ LemonSign (localhost.backloop.dev).\n- 🔍 Bổ sung nút Kiểm tra Máy chủ (Server Check) độc lập cho cả LemonSign và ESign trong Cài đặt với phản hồi trạng thái thời gian thực.\n- ⚡ Chế độ Cài đặt Siêu tốc (Ultra-Fast Store Mode Level 0): Bỏ qua nén zip khi đóng gói cục bộ, cài đặt ứng dụng chỉ mất 2-3 giây tương đương ESign.\n- 💾 Bộ nhớ đệm lặp lại tức thì (Instant Repeat Install): Cài đặt lại ứng dụng đã ký ngay lập tức mà không cần đóng gói lại.",
+                    "minOSVersion": "16.0"
+                },
+                {
                     "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v5.2.4/LemonSign.ipa",
                     "size": 15500000,
                     "version": "5.2.4",
@@ -46,11 +55,11 @@
                 }
             ],
             "appPermissions": {},
-            "version": "5.2.4",
-            "buildVersion": "525",
-            "versionDate": "2026-10-24T08:20:00+07:00",
+            "version": "5.2.5",
+            "buildVersion": "526",
+            "versionDate": "2026-10-24T17:30:00+07:00",
             "size": 15500000,
-            "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v5.2.4/LemonSign.ipa"
+            "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v5.2.5/LemonSign.ipa"
         },
         {
             "name": "3105",

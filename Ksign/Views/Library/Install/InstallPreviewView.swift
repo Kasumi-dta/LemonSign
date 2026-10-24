@@ -79,7 +79,11 @@ struct InstallPreviewView: View {
 				if _serverMethod == 0 {
 					UIApplication.shared.open(URL(string: installer.iTunesLink)!)
 				} else if _serverMethod == 1 {
-					_isWebviewPresenting = true
+					if let extUrl = URL(string: installer.iTunesLinkExternal) {
+						UIApplication.shared.open(extUrl)
+					} else {
+						_isWebviewPresenting = true
+					}
 				}
 				_startPayloadWatcher()
 			}
@@ -116,10 +120,6 @@ struct InstallPreviewView: View {
 		}
 		.onAppear(perform: _install)
 		.onAppear {
-			if ServerInstaller.isHighIOS && _serverMethod == 1 {
-				_serverMethod = 0
-				ServerInstaller.setServerMethod(0)
-			}
 			BackgroundAudioManager.shared.start()
 		}
 		.onDisappear {

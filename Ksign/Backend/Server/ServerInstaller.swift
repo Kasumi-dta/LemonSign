@@ -118,9 +118,6 @@ class ServerInstaller: Identifiable, ObservableObject {
 	}
 		
 	static func getServerMethod() -> Int {
-		if isHighIOS {
-			return 0
-		}
 		return UserDefaults.standard.integer(forKey: "Feather.serverMethod")
 	}
 	
