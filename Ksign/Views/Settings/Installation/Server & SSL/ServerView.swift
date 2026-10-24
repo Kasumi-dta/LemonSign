@@ -32,24 +32,24 @@ struct ServerView: View {
 	
 	private var _serverMethods: [String] {
 		[
-			"🍋 Máy chủ LemonSign (Cục bộ HTTPS - Khuyên dùng)",
-			"⚡ Máy chủ ESign / Công cộng (Public Relay)"
+			"🍋 Cục bộ (Local - LemonSign)",
+			"⚡ Bán cục bộ (Semi Local - ESign)"
 		]
 	}
 	
 	var body: some View {
 		Group {
 			Section {
-				Picker("Máy chủ cài đặt OTA", systemImage: "server.rack", selection: $_serverMethod) {
+				Picker("Phương thức cài đặt OTA", systemImage: "server.rack", selection: $_serverMethod) {
 					ForEach(_serverMethods.indices, id: \.self) { index in
 						Text(_serverMethods[index]).tag(index)
 					}
 				}
 			} footer: {
 				if _serverMethod == 0 {
-					Text("Máy chủ LemonSign: Chạy HTTPS nội bộ trên iPhone (localhost.backloop.dev). Hoàn toàn riêng tư, không cần Internet, tốc độ truyền nội bộ cực đại.")
+					Text("Cục bộ (Khuyên dùng): Chạy máy chủ HTTPS nội bộ trực tiếp trên iPhone (localhost.backloop.dev). Tốc độ truyền cực đại, hoạt động offline hoàn toàn không cần kết nối mạng.")
 				} else {
-					Text("Máy chủ ESign / Công cộng: Sử dụng máy chủ tạo manifest công cộng (api.palera.in). Hộp thoại iOS sẽ hiển thị yêu cầu cài đặt từ máy chủ công cộng tương tự ESign.")
+					Text("Bán cục bộ: Sử dụng máy chủ trung gian ESign (api.palera.in) để tạo manifest cài đặt OTA. Hộp thoại iOS sẽ hiển thị yêu cầu cài đặt từ api.palera.in tương tự như ESign.")
 				}
 			}
 
@@ -57,7 +57,7 @@ struct ServerView: View {
 				// Check Lemon Server
 				VStack(alignment: .leading, spacing: 6) {
 					HStack {
-						Label("Server Lemon (Nội bộ)", systemImage: "house.fill")
+						Label("Server Cục bộ (LemonSign)", systemImage: "house.fill")
 							.font(.subheadline)
 							.fontWeight(.medium)
 						Spacer()
@@ -98,7 +98,7 @@ struct ServerView: View {
 				// Check ESign Server
 				VStack(alignment: .leading, spacing: 6) {
 					HStack {
-						Label("Server ESign (Công cộng)", systemImage: "globe")
+						Label("Server Bán cục bộ (ESign)", systemImage: "globe")
 							.font(.subheadline)
 							.fontWeight(.medium)
 						Spacer()
@@ -142,9 +142,9 @@ struct ServerView: View {
 			}
 			
 			Section {
-				Toggle("Tối ưu siêu tốc độ (Store Mode)", systemImage: "bolt.fill", isOn: $_ultraFastInstall)
+				Toggle("Tối ưu tốc độ cài đặt (Fast Install)", systemImage: "bolt.fill", isOn: $_ultraFastInstall)
 			} footer: {
-				Text("Bỏ qua nén Deflate khi đóng gói cài đặt nội bộ. Giúp đóng gói IPA trong 0.3s và iOS cài đặt xong chỉ trong 2-3 giây (tương tự cơ chế của ESign).")
+				Text("Áp dụng chuẩn nén BestSpeed (Level 1) tương thích 100% với trình giải nén iOS, đóng gói IPA cực nhanh trong 0.3s và cài đặt mượt mà.")
 			}
 
 			Section {
@@ -189,7 +189,7 @@ struct ServerView: View {
 				HStack {
 					Label("Tên miền hỗ trợ", systemImage: "network")
 					Spacer()
-					Text(_sslDomainText)
+					Text(_serverMethod == 0 ? _sslDomainText : "api.palera.in")
 						.font(.caption)
 						.foregroundColor(.secondary)
 				}
@@ -207,7 +207,8 @@ struct ServerView: View {
 				}
 				.disabled(_isUpdatingSSL)
 			} header: {
-				Text("Chứng chỉ SSL HTTPS Nội bộ")
+				Text(_serverMethod == 0 ? "Chứng chỉ SSL & Máy chủ Cục bộ" : "Chứng chỉ SSL & Máy chủ Bán cục bộ")
+			}
 			}
 		}
 		.onAppear {

@@ -57,18 +57,10 @@ extension ServerInstaller {
 	}
 
 	static var sni: String {
-		let localhost = "127.0.0.1"
-		
-		if getServerMethod() == 1 {
-			return !ServerInstaller.getIPFix()
-			? (getLocalAddress() ?? localhost)
-			: localhost
-		} else {
-			if let common = readCommonName() {
-				return sanitizeHostname(common)
-			}
-			return "localhost.backloop.dev"
+		if let common = readCommonName() {
+			return sanitizeHostname(common)
 		}
+		return "localhost.backloop.dev"
 	}
 	
 	static func tls() throws -> TLSConfiguration? {

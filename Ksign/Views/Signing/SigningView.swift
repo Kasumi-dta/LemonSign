@@ -137,17 +137,7 @@ struct SigningView: View {
 			}
 			.animation(.smooth, value: _isSigning)
 		}
-		.onChange(of: _temporaryCertificate) { _ in
-			if let certAppId = _getCertAppID(), !certAppId.contains("*"), !certAppId.isEmpty {
-				_temporaryOptions.appIdentifier = certAppId
-			}
-		}
 		.onAppear {
-			// Auto match certificate's explicit App ID if not wildcard (*)
-			if let certAppId = _getCertAppID(), !certAppId.contains("*"), !certAppId.isEmpty {
-				_temporaryOptions.appIdentifier = certAppId
-			}
-			
 			// ppq protection
 			if
 				_optionsManager.options.ppqProtection,

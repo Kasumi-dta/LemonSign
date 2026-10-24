@@ -22,7 +22,6 @@ struct InstallPreviewView: View {
 	@AppStorage("Feather.serverMethod") private var _serverMethod: Int = 0
 	@State private var _isWebviewPresenting = false
     @State private var progressTask: Task<Void, Never>?
-	@State private var payloadTimeoutTask: Task<Void, Never>?
 	
 	struct ServerAlertInfo: Identifiable {
 		let id = UUID()
@@ -85,12 +84,9 @@ struct InstallPreviewView: View {
 						_isWebviewPresenting = true
 					}
 				}
-				_startPayloadWatcher()
 			}
             
             if case .installing = newStatus {
-				payloadTimeoutTask?.cancel()
-				payloadTimeoutTask = nil
                 if progressTask == nil {
                     progressTask = startInstallProgressPolling(
                         bundleID: app.identifier!,
@@ -100,8 +96,6 @@ struct InstallPreviewView: View {
             }
 			
 			if case .sendingPayload = newStatus {
-				payloadTimeoutTask?.cancel()
-				payloadTimeoutTask = nil
 				if _serverMethod == 1 {
 					_isWebviewPresenting = false
 				}
@@ -109,8 +103,6 @@ struct InstallPreviewView: View {
             
             switch newStatus {
             case .completed, .broken(_):
-				payloadTimeoutTask?.cancel()
-				payloadTimeoutTask = nil
                 progressTask?.cancel()
                 progressTask = nil
                 BackgroundAudioManager.shared.stop()
@@ -123,8 +115,6 @@ struct InstallPreviewView: View {
 			BackgroundAudioManager.shared.start()
 		}
 		.onDisappear {
-			payloadTimeoutTask?.cancel()
-			payloadTimeoutTask = nil
             progressTask?.cancel()
             progressTask = nil
 			BackgroundAudioManager.shared.stop()
@@ -249,66 +239,6 @@ struct InstallPreviewView: View {
         private func _normalizeInstallProgress(_ rawProgress: Double) -> Double {
             min(1.0, max(0.0, (rawProgress - 0.6) / 0.3))
         }
-
-	private func _startPayloadWatcher() {
-		payloadTimeoutTask?.cancel()
-		
-		// If Semi Local is used, use a short 4.5s timeout. If Fully Local, wait 10s.
-		let timeoutNanoseconds: UInt64 = (_serverMethod == 1) ? 4_500_000_000 : 10_000_000_000
-		
-		payloadTimeoutTask = Task { @MainActor in
-			try? await Task.sleep(nanoseconds: timeoutNanoseconds)
-			guard !Task.isCancelled else { return }
-			
-			switch viewModel.status {
-			case .ready, .sendingManifest:
-				if _serverMethod == 1 {
-					// Auto fallback from Semi Local to Fully Local
-					print("[LemonSign] Semi Local timed out (no payload request). Auto-switching to Fully Local (HTTPS)...")
-					_isWebviewPresenting = false
-					_serverMethod = 0
-					ServerInstaller.setServerMethod(0)
-					
-					SSLManager.shared.autoCheckAndUpdateSSL(force: false) { [self] _ in
-						do {
-							try installer.restartAsFullyLocal()
-							UIApplication.shared.open(URL(string: installer.iTunesLink)!)
-							HapticManager.shared.impact(.medium)
-						} catch {
-							print("[LemonSign] Restarting as Fully Local failed, updating SSL forcefully...")
-							SSLManager.shared.autoCheckAndUpdateSSL(force: true) { [self] success in
-								if success {
-									try? installer.restartAsFullyLocal()
-									UIApplication.shared.open(URL(string: installer.iTunesLink)!)
-								}
-							}
-						}
-					}
-				} else {
-					// Fully Local didn't receive payload request (likely SSL expired). Auto-update SSL!
-					print("[LemonSign] Fully Local payload timeout, auto-updating SSL certificates...")
-					SSLManager.shared.autoCheckAndUpdateSSL(force: true) { [self] success in
-						if success {
-							try? installer.restartAsFullyLocal()
-							UIApplication.shared.open(URL(string: installer.iTunesLink)!)
-						} else {
-							_activeAlert = ServerAlertInfo(
-								title: "Lỗi kết nối cài đặt",
-								message: "Thiết bị không thể kết nối tới máy chủ cài đặt nội bộ. Vui lòng kiểm tra lại kết nối mạng hoặc thử lại.",
-								primaryButtonTitle: "Thử lại",
-								primaryAction: {
-									_updateSSLCertificate()
-								},
-								secondaryButtonTitle: "Đóng"
-							)
-						}
-					}
-				}
-			default:
-				break
-			}
-		}
-	}
 	
 	private func _updateSSLCertificate() {
 		SSLManager.shared.autoCheckAndUpdateSSL(force: true) { [self] success in

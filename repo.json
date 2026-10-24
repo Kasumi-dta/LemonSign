@@ -18,12 +18,21 @@
             "category": "utilities",
             "versions": [
                 {
+                    "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v5.2.7/LemonSign.ipa",
+                    "size": 15500000,
+                    "version": "5.2.7",
+                    "buildVersion": "528",
+                    "date": "2026-10-24T18:40:00+07:00",
+                    "localizedDescription": "Bản phát hành LemonSign v5.2.7 (Build 528):\n- 🚀 Giữ nguyên 100% Bundle ID gốc của ứng dụng khi ký: Xóa bỏ hoàn toàn cơ chế tự động ghi đè Bundle ID, đảm bảo ứng dụng mod/tweak (như AovCheat) hoạt động chuẩn xác.\n- 🔄 Khôi phục chuẩn danh mục cài đặt 'Cục bộ' (Local) và 'Bán cục bộ' (Semi Local):\n  + Cục bộ (LemonSign): Chạy HTTPS nội bộ trên thiết bị (localhost.backloop.dev).\n  + Bán cục bộ (ESign): Sử dụng máy chủ trung gian api.palera.in.\n- 🌐 Đồng bộ hiển thị tên miền hỗ trợ động: Tự động đổi giữa 'localhost.backloop.dev' và 'api.palera.in' theo đúng máy chủ được chọn.\n- 🛑 Khắc phục triệt để lỗi sập server khi đang cài đặt: Loại bỏ hoàn toàn cơ chế timeout ngắt server đột ngột, đảm bảo máy chủ luôn sẵn sàng phục vụ thiết bị kết nối.",
+                    "minOSVersion": "16.0"
+                },
+                {
                     "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v5.2.6/LemonSign.ipa",
                     "size": 15500000,
                     "version": "5.2.6",
                     "buildVersion": "527",
                     "date": "2026-10-24T18:05:00+07:00",
-                    "localizedDescription": "Bản phát hành LemonSign v5.2.6 (Build 527):\n- 🛡️ Khắc phục triệt để lỗi 'Không thể cài đặt LemonSign': Bổ sung header Content-Length bắt buộc cho luồng tải OTA của iOS và chuẩn hóa mức nén Deflate BestSpeed (Level 1) tương thích 100% với trình giải nén BOMCopier của iOS.\n- 🔒 Luôn kích hoạt mã hóa TLS HTTPS nội bộ ngay cả ở chế độ Server ESign (Public Relay), ngăn chặn lỗi từ chối kết nối hoặc bị Apple ATS chặn.\n- 🔑 Tự động nhận diện và đồng bộ App ID chứng chỉ cá nhân Apple Developer (Explicit App ID) khi ký, tránh lỗi xung đột định danh ứng dụng.\n- ⚡ Tối ưu luồng đóng gói siêu tốc, an toàn và ổn định tuyệt đối.",
+                    "localizedDescription": "Bản phát hành LemonSign v5.2.6 (Build 527):\n- 🛡️ Khắc phục triệt để lỗi 'Không thể cài đặt LemonSign': Bổ sung header Content-Length bắt buộc cho luồng tải OTA của iOS và chuẩn hóa mức nén Deflate BestSpeed (Level 1) tương thích 100% với trình giải nén BOMCopier của iOS.\n- 🔒 Luôn kích hoạt mã hóa TLS HTTPS nội bộ ngay cả ở chế độ Server ESign (Public Relay), ngăn chặn lỗi từ chối kết nối hoặc bị Apple ATS chặn.\n- ⚡ Tối ưu luồng đóng gói siêu tốc, an toàn và ổn định tuyệt đối.",
                     "minOSVersion": "16.0"
                 },
                 {
@@ -64,11 +73,11 @@
                 }
             ],
             "appPermissions": {},
-            "version": "5.2.6",
-            "buildVersion": "527",
-            "versionDate": "2026-10-24T18:05:00+07:00",
+            "version": "5.2.7",
+            "buildVersion": "528",
+            "versionDate": "2026-10-24T18:40:00+07:00",
             "size": 15500000,
-            "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v5.2.6/LemonSign.ipa"
+            "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v5.2.7/LemonSign.ipa"
         },
         {
             "name": "3105",
