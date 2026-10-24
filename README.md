@@ -5,6 +5,15 @@
 <h1 align="center">LemonSign</h1>
 
 <p align="center">
+  <img src="https://img.shields.io/badge/Status-DISCONTINUED%20%2F%20NG%E1%BB%AANG%20H%E1%BB%96%20TR%E1%BB%A2-red?style=for-the-badge" alt="Status: Discontinued">
+</p>
+
+> [!CAUTION]
+> ### ⚠️ DỰ ÁN ĐÃ CHÍNH THỨC NGỪNG HỖ TRỢ / PROJECT DISCONTINUED
+> **LemonSign hiện đã ngừng phát triển và ngừng hỗ trợ.**
+> Do các rào cản bảo mật từ iOS (thu hồi chứng chỉ Apple OCSP, lỗi xác minh tính toàn vẹn và các bất ổn định của máy chủ cài đặt OTA itms-services), dự án sẽ không tiếp tục phát hành hoặc sửa lỗi. Xin chân thành cảm ơn mọi người đã quan tâm và đồng hành trong suốt thời gian qua!
+
+<p align="center">
   <a href="https://github.com/Kasumi-dta/LemonSign/releases/latest">
     <img src="https://img.shields.io/github/v/release/Kasumi-dta/LemonSign?style=for-the-badge&color=FFD60A&labelColor=23272d" alt="GitHub Release">
   </a>

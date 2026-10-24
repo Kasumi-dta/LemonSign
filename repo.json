@@ -1,19 +1,19 @@
 {
-    "name": "LemonSign Repository",
+    "name": "LemonSign Repo [ĐÃ NGỪNG HỖ TRỢ]",
     "identifier": "com.kasumidta.lemonsign-repo",
-    "subtitle": "Official source for LemonSign",
-    "description": "AltStore & ESign source for LemonSign",
+    "subtitle": "[DISCONTINUED] Nguồn LemonSign đã ngừng hỗ trợ",
+    "description": "[ĐÃ NGỪNG HỖ TRỢ] Nguồn AltStore & ESign cho LemonSign. Dự án đã dừng phát triển do giới hạn hệ thống iOS.",
     "iconURL": "https://raw.githubusercontent.com/Kasumi-dta/LemonSign/main/assets/logo.png",
     "website": "https://github.com/Kasumi-dta/LemonSign",
     "tintColor": "FFD60A",
     "apps": [
         {
-            "name": "LemonSign",
+            "name": "LemonSign [ĐÃ NGỪNG HỖ TRỢ]",
             "bundleIdentifier": "com.kasumidta.lemonsign",
             "developerName": "Kasumi-dta",
             "iconURL": "https://raw.githubusercontent.com/Kasumi-dta/LemonSign/main/assets/logo.png",
-            "localizedDescription": "Trình ký và cài đặt ứng dụng iOS trực tiếp trên thiết bị (On-Device Signer) với giao diện Lemon Yellow độc quyền, tích hợp lõi C++ zsign tốc độ cao và phát hiện Jailbreak thời gian thực.",
-            "subtitle": "Trình ký ứng dụng iOS giao diện Lemon Yellow.",
+            "localizedDescription": "[DỰ ÁN ĐÃ CHÍNH THỨC NGỪNG HỖ TRỢ / DISCONTINUED]\nLemonSign đã dừng phát triển và ngừng hỗ trợ toàn diện do các rào cản thu hồi chứng chỉ và lỗi hệ thống iOS. Xin chân thành cảm ơn bạn đã sử dụng và ủng hộ!",
+            "subtitle": "[ĐÃ NGỪNG HỖ TRỢ] Trình ký ứng dụng iOS Lemon Yellow.",
             "tintColor": "FFD60A",
             "category": "utilities",
             "versions": [
