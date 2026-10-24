@@ -20,7 +20,7 @@ extension Storage {
 		appVersion: String? = nil,
 		appIcon: String? = nil,
 		
-		completion: @escaping (Error?) -> Void
+		completion: @escaping (Error?, Signed?) -> Void
 	) {
 		let generator = UIImpactFeedbackGenerator(style: .light)
 		
@@ -39,6 +39,31 @@ extension Storage {
 		
         saveContext()
         generator.impactOccurred()
-        completion(nil)
+        completion(nil, new)
+	}
+
+	func addSigned(
+		uuid: String,
+		source: URL? = nil,
+		certificate: CertificatePair? = nil,
+		
+		appName: String? = nil,
+		appIdentifier: String? = nil,
+		appVersion: String? = nil,
+		appIcon: String? = nil,
+		
+		completion: @escaping (Error?) -> Void
+	) {
+		addSigned(
+			uuid: uuid,
+			source: source,
+			certificate: certificate,
+			appName: appName,
+			appIdentifier: appIdentifier,
+			appVersion: appVersion,
+			appIcon: appIcon
+		) { error, _ in
+			completion(error)
+		}
 	}
 }

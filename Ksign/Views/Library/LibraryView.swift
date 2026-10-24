@@ -334,17 +334,17 @@ extension LibraryView {
 			using: options,
 			icon: nil,
 			certificate: activeCert
-		) { error in
+		) { error, signedApp in
 			if let error = error {
 				HapticManager.shared.notification(.error)
 				_selectedSigningAppPresenting = AnyApp(base: lemonApp, signAndInstall: true)
 			} else {
 				HapticManager.shared.notification(.success)
 				Storage.shared.deleteApp(for: lemonApp)
-				DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+				DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
 					NotificationCenter.default.post(
 						name: NSNotification.Name("feather.installApp"),
-						object: nil
+						object: signedApp
 					)
 				}
 			}

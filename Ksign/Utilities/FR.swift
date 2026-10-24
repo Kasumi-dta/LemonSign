@@ -46,7 +46,7 @@ enum FR {
 		using options: Options,
 		icon: UIImage?,
 		certificate: CertificatePair?,
-		completion: @escaping (Error?) -> Void
+		completion: @escaping (Error?, Signed?) -> Void
 	) {
 		Task.detached(priority: .userInitiated) {
 			let handler = SigningHandler(app: app, options: options)
@@ -57,18 +57,30 @@ enum FR {
 			
 			do {
 				try await handler.copy()
-				try await handler.modify()
+				let signedApp = try await handler.modify()
                 try? await handler.clean()
 				
 				await MainActor.run {
-					completion(nil)
+					completion(nil, signedApp)
 				}
 			} catch {
 				try? await handler.clean()
 				await MainActor.run {
-					completion(error)
+					completion(error, nil)
 				}
 			}
+		}
+	}
+	
+	static func signPackageFile(
+		_ app: AppInfoPresentable,
+		using options: Options,
+		icon: UIImage?,
+		certificate: CertificatePair?,
+		completion: @escaping (Error?) -> Void
+	) {
+		signPackageFile(app, using: options, icon: icon, certificate: certificate) { error, _ in
+			completion(error)
 		}
 	}
 	

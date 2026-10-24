@@ -63,8 +63,9 @@ class ServerInstaller: Identifiable, ObservableObject {
 				
 				self._updateStatus(.sendingPayload)
 				
-				return req.fileio.streamFile(
-					at: packageUrl.path
+				let res = req.fileio.streamFile(
+					at: packageUrl.path,
+					chunkSize: 1024 * 1024
 				) { result in
                     switch result {
                     case .success:
@@ -73,6 +74,11 @@ class ServerInstaller: Identifiable, ObservableObject {
                         self._updateStatus(.broken(error))
                     }
 				}
+				res.headers.replaceOrAdd(name: .contentType, value: "application/octet-stream")
+				res.headers.replaceOrAdd(name: "Accept-Ranges", value: "bytes")
+				res.headers.replaceOrAdd(name: .cacheControl, value: "no-cache, no-store, must-revalidate")
+				res.headers.replaceOrAdd(name: "Connection", value: "keep-alive")
+				return res
 			case "/install":
 				var headers = HTTPHeaders()
 				headers.add(name: .contentType, value: "text/html")

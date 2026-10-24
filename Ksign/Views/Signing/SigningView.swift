@@ -341,7 +341,7 @@ extension SigningView {
 			using: _temporaryOptions,
 			icon: appIcon,
 			certificate: _selectedCert()
-		) { [self] error in
+		) { [self] error, signedApp in
 			if let error {
 				HapticManager.shared.notification(.error)
 				let ok = UIAlertAction(title: .localized("Dismiss"), style: .cancel) { _ in
@@ -363,10 +363,10 @@ extension SigningView {
 				dismiss()
 				
 				if shouldInstall || signAndInstall {
-					DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+					DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
 						NotificationCenter.default.post(
 							name: NSNotification.Name("feather.installApp"),
-							object: nil
+							object: signedApp
 						)
 					}
 				}

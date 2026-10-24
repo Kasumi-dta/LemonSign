@@ -453,7 +453,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Ksign/Supporting Files/Feather.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 524;
+				CURRENT_PROJECT_VERSION = 525;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
@@ -523,7 +523,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Ksign/Supporting Files/Feather.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 524;
+				CURRENT_PROJECT_VERSION = 525;
 				DEAD_CODE_STRIPPING = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DEVELOPMENT_ASSET_PATHS = "";

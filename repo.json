@@ -21,9 +21,9 @@
                     "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v5.2.4/LemonSign.ipa",
                     "size": 15500000,
                     "version": "5.2.4",
-                    "buildVersion": "524",
-                    "date": "2026-10-24T04:26:00+07:00",
-                    "localizedDescription": "Bản phát hành LemonSign v5.2.4:\n- 🛡️ Khắc phục triệt để lỗi 'Không thể xác minh tính toàn vẹn' khi ký chứng chỉ cá nhân Apple Developer: Đảm bảo embedded.mobileprovision và team entitlements luôn được đóng gói đầy đủ và chuẩn xác vào bundle ứng dụng.\n- 🎨 Sửa dứt điểm lỗi đổi biểu tượng ứng dụng (OSStatus -54): Tích hợp trọn bộ bộ icon vào Asset Catalog và Info.plist chuẩn LaunchServices.\n- 🧹 Xóa bỏ hoàn toàn phần cấu hình DNS chặn thu hồi khỏi Cài đặt theo yêu cầu.\n- ⚡ Giữ nguyên cơ chế ký và stream payload tốc độ cao chuẩn KSign mượt mà.",
+                    "buildVersion": "525",
+                    "date": "2026-10-24T08:20:00+07:00",
+                    "localizedDescription": "Bản phát hành LemonSign v5.2.4 (Build 525):\n- 🛡️ Khắc phục triệt để lỗi 'Không thể cài đặt' khi cập nhật từ trong app: Khôi phục toàn diện streaming headers (Accept-Ranges bytes, Content-Type octet-stream) cho máy chủ OTA nội bộ và truyền chính xác thực thể SignedApp mới nhất sang trình cài đặt.\n- 🚀 Giữ nguyên Bundle ID gốc của ứng dụng khi ký để đảm bảo cập nhật đè (in-place update) mượt mà không bị iOS chặn do sai lệch định danh.\n- 🎨 Sửa dứt điểm lỗi đổi biểu tượng ứng dụng (OSStatus -54).\n- 🧹 Xóa bỏ hoàn toàn phần cấu hình DNS chặn thu hồi.",
                     "minOSVersion": "16.0"
                 },
                 {
@@ -47,8 +47,8 @@
             ],
             "appPermissions": {},
             "version": "5.2.4",
-            "buildVersion": "524",
-            "versionDate": "2026-10-24T04:26:00+07:00",
+            "buildVersion": "525",
+            "versionDate": "2026-10-24T08:20:00+07:00",
             "size": 15500000,
             "downloadURL": "https://github.com/Kasumi-dta/LemonSign/releases/download/v5.2.4/LemonSign.ipa"
         },
